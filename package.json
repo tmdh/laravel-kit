@@ -1,0 +1,35 @@
+{
+  "name": "laravel-kit",
+  "version": "1.0.0",
+  "description": "Easy Laravel application management",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.tarequemdhanif.laravel-kit",
+    "productName": "Laravel Kit",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icons/mac/icon.icns"
+    },
+    "win": {
+      "target": ["nsis", "zip"],
+      "icon": "build/icons/win/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons/png/32x32.png"
+    }
+  },
+  "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
+  "license": "MIT",
+  "dependencies": {
+    "electron-settings": "^3.1.4",
+    "electron-window-state": "^4.1.1",
+    "tree-kill": "^1.2.0"
+  },
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-builder": "^19.52.1"
+  }
+}
