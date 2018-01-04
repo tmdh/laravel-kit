@@ -56,3 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Electron Builder
+dist

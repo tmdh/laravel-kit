@@ -4,7 +4,9 @@
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
     "appId": "com.tarequemdhanif.laravel-kit",
@@ -23,8 +25,15 @@
   },
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
   "license": "MIT",
+  "homepage": "https://github.com/tarequemdhanif/laravel-kit",
+  "url": "https://github.com/tarequemdhanif/laravel-kit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarequemdhanif/laravel-kit.git"
+  },
   "dependencies": {
     "electron-settings": "^3.1.4",
+    "electron-updater": "^2.18.2",
     "electron-window-state": "^4.1.1",
     "tree-kill": "^1.2.0"
   },
