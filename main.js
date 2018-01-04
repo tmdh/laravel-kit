@@ -1,4 +1,6 @@
-const {app, BrowserWindow} = require("electron")
+const {app, BrowserWindow, dialog} = require("electron")
+const { autoUpdater } = require('electron-updater')
+const isDev = require("electron-is-dev")
 const settings = require("electron-settings")
 const windowStateKeeper = require('electron-window-state')
 const url = require("url")
@@ -36,7 +38,7 @@ function createWindow () {
 		slashes: true
 	}))
 	
-	// mainWindow.webContents.openDevTools()
+	mainWindow.webContents.openDevTools()
 	
 	mainWindow.on('closed', () => {
 		mainWindow = null
@@ -47,7 +49,53 @@ function createWindow () {
 	})
 
 	mainWindowState.manage(mainWindow)
-		
+
+	autoUpdater.autoDownload = false
+
+	autoUpdater.on('error', (event, error) => {
+		dialog.showErrorBox('Error: ', error == null ? "unknown" : (error.stack || error).toString())
+	})
+
+	autoUpdater.on('update-available', () => {
+		dialog.showMessageBox({
+			type: 'info',
+			title: 'Found Updates',
+			message: 'Found updates, do you want update now?',
+			buttons: ['Sure', 'No']
+		}, (buttonIndex) => {
+			if (buttonIndex === 0) {
+				autoUpdater.downloadUpdate()
+			}
+			else {
+				dialog.showMessageBox({
+					type: "info",
+					title: "Update aborted",
+					message: "If you want to check for updates again, restart the app."
+				})
+			}
+		})
+	})
+
+	autoUpdater.on('update-not-available', () => {
+		dialog.showMessageBox({
+		  title: 'No Updates',
+		  message: 'Current version is up-to-date.'
+		})
+	})
+
+	autoUpdater.on('update-downloaded', () => {
+		dialog.showMessageBox({
+		  title: 'Install Updates',
+		  message: 'Updates downloaded, application will be quit for update...'
+		}, () => {
+		  setImmediate(() => autoUpdater.quitAndInstall())
+		})
+	})
+
+	if(!isDev) {
+		autoUpdater.updateConfigPath = path.join(APP_PATH, 'app-update.yml');
+		autoUpdater.checkForUpdates()
+	}
 }
 
 app.on('ready', createWindow)
