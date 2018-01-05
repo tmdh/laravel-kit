@@ -79,7 +79,7 @@ const template = [
 			},
 			{
 				label: "Donate",
-				click() { goto("paypal.me/tarequemdhanif") }
+				click() { goto("https://paypal.me/tarequemdhanif") }
 			},
 			{
 				type: "separator"

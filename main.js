@@ -38,7 +38,7 @@ function createWindow () {
 		slashes: true
 	}))
 	
-	mainWindow.webContents.openDevTools()
+	// mainWindow.webContents.openDevTools()
 	
 	mainWindow.on('closed', () => {
 		mainWindow = null
@@ -93,7 +93,6 @@ function createWindow () {
 	})
 
 	if(!isDev) {
-		autoUpdater.updateConfigPath = path.join(APP_PATH, 'app-update.yml');
 		autoUpdater.checkForUpdates()
 	}
 }
