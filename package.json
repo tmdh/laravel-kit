@@ -17,9 +17,14 @@
     },
     "win": {
       "target": [
-        "msi"
+        "nsis"
       ],
-      "icon": "build/icons/win/icon.ico"
+      "icon": "build/icons/win/icon.ico",
+      "publish": ["github"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     },
     "linux": {
       "icon": "build/icons/png/32x32.png"
