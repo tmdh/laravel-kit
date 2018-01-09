@@ -12,25 +12,31 @@ var serve
 
 const template = [
 	{
-		label: "Project",
+		label: 'Edit',
 		submenu: [
-			{
-				label: "New Project",
-				accelerator: 'CmdOrCtrl+N',
-				click() { newProject() }
-			},
-			{
-				label: "Open Project",
-				accelerator: 'CmdOrCtrl+O',
-				click() { openProjectPre() }
-			},
-			{
-				type: "separator"
-			},
-			{
-				label: "Exit",
-				role: "quit"
-			}
+			{role: 'undo'},
+			{role: 'redo'},
+			{type: 'separator'},
+			{role: 'cut'},
+			{role: 'copy'},
+			{role: 'paste'},
+			{role: 'pasteandmatchstyle'},
+			{role: 'delete'},
+			{role: 'selectall'}
+		]
+	},
+	{
+		label: 'View',
+		submenu: [
+			{role: 'reload'},
+			{role: 'forcereload'},
+			{role: 'toggledevtools'},
+			{type: 'separator'},
+			{role: 'resetzoom'},
+			{role: 'zoomin'},
+			{role: 'zoomout'},
+			{type: 'separator'},
+			{role: 'togglefullscreen'}
 		]
 	},
 	{
@@ -48,7 +54,14 @@ const template = [
 		]
 	},
 	{
-		label: "Help",
+		role: 'window',
+		submenu: [
+			{role: 'minimize'},
+			{role: 'close'}
+		]
+	},
+	{
+		role: "help",
 		submenu: [
 			{
 				label: "Laravel Kit on GitHub",
@@ -80,10 +93,15 @@ const template = [
 			{
 				label: "Donate",
 				click() { goto("https://paypal.me/tarequemdhanif") }
-			},
-			{
-				type: "separator"
-			},
+			}
+		]
+	}
+]
+
+if(process.platform === "darwin") {
+	template.unshift({
+		label: "Laravel Kit",
+		submenu: [
 			{
 				label: "About",
 				click() {
@@ -94,11 +112,71 @@ const template = [
 						detail: "Version " + app.getVersion() + "\nNode " + process.version + "\nArchitecture " + process.arch
 					})
 				}
+			},
+			{
+				type: "separator"
+			},
+			,
+			{
+				label: "Exit",
+				role: "quit"
+			}
+		]
+	},
+	{
+		label: "Project",
+		submenu: [
+			{
+				label: "New Project",
+				accelerator: 'CmdOrCtrl+N',
+				click() { newProject() }
+			},
+			{
+				label: "Open Project",
+				accelerator: 'CmdOrCtrl+O',
+				click() { openProjectPre() }
 			}
 		]
 	}
-	
-]
+)
+} else {
+	template.unshift({
+		label: "Project",
+		submenu: [
+			{
+				label: "New Project",
+				accelerator: 'CmdOrCtrl+N',
+				click() { newProject() }
+			},
+			{
+				label: "Open Project",
+				accelerator: 'CmdOrCtrl+O',
+				click() { openProjectPre() }
+			},
+			{
+				type: "separator"
+			},
+			,
+			{
+				label: "About",
+				click() {
+					dialog.showMessageBox({
+						type: "info",
+						title: "Laravel Kit",
+						message: "Laravel Kit",
+						detail: "Version " + app.getVersion() + "\nNode " + process.version + "\nArchitecture " + process.arch
+					})
+				}
+			},
+			{
+				label: "Exit",
+				role: "quit"
+			}
+		]
+	})
+}
+
+
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu);
 

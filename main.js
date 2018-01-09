@@ -30,7 +30,7 @@ function createWindow () {
 		'height': mainWindowState.height,
 		show: false,
 		center: true,
-		icon: 'app/img/icon.png'
+		icon: __dirname + '/app/img/icon.png'
 	})
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'app', 'index.html'),
@@ -93,6 +93,7 @@ function createWindow () {
 	})
 
 	if(!isDev) {
+		autoUpdater.updateConfigPath = path.join(__dirname, 'app-update.yml')
 		autoUpdater.checkForUpdates()
 	}
 }
