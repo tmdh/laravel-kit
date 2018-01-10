@@ -20,7 +20,9 @@
         "nsis"
       ],
       "icon": "build/icons/win/icon.ico",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     },
     "nsis": {
       "oneClick": false,
