@@ -164,12 +164,7 @@ if(process.platform === "darwin") {
 
 
 const menu = Menu.buildFromTemplate(template)
-if(process.platform === "darwin") {
-	app.dock.setMenu(menu)
-	app.dock.setIcon("img/icon.png")
-} else {
-	Menu.setApplicationMenu(menu);
-}
+Menu.setApplicationMenu(menu);
 
 $(document).ready(function () {
 	$("#editorcmd").val(settings.get("editor.command"))
