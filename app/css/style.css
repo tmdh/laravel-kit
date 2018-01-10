@@ -1,3 +1,22 @@
+/* Fonts */
+@font-face {
+	font-family: "Source Sans Pro";
+	src: url("fonts/SourceSansPro-Regular.ttf");
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Source Sans Pro";
+	src: url("fonts/SourceSansPro-Bold.ttf");
+	font-weight: bold;
+}
+@font-face {
+	font-family: "Source Sans Pro";
+	src: url("fonts/SourceSansPro-LightItalic.ttf");
+	font-weight: normal;
+	font-style: italic;
+}
+
+
 /* Global */
 * {
 	font-family: "Source Sans Pro";

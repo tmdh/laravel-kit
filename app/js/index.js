@@ -40,20 +40,6 @@ const template = [
 		]
 	},
 	{
-		label: "Debug",
-		submenu: [
-			{
-				role: "reload"
-			},
-			{
-				role: "forcereload"
-			},
-			{
-				role: "toggledevtools"
-			}
-		]
-	},
-	{
 		role: 'window',
 		submenu: [
 			{role: 'minimize'},
