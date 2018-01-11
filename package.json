@@ -29,7 +29,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "linux": {
-      "icon": "build/icons/png/32x32.png"
+      "icon": "build/icons/png/"
     }
   },
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
