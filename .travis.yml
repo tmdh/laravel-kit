@@ -36,9 +36,9 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
+        /bin/bash -c "npm run dist --linux --win"
     else
-      yarn release
+      npm run dist
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
