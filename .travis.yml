@@ -37,8 +37,10 @@ script:
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
         /bin/bash -c "npm run dist --linux --win"
+      echo "from linux"
     else
       npm run dist
+      echo "from else"
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
