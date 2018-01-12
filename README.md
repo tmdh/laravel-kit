@@ -33,6 +33,10 @@ Download Laravel Kit for your computer from the [releases](https://github.com/ta
 
 Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
+## Backers
+
+No backers yet. [Become a backer](patreon.com/tarequemdhanif).
+
 ------
 
 Copyright © 2018 by [Tareque Md Hanif](https://github.com/tarequemdhanif)
