@@ -36,9 +36,9 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "npm run dist --linux --win"
+        /bin/bash -c "./node_modules/.bin/electron-builder --win --linux"
     else
-      npm run dist
+      ./node_modules/.bin/electron-builder
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
