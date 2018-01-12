@@ -37,7 +37,7 @@ Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
 ## Backers
 
-No backers yet. [Become a backer](patreon.com/tarequemdhanif).
+No backers yet. [Become a backer](https://patreon.com/tarequemdhanif).
 
 ------
 
