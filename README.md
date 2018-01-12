@@ -18,6 +18,8 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 ## Download
 
+[Composer](getcomposer.org) with PHP is required.
+
 Download Laravel Kit for your computer from the [releases](https://github.com/tarequemdhanif/laravel-kit/releases/latest) page.
 
 ## Features
