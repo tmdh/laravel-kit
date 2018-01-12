@@ -36,11 +36,9 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "./node_modules/.bin/electron-builder --win"
-      echo "from linux"
+        /bin/bash -c "./node_modules/.bin/electron-builder --win --linux"
     else
       ./node_modules/.bin/electron-builder
-      echo "from else"
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
