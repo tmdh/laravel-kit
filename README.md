@@ -6,6 +6,8 @@ Easy Laravel application management.
 
 Laravel Kit is an open source application which can execute almost all Laravel Artisan commands without using any terminal.
 
+
+
 ## Screenshots
 
 ![Main](screenshots/main.png)
@@ -16,11 +18,17 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 ![Main](screenshots/more.png)
 
+
+
 ## Download
 
 [Composer](getcomposer.org) with PHP is required.
 
-Download Laravel Kit for your computer from the [releases](https://github.com/tarequemdhanif/laravel-kit/releases/latest) page.
+| macOS                                    | Windows                                  | Linux                                    |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.0.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-setup-1.0.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.0.0-x86_64.AppImage) |
+
+
 
 ## Features
 
@@ -31,9 +39,13 @@ Download Laravel Kit for your computer from the [releases](https://github.com/ta
 * Nice UI.
 
 
+
+
 ## Documentation
 
 Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
+
+
 
 ## Backers
 
