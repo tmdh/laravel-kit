@@ -15,7 +15,11 @@
 	font-weight: normal;
 	font-style: italic;
 }
-
+@font-face {
+	font-family: "Fira Sans";
+	src: url("fonts/Inconsolata-Regular.ttf");
+	font-weight: normal;
+}
 
 /* Global */
 * {
@@ -145,15 +149,6 @@ input[type=text] {
 	position: absolute;
 	bottom: 35px;
 }
-.tip {
-    font-size: 11px;
-    padding: 5px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: -5px;
-}
 
 /* Topbar */
 .topbar {
@@ -182,7 +177,7 @@ input[type=text] {
 .content > div {
 	padding: 30px;
 	overflow-y: scroll;
-    height: calc(100% - 60px);
+  height: calc(100% - 60px);
 }
 .auth,
 .migrate,
@@ -190,6 +185,7 @@ input[type=text] {
 .route,
 .queue,
 .more,
+.console,
 .settings
 {
 	display: none;
@@ -234,6 +230,22 @@ input[type=text] {
 }
 .settings input[type=text], .settings button {
 	margin-left: 0;
+}
+
+/* Console */
+.console, .console > div {
+	background: #1E1E1E;
+	font-family: "Fira Sans";
+	font-size: 18px;
+}
+.console > div {
+	margin-bottom: 3px;
+}
+.console > .command {
+	color: #00FF00;
+}
+.console > .output {
+	color: #009DFF;
 }
 
 /* Status Bar */
