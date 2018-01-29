@@ -24,6 +24,12 @@ function createWindow () {
 		defaultHeight: 800
 	})
 
+	if(isDev) {
+		require('electron-reload')(__dirname, {
+			electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+		});
+	}
+
 	mainWindow = new BrowserWindow({
 		'x': mainWindowState.x,
 		'y': mainWindowState.y,
