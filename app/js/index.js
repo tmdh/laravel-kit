@@ -296,6 +296,7 @@ function openProjectPre () {
 }
 
 function openProject (folderPath) {
+	changeStatus("Opening...")
 	exec("php artisan -V", { cwd: folderPath }, function (error, stdout, stderr) {
 		if(error !== null) {
 			ae("Not a valid Laravel Project");
