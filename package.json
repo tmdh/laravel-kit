@@ -5,8 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "pack": "yarn compile && electron-builder --dir",
+    "dist": "yarn compile && electron-builder",
+    "release": "yarn compile && electron-builder"
   },
   "build": {
     "appId": "com.tarequemdhanif.laravel-kit",
