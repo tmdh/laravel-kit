@@ -296,6 +296,7 @@ function openProjectPre () {
 }
 
 function openProject (folderPath) {
+	changeStatus("Opening...")
 	exec("php artisan -V", { cwd: folderPath }, function (error, stdout, stderr) {
 		if(error !== null) {
 			ae("Not a valid Laravel Project");
@@ -328,15 +329,16 @@ function changeStatusToBSA () {
 }
 
 function execute (command, dir, callback) {
-	console.log(command)
+	cmd(command);
 	exec(command, { cwd: dir }, (error, stdout, stderr) => {
 		if(error !== null) {
 			ae(stdout)
+			output(stdout)
 			changeStatusToBSA()
 		} else {
+			output(stdout)
 			callback(stdout)
 		}
-		console.log(stdout)
 	})
 }
 
@@ -380,4 +382,12 @@ function openInEditor () {
 
 function goto (link) {
 	shell.openExternal(link)
+}
+
+function cmd (command) {
+	$(".console").append("<div class='command'>→ " + command + "</div>");
+}
+
+function output (output) {
+	$(".console").append("<div class='output'>" + output + "</div>");
 }

@@ -1,5 +1,6 @@
 const {app, BrowserWindow, dialog} = require("electron")
 const { autoUpdater } = require('electron-updater')
+const isOnline = require('is-online')
 const isDev = require("electron-is-dev")
 const settings = require("electron-settings")
 const windowStateKeeper = require('electron-window-state')
@@ -22,6 +23,12 @@ function createWindow () {
 		defaultWidth: 1000,
 		defaultHeight: 800
 	})
+
+	if(isDev) {
+		require('electron-reload')(__dirname, {
+			electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+		});
+	}
 
 	mainWindow = new BrowserWindow({
 		'x': mainWindowState.x,
@@ -76,13 +83,6 @@ function createWindow () {
 		})
 	})
 
-	autoUpdater.on('update-not-available', () => {
-		dialog.showMessageBox({
-		  title: 'No Updates',
-		  message: 'Current version is up-to-date.'
-		})
-	})
-
 	autoUpdater.on('update-downloaded', () => {
 		dialog.showMessageBox({
 		  title: 'Install Updates',
@@ -92,10 +92,13 @@ function createWindow () {
 		})
 	})
 
-	if(!isDev) {
-		autoUpdater.updateConfigPath = path.join(__dirname, 'app-update.yml')
-		autoUpdater.checkForUpdates()
-	}
+	isOnline().then(online => {
+		if(!isDev && online) {
+			autoUpdater.updateConfigPath = path.join(__dirname, 'app-update.yml')
+			autoUpdater.checkForUpdates()
+		}
+	});
+	
 }
 
 app.on('ready', createWindow)
