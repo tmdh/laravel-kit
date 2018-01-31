@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "release": "electron-builder"
   },
   "build": {
     "appId": "com.tarequemdhanif.laravel-kit",
@@ -51,7 +52,7 @@
   },
   "devDependencies": {
     "electron": "^1.7.11",
-    "electron-builder": "^19.52.1",
+    "electron-builder": "^19.55.3",
     "electron-reload": "^1.2.2"
   }
 }
