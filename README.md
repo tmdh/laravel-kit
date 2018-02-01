@@ -1,6 +1,6 @@
 # Laravel Kit
 
-[![Build Status](https://travis-ci.org/tarequemdhanif/laravel-kit.svg?branch=master)](https://travis-ci.org/tarequemdhanif/laravel-kit) [![Wiki](https://img.shields.io/badge/wiki-working_on_it-yellow.svg)](https://github.com/tarequemdhanif/laravel-kit/wiki) [![Patreon](https://img.shields.io/badge/support-patreon-orange.svg)](https://patreon.com/tarequemdhanif) [![Wiki](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/tarequemdhanif) [![Downloads](https://img.shields.io/badge/dynamic/json.svg?label=downloads&colorB=&prefix=&suffix=&query=$.downloads&uri=https%3A%2F%2Flk--c2p9jtxghlw9.runkit.sh%2Fdownloads)]()
+[![Build Status](https://travis-ci.org/tarequemdhanif/laravel-kit.svg?branch=master)](https://travis-ci.org/tarequemdhanif/laravel-kit) [![Wiki](https://img.shields.io/badge/wiki-working_on_it-yellow.svg)](https://github.com/tarequemdhanif/laravel-kit/wiki) [![Patreon](https://img.shields.io/badge/support-patreon-orange.svg)](https://patreon.com/tarequemdhanif) [![Wiki](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/tarequemdhanif) [![Downloads](https://img.shields.io/badge/dynamic/json.svg?label=downloads&colorB=&prefix=&suffix=&query=$.downloads&uri=https%3A%2F%2Flk--c2p9jtxghlw9.runkit.sh%2Fdownloads)](#download)
 
 Easy Laravel application management.
 
@@ -12,11 +12,9 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 ![Main](screenshots/main.png)
 
+![Make](screenshots/make.png)
 
-
-![Main](screenshots/make.png)
-
-![Main](screenshots/more.png)
+![More](screenshots/more.png)
 
 
 
@@ -26,7 +24,7 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 | macOS                                    | Windows                                  | Linux                                    |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.0.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-setup-1.0.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.0.0-x86_64.AppImage) |
+| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.1.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-setup-1.1.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.1.0-x86_64.AppImage) |
 
 
 
@@ -35,8 +33,8 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 * [Artisan commands](#): You can execute 61 artisan commands with Laravel Kit.
 * [Works offline](#): You can create a fresh Laravel 5.5 application without any internet connection.
 * Cross platform support (Windows, macOS and Linux)
-* [Developer tools](#): Toggle Developer Tools and see full outputs of a command.
-* Nice UI.
+* [Console](#): This feature allows you to see full output of a command.
+* Beautiful UI.
 
 
 
