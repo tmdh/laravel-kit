@@ -30,10 +30,10 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 ## Features
 
-* [Artisan commands](#): You can execute 61 artisan commands with Laravel Kit.
-* [Works offline](#): You can create a fresh Laravel 5.5 application without any internet connection.
+* **Artisan commands**: You can execute 61 artisan commands with Laravel Kit.
+* **Works offline**: You can create a fresh Laravel 5.5 application without any internet connection.
 * Cross platform support (Windows, macOS and Linux)
-* [Console](#): This feature allows you to see full output of a command.
+* **Console**: This feature allows you to see full output of a command.
 * Beautiful UI.
 
 
