@@ -24,7 +24,7 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 | macOS                                    | Windows                                  | Linux                                    |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.1.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-setup-1.1.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.0.0/laravel-kit-1.1.0-x86_64.AppImage) |
+| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.1.0/laravel-kit-1.1.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.1.0/laravel-kit-setup-1.1.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.1.0/laravel-kit-1.1.0-x86_64.AppImage) |
 
 
 
