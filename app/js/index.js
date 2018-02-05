@@ -9,7 +9,6 @@ var statusbar = $(".status-bar"), serveBtn = $("#serve.serve"), servingBtn = $("
 var projectPath = ""
 var serve
 
-
 const template = [
 	{
 		label: 'Edit',
@@ -83,7 +82,6 @@ const template = [
 		]
 	}
 ]
-
 if(process.platform === "darwin") {
 	template.unshift({
 		label: "Laravel Kit",
@@ -121,6 +119,14 @@ if(process.platform === "darwin") {
 				label: "Open Project",
 				accelerator: 'CmdOrCtrl+O',
 				click() { openProjectPre() }
+			},
+			{
+				label: "Open Recent",
+				submenu: []
+			},
+			{
+				label: "Clear Recents",
+				click () { clearRecents() }
 			}
 		]
 	}
@@ -138,6 +144,14 @@ if(process.platform === "darwin") {
 				label: "Open Project",
 				accelerator: 'CmdOrCtrl+O',
 				click() { openProjectPre() }
+			},
+			{
+				label: "Open Recent",
+				submenu: []
+			},
+			{
+				label: "Clear Recents",
+				click () { clearRecents() }
 			},
 			{
 				type: "separator"
@@ -161,10 +175,9 @@ if(process.platform === "darwin") {
 		]
 	})
 }
-
-
 const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu);
+Menu.setApplicationMenu(menu)
+updateRecents()
 
 $(document).ready(function () {
 	$("#editorcmd").val(settings.get("editor.command"))
@@ -300,6 +313,7 @@ function openProject (folderPath) {
 	exec("php artisan -V", { cwd: folderPath }, function (error, stdout, stderr) {
 		if(error !== null) {
 			ae("Not a valid Laravel Project");
+			changeStatusToBSA()
 		} else {
 			projectPath = folderPath;
 			$(".welcome").addClass("no-display");
@@ -312,8 +326,51 @@ function openProject (folderPath) {
 			$("." + oldContent).hide();
 			$(".main").show();
 			$("input[type=text]:not(#editorcmd)").val("");
+			updateRecents(folderPath);
 		}
 	})
+}
+
+function updateRecents (folderPath) {
+	const currentMenu = Menu.getApplicationMenu();
+	if (!currentMenu) return;
+
+	const recents = currentMenu.items[(process.platform === "darwin" ? 1 : 0)].submenu.items[2]
+	if (!recents) return;
+
+	recents.submenu.clear();
+
+	const item = new MenuItem({
+		label: folderPath,
+		click: () => openProject(folderPath)
+	});
+	
+	var recentsSettings = settings.get("recents")
+
+	if(folderPath !== undefined) {
+		if (recentsSettings.length >= 10) {
+			recentsSettings.pop()
+		}
+		
+		if(recentsSettings.includes(folderPath)) {
+			var index = recentsSettings.indexOf(folderPath)
+			if (index > -1) {
+				recentsSettings.splice(index, 1);
+			}
+		}
+		recentsSettings.unshift(folderPath)
+		settings.set("recents", recentsSettings)
+	}
+	
+	for (var i = 0; i < recentsSettings.length; i++) {
+		recents.submenu.append(new MenuItem({ label: recentsSettings[i], click() { openProject(recentsSettings[i]) } }))
+	}
+	Menu.setApplicationMenu(currentMenu);
+}
+
+function clearRecents () {
+	settings.set("recents", [])
+	updateRecents()
 }
 
 function changeStatus (status) {

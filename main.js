@@ -12,9 +12,12 @@ let mainWindow
 function createWindow () {
 	
 	if(!settings.has("editor.command")) {
-		console.log(settings.set("editor", {
+		settings.set("editor", {
 			command: "echo No command specified. Go to settings to specify a command."
-		}))
+		})
+	}
+	if(!settings.has("recents")) {
+		settings.set("recents", [])
 	}
 	
 	// settings.deleteAll();
@@ -45,7 +48,9 @@ function createWindow () {
 		slashes: true
 	}))
 	
-	// mainWindow.webContents.openDevTools()
+	if(isDev) {
+		mainWindow.webContents.openDevTools()
+	}
 	
 	mainWindow.on('closed', () => {
 		mainWindow = null
