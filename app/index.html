@@ -24,6 +24,7 @@
 					<li content="more">More</li>
 					<li content="console">Console</li>
 					<li content="settings">Settings</li>
+					<li content="store">Package Store</li>
 				</ul>
 			</div>
 			<div class="topbar">
@@ -625,6 +626,16 @@
 					<div>
 						<button id="saveSettings" class="btn">Save</button>
 					</div>
+				</div>
+				<div class="store">
+					<p class="content-name">Package Store</p>
+					<input type="text" placeholder="Search packages" id="search">
+					<p>Available Laravel packages <span class="total badge"></span></p>
+					<div class="packages">
+						<p style='margin-left: 10px;'>Search for PHP packages tagged 'laravel-package'</p>
+					</div>
+					<div class="pages btn-group"></div>
+					<button class="btn" onclick="goto('https://github.com/tarequemdhanif/laravel-kit/blob/master/STORE.md')">Not seeing your package?</a>
 				</div>
 			</div>
 		</div>

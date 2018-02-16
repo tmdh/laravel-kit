@@ -5,6 +5,7 @@ const {exec, spawn} = require("child_process")
 const extract = require('extract-zip')
 const settings = require("electron-settings")
 const kill = require('tree-kill')
+const request = require("request")
 var statusbar = $(".status-bar"), serveBtn = $("#serve.serve"), servingBtn = $("#serve.serving")
 var projectPath = ""
 var serve
@@ -249,10 +250,39 @@ $("#saveSettings").click(function () {
 		command: $("#editorcmd").val()
 	})
 	changeStatus("Settings saved!");
-})
+});
 
 $("#openInEditor").click(function () {
 	openInEditor()
+});
+
+$("#search").keyup(function () {
+	if($(this).val() === "") {
+		$(".packages").html("<p style='margin-left: 10px;'>Search for PHP packages tagged 'laravel-package'</p>");
+		$(".pages").html("");
+	} else {
+		searchPackages($(this).val(), "1");
+	}
+})
+
+$("body").delegate("a", "click", function (e) {
+	e.preventDefault();
+	goto($(this).attr("href"));
+});
+
+$(".pages").delegate(".page", "click", function () {
+	searchPackages($("#search").val(), $(this).attr("page"))
+})
+
+$(".packages").delegate("#install", "click", function () {
+	var packageName = $(this).attr("pkg");
+	changeStatusToWait("Installing "+ packageName + " ....");
+	execute("composer require " + packageName, projectPath, function () {
+		changeStatus("Installed " + packageName);
+	});
+	setTimeout(function () {
+		changeStatusToBSA();
+	}, 3000);
 })
 
 function ae (error) {
@@ -309,11 +339,12 @@ function openProjectPre () {
 }
 
 function openProject (folderPath) {
-	changeStatus("Opening...")
+	changeStatus("Opening...");
 	exec("php artisan -V", { cwd: folderPath }, function (error, stdout, stderr) {
 		if(error !== null) {
 			ae("Not a valid Laravel Project");
-			changeStatusToBSA()
+			ae(error.toString() + " in " + folderPath);
+			changeStatusToBSA();
 		} else {
 			projectPath = folderPath;
 			$(".welcome").addClass("no-display");
@@ -340,11 +371,6 @@ function updateRecents (folderPath) {
 
 	recents.submenu.clear();
 
-	const item = new MenuItem({
-		label: folderPath,
-		click: () => openProject(folderPath)
-	});
-	
 	var recentsSettings = settings.get("recents")
 
 	if(folderPath !== undefined) {
@@ -362,7 +388,7 @@ function updateRecents (folderPath) {
 		settings.set("recents", recentsSettings)
 	}
 	
-	for (var i = 0; i < recentsSettings.length; i++) {
+	for (let i = 0; i < recentsSettings.length; i++) {
 		recents.submenu.append(new MenuItem({ label: recentsSettings[i], click() { openProject(recentsSettings[i]) } }))
 	}
 	Menu.setApplicationMenu(currentMenu);
@@ -447,4 +473,39 @@ function cmd (command) {
 
 function output (output) {
 	$(".console").append("<div class='output'>" + output + "</div>");
+}
+
+function searchPackages (name, page) {
+	changeStatusToWait("");
+	$(".packages").html("<p style='margin-left: 10px;'>Searching...</p>");
+	$(".pages").html("");
+	request({
+		url: "https://packagist.org/search.json",
+		qs: { type: "laravel-package", q: name, page: page }
+	}, function (error, response, body) {
+		if(error === null) {
+			var json = JSON.parse(body);
+			var results = json.results;
+			if(results.length > 0) {
+				var total = json.total;
+				var pages = Math.ceil(total / 15);
+				$(".pages").html("");
+				$(".packages").html("");
+				$(".total").text(total);
+				for (var i = 0; i < pages; i++) {
+					$(".pages").append("<button class='btn btn-sm page' page='" + (i+1).toString() + "'>" + (i+1).toString() + "</button>")
+				}
+				$("button.page[page=" + page + "]").addClass("btn-active");
+				for (var i = 0; i < results.length; i++) {
+					$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>Install</button></div>")
+				}
+			} else {
+				$(".packages").html("<p style='margin-left: 10px;'>Found nothing.</p>")
+			}
+		} else {
+			ae(error);
+			console.log(error);
+		}
+		changeStatusToBSA();
+	})
 }
