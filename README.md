@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tarequemdhanif/laravel-kit.svg?branch=master)](https://travis-ci.org/tarequemdhanif/laravel-kit) [![Wiki](https://img.shields.io/badge/wiki-working_on_it-yellow.svg)](https://github.com/tarequemdhanif/laravel-kit/wiki) [![Patreon](https://img.shields.io/badge/support-patreon-orange.svg)](https://patreon.com/tarequemdhanif) [![Wiki](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/tarequemdhanif) [![Downloads](https://img.shields.io/badge/dynamic/json.svg?label=downloads&colorB=&prefix=&suffix=&query=$.downloads&uri=https%3A%2F%2Flk--c2p9jtxghlw9.runkit.sh%2Fdownloads)](#download)
 
-![Logo](build/icons/png/64x64.png)
+![Logo](screenshots/64x64.png)
 
 Easy Laravel application management.
 
@@ -40,8 +40,9 @@ Find out more [here](https://github.com/tarequemdhanif/laravel-kit/releases/late
 
 * **Artisan commands**: You can execute 61 artisan commands with Laravel Kit.
 * **Works offline**: You can create a fresh Laravel 5.5 application without any internet connection.
-* Cross platform support (Windows, macOS and Linux)
+* Cross platform support (Windows, macOS and Linux).
 * **Console**: This feature allows you to see full output of a command.
+* **Package Store**: This feature allows you to install composer packages (tagged `laravel-package`).
 * Beautiful UI.
 
 

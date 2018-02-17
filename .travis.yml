@@ -37,8 +37,10 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
+        yarn icons
         /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release --linux --win"
     else
+      yarn icons
       yarn release
     fi
 
