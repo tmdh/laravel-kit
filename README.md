@@ -56,8 +56,13 @@ Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
 ## Backers
 
-No backers yet. [Become a backer ($5/mo)](https://patreon.com/tarequemdhanif).
+- [DigitalOcean](https://m.do.co/c/36fb62dbec41) (Get 10$ platform credit)
+
+- [Cloudways](https://www.cloudways.com/en/?id=185419)
+
+[Become a backer ($5/mo)](https://patreon.com/tarequemdhanif).
 
 ------
 
 Copyright © 2018 by [Tareque Md Hanif](https://github.com/tarequemdhanif)
+
