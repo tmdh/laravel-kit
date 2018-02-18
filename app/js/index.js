@@ -73,6 +73,14 @@ const template = [
 				type: "separator"
 			},
 			{
+				label: "Backers",
+				click() { goto("https://github.com/tarequemdhanif/laravel-kit#backers") }
+			},
+			{
+				label: "Get 10$ platform credit on DigitalOcean",
+				click() { goto("https://m.do.co/c/36fb62dbec41") }
+			},
+			{
 				label: "Support on Patreon",
 				click() { goto("https://www.patreon.com/tarequemdhanif") }
 			},
