@@ -760,9 +760,9 @@ electron-download@^3.0.1:
     semver "^5.3.0"
     sumchecker "^1.2.0"
 
-electron-icon-maker@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/electron-icon-maker/-/electron-icon-maker-0.0.4.tgz#0766087c270a736d0857204bb72130d574d91c51"
+electron-icon-maker-fix@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/electron-icon-maker-fix/-/electron-icon-maker-fix-0.0.5.tgz#b07012bc1a2f67025f4b25b19e29fecfcaf53095"
   dependencies:
     args "^2.3.0"
     icon-gen "1.0.7"

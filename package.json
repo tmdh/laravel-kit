@@ -55,7 +55,7 @@
   "devDependencies": {
     "electron": "^1.7.11",
     "electron-builder": "^19.55.3",
-    "electron-icon-maker": "^0.0.4",
+    "electron-icon-maker-fix": "^0.0.5",
     "electron-reload": "^1.2.2"
   }
 }
