@@ -27,7 +27,6 @@ before_install:
 
 before_script:
   - git lfs pull
-  - yarn icons
 
 script:
   - |
