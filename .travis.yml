@@ -27,6 +27,8 @@ before_install:
 
 before_script:
   - git lfs pull
+  - yarn global add electron-icon-maker
+  - electron-icon-maker --input=./app/img/icon.png --output=./build
 
 script:
   - |
