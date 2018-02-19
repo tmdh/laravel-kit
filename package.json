@@ -1,14 +1,13 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "icons": "./node_modules/.bin/electron-icon-maker --input=./app/img/icon.png --output=./build",
-    "release": "yarn icons && electron-builder"
+    "release": "electron-builder"
   },
   "build": {
     "appId": "com.tarequemdhanif.laravel-kit",
