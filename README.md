@@ -26,7 +26,7 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 | macOS                                    | Windows                                  | Linux                                    |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.0/laravel-kit-1.2.0-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.0/laravel-kit-setup-1.2.0.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.0/laravel-kit-1.2.0-x86_64.AppImage) |
+| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-1.2.1-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-setup-1.2.1.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-1.2.1-x86_64.AppImage) |
 
 You can also install Laravel Kit with [brew](https://caskroom.github.io/) on macOS.
 
@@ -56,9 +56,11 @@ Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
 ## Backers
 
-- [DigitalOcean](https://m.do.co/c/36fb62dbec41) (Get 10$ platform credit)
+- [DigitalOcean (Get 10$ platform credit)](http://bit.ly/laravelkitdo)
 
-- [Cloudways](https://www.cloudways.com/en/?id=185419)
+- [Cloudways](http://bit.ly/laravelkitcw)
+
+- [Bluehost](http://bit.ly/laravelkitbh)
 
 [Become a backer ($5/mo)](https://patreon.com/tarequemdhanif).
 
