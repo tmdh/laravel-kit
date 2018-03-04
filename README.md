@@ -12,11 +12,7 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 ## Screenshots
 
-![Main](screenshots/main.png)
-
-![Make](screenshots/make.png)
-
-![More](screenshots/more.png)
+![Main](screenshots/lk.gif)
 
 
 
@@ -42,7 +38,7 @@ Find out more [here](https://github.com/tarequemdhanif/laravel-kit/releases/late
 * **Works offline**: You can create a fresh Laravel 5.5 application without any internet connection.
 * Cross platform support (Windows, macOS and Linux).
 * **Console**: This feature allows you to see full output of a command.
-* **Package Store**: This feature allows you to install composer packages (tagged `laravel-package`).
+* **Package Store**: This feature allows you to install composer packages (tagged `laravel`).
 * Beautiful UI.
 
 

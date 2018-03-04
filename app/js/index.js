@@ -489,7 +489,7 @@ function searchPackages (name, page) {
 	$(".pages").html("");
 	request({
 		url: "https://packagist.org/search.json",
-		qs: { type: "laravel-package", q: name, page: page }
+		qs: { tag: "laravel", q: name, page: page }
 	}, function (error, response, body) {
 		if(error === null) {
 			var json = JSON.parse(body);
