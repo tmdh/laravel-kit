@@ -505,7 +505,7 @@ function searchPackages (name, page) {
 				}
 				$("button.page[page=" + page + "]").addClass("btn-active");
 				for (var i = 0; i < results.length; i++) {
-					$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>Install</button></div>")
+					$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>require</button></div>")
 				}
 			} else {
 				$(".packages").html("<p style='margin-left: 10px;'>Found nothing.</p>")
