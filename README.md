@@ -20,7 +20,7 @@ Laravel Kit is an open source application which can execute almost all Laravel A
 
 | macOS                                    | Windows                                  | Linux                                    |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-1.2.1-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-setup-1.2.1.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.1/laravel-kit-1.2.1-x86_64.AppImage) |
+| [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.2/laravel-kit-1.2.2-mac.zip) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.2/laravel-kit-setup-1.2.2.exe) | [Download](https://github.com/tarequemdhanif/laravel-kit/releases/download/v1.2.2/laravel-kit-1.2.2-x86_64.AppImage) |
 
 You can also install Laravel Kit with [brew](https://caskroom.github.io/) on macOS.
 
