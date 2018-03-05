@@ -5,6 +5,7 @@ const {exec, spawn} = require("child_process")
 const extract = require('extract-zip')
 const settings = require("electron-settings")
 const kill = require('tree-kill')
+const isOnline = require("is-online")
 const request = require("request")
 var statusbar = $(".status-bar"), serveBtn = $("#serve.serve"), servingBtn = $("#serve.serving")
 var projectPath = ""
@@ -266,7 +267,7 @@ $("#openInEditor").click(function () {
 
 $("#search").keyup(function () {
 	if($(this).val() === "") {
-		$(".packages").html("<p style='margin-left: 10px;'>Search for PHP packages tagged 'laravel-package'</p>");
+		$(".packages").html("<p style='margin-left: 10px;'>Search for PHP Composer packages tagged 'laravel'</p>");
 		$(".pages").html("");
 	} else {
 		searchPackages($(this).val(), "1");
@@ -484,36 +485,42 @@ function output (output) {
 }
 
 function searchPackages (name, page) {
-	changeStatusToWait("");
-	$(".packages").html("<p style='margin-left: 10px;'>Searching...</p>");
-	$(".pages").html("");
-	request({
-		url: "https://packagist.org/search.json",
-		qs: { type: "laravel-package", q: name, page: page }
-	}, function (error, response, body) {
-		if(error === null) {
-			var json = JSON.parse(body);
-			var results = json.results;
-			if(results.length > 0) {
-				var total = json.total;
-				var pages = Math.ceil(total / 15);
-				$(".pages").html("");
-				$(".packages").html("");
-				$(".total").text(total);
-				for (var i = 0; i < pages; i++) {
-					$(".pages").append("<button class='btn btn-sm page' page='" + (i+1).toString() + "'>" + (i+1).toString() + "</button>")
+	isOnline().then(online => {
+		if(online === true) {
+			changeStatusToWait("");
+			$(".packages").html("<p style='margin-left: 10px;'>Searching...</p>");
+			$(".pages").html("");
+			request({
+				url: "https://packagist.org/search.json",
+				qs: { tag: "laravel", q: name, page: page }
+			}, function (error, response, body) {
+				if(error === null) {
+					var json = JSON.parse(body);
+					var results = json.results;
+					if(results.length > 0) {
+						var total = json.total;
+						var pages = Math.ceil(total / 15);
+						$(".pages").html("");
+						$(".packages").html("");
+						$(".total").text(total);
+						for (var i = 0; i < pages; i++) {
+							$(".pages").append("<button class='btn btn-sm page' page='" + (i+1).toString() + "'>" + (i+1).toString() + "</button>")
+						}
+						$("button.page[page=" + page + "]").addClass("btn-active");
+						for (var i = 0; i < results.length; i++) {
+							$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>require</button></div>")
+						}
+					} else {
+						$(".packages").html("<p style='margin-left: 10px;'>Found nothing.</p>")
+					}
+				} else {
+					alert(error + "\nToggle DevTools for more.");
+					console.log(error);
 				}
-				$("button.page[page=" + page + "]").addClass("btn-active");
-				for (var i = 0; i < results.length; i++) {
-					$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>Install</button></div>")
-				}
-			} else {
-				$(".packages").html("<p style='margin-left: 10px;'>Found nothing.</p>")
-			}
+				changeStatusToBSA();
+			})
 		} else {
-			ae(error);
-			console.log(error);
+			ae("Check your internet connection and try again.");
 		}
-		changeStatusToBSA();
-	})
+	});
 }

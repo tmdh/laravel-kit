@@ -1,6 +1,6 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {

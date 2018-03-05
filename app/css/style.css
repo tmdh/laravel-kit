@@ -304,6 +304,7 @@ input[type=text] {
 	background: #1E1E1E;
 	font-family: "Fira Sans";
 	font-size: 18px;
+	-webkit-user-select: text;
 }
 .console > div {
 	margin-bottom: 3px;
