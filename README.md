@@ -50,8 +50,6 @@ Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
 ## Backers
 
-- [DigitalOcean (Get 10$ platform credit)](http://bit.ly/laravelkitdo)
-
 - [Cloudways](http://bit.ly/laravelkitcw)
 
 - [Bluehost](http://bit.ly/laravelkitbh)
