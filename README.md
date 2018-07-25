@@ -50,11 +50,7 @@ Go to [Laravel Kit wiki](https://github.com/tarequemdhanif/laravel-kit/wiki).
 
 ## Backers
 
-- [Cloudways](http://bit.ly/laravelkitcw)
-
-- [Bluehost](http://bit.ly/laravelkitbh)
-
-[Become a backer ($5/mo)](https://patreon.com/tarequemdhanif).
+[Become a backer ($2/mo)](https://patreon.com/tarequemdhanif).
 
 ------
 
