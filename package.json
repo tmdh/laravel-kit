@@ -1,6 +1,6 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
   "license": "MIT",
-  "homepage": "https://github.com/tmdh/laravel-kit",
+  "homepage": "https://tmdh.github.io/laravel-kit",
   "url": "https://github.com/tmdh/laravel-kit/issues",
   "repository": {
     "type": "git",

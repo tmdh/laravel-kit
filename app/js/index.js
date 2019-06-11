@@ -19,7 +19,6 @@ const template = [
 			{role: 'cut'},
 			{role: 'copy'},
 			{role: 'paste'},
-			{role: 'pasteandmatchstyle'},
 			{role: 'delete'},
 			{role: 'selectall'}
 		]
@@ -51,6 +50,10 @@ const template = [
 			{
 				label: "Laravel Kit on GitHub",
 				click() { goto('https://github.com/tmdh/laravel-kit') }
+			},
+			{
+				label: "Laravel Kit Website",
+				click() { goto('https://tmdh.github.io/laravel-kit') }
 			},
 			{
 				label: "Wiki",
@@ -179,16 +182,22 @@ $(document).ready(function () {
 	$("#editorcmd").val(settings.get("editor.command"))
 });
 
-if(settings.has('donate')) {
-	if (settings.get('donate') == 1) {
-		showDonateBox()
-		settings.set('donate', 0)
+if(!settings.has('donated')) {
+	settings.set('donated', 0)
+}
+
+if(settings.get('donated') == 0) {
+	if(settings.has('donate')) {
+		if (settings.get('donate') == 1) {
+			showDonateBox()
+			settings.set('donate', 0)
+		} else {
+			settings.set('donate', 1)
+		}
 	} else {
-		settings.set('donate', 1)
+		settings.set('donate', 0)
+		showDonateBox();
 	}
-} else {
-	settings.set('donate', 0)
-	showDonateBox();
 }
 
 $(".pr-name, .sidebar > ul > li").click(function () {
@@ -455,6 +464,7 @@ function showDonateBox () {
 	}, (buttonIndex) => {
 		if (buttonIndex === 0) {
 			goto("https://paypal.me/tarequemdhanif")
+			settings.set('donated', 1)
 		}
 	})
 }
