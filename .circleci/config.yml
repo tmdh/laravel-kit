@@ -1,11 +1,11 @@
 version: 2
 jobs:
-  build-windows:
+  build-windows-linux:
     docker:
       - image: electronuserland/builder:wine
     steps:
       - checkout
-      - run: yarn && yarn release --win
+      - run: yarn && yarn release --win --linux
 
   build-macos:
     macos:
@@ -13,17 +13,10 @@ jobs:
     steps:
       - checkout
       - run: yarn && yarn release --mac
-  build-linux:
-    docker:
-      - image: electronuserland/builder:wine
-    steps:
-      - run: yarn --link-duplicates --pure-lockfile
-      - run: yarn release --linux --win
 
 workflows:
   version: 2
   build:
     jobs:
       - build-windows
-      - build-macos
-      - build-linux
+      - build-windows-linux
