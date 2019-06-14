@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build-windows-linux:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: yarn && yarn release --win --linux
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-windows-linux

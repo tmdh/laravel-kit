@@ -1,6 +1,6 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "release": "electron-builder"
   },
   "build": {
-    "appId": "com.tarequemdhanif.laravel-kit",
+    "appId": "com.tmdh.laravel-kit",
     "productName": "Laravel Kit",
     "mac": {
       "category": "public.app-category.developer-tools",
@@ -35,11 +35,11 @@
   },
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
   "license": "MIT",
-  "homepage": "https://github.com/tarequemdhanif/laravel-kit",
-  "url": "https://github.com/tarequemdhanif/laravel-kit/issues",
+  "homepage": "https://tmdh.github.io/laravel-kit",
+  "url": "https://github.com/tmdh/laravel-kit/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tarequemdhanif/laravel-kit.git"
+    "url": "https://github.com/tmdh/laravel-kit.git"
   },
   "dependencies": {
     "electron-is-dev": "^0.3.0",
@@ -48,7 +48,6 @@
     "electron-window-state": "^4.1.1",
     "extract-zip": "^1.6.6",
     "is-online": "^7.0.0",
-    "request": "^2.83.0",
     "tree-kill": "^1.2.0"
   },
   "devDependencies": {

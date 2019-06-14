@@ -5,8 +5,6 @@ const {exec, spawn} = require("child_process")
 const extract = require('extract-zip')
 const settings = require("electron-settings")
 const kill = require('tree-kill')
-const isOnline = require("is-online")
-const request = require("request")
 var statusbar = $(".status-bar"), serveBtn = $("#serve.serve"), servingBtn = $("#serve.serving")
 var projectPath = ""
 var serve
@@ -21,7 +19,6 @@ const template = [
 			{role: 'cut'},
 			{role: 'copy'},
 			{role: 'paste'},
-			{role: 'pasteandmatchstyle'},
 			{role: 'delete'},
 			{role: 'selectall'}
 		]
@@ -52,38 +49,30 @@ const template = [
 		submenu: [
 			{
 				label: "Laravel Kit on GitHub",
-				click() { goto('https://github.com/tarequemdhanif/laravel-kit') }
+				click() { goto('https://github.com/tmdh/laravel-kit') }
+			},
+			{
+				label: "Laravel Kit Website",
+				click() { goto('https://tmdh.github.io/laravel-kit') }
 			},
 			{
 				label: "Wiki",
-				click() { goto('https://github.com/tarequemdhanif/laravel-kit/wiki') }
+				click() { goto('https://github.com/tmdh/laravel-kit/wiki') }
 			},
 			{
 				label: "Releases",
-				click() { goto('https://github.com/tarequemdhanif/laravel-kit/releases') }
+				click() { goto('https://github.com/tmdh/laravel-kit/releases') }
 			},
 			{
 				label: "Report an issue",
-				click() { goto('https://github.com/tarequemdhanif/laravel-kit/issues/new') }
+				click() { goto('https://github.com/tmdh/laravel-kit/issues/new') }
 			},
 			{
 				label: "License",
-				click() { goto('https://github.com/tarequemdhanif/laravel-kit/blob/master/LICENSE') }
+				click() { goto('https://github.com/tmdh/laravel-kit/blob/master/LICENSE') }
 			},
 			{
 				type: "separator"
-			},
-			{
-				label: "Backers",
-				click() { goto("https://github.com/tarequemdhanif/laravel-kit#backers") }
-			},
-			{
-				label: "Get 10$ platform credit on DigitalOcean",
-				click() { goto("https://m.do.co/c/36fb62dbec41") }
-			},
-			{
-				label: "Support on Patreon",
-				click() { goto("https://www.patreon.com/tarequemdhanif") }
 			},
 			{
 				label: "Donate",
@@ -193,6 +182,24 @@ $(document).ready(function () {
 	$("#editorcmd").val(settings.get("editor.command"))
 });
 
+if(!settings.has('donated')) {
+	settings.set('donated', 0)
+}
+
+if(settings.get('donated') == 0) {
+	if(settings.has('donate')) {
+		if (settings.get('donate') == 1) {
+			showDonateBox()
+			settings.set('donate', 0)
+		} else {
+			settings.set('donate', 1)
+		}
+	} else {
+		settings.set('donate', 0)
+		showDonateBox();
+	}
+}
+
 $(".pr-name, .sidebar > ul > li").click(function () {
 	if(!$(this).hasClass("active")) {
 		var oldContent = $(".active").attr("content")
@@ -265,34 +272,10 @@ $("#openInEditor").click(function () {
 	openInEditor()
 });
 
-$("#search").keyup(function () {
-	if($(this).val() === "") {
-		$(".packages").html("<p style='margin-left: 10px;'>Search for PHP Composer packages tagged 'laravel'</p>");
-		$(".pages").html("");
-	} else {
-		searchPackages($(this).val(), "1");
-	}
-})
-
 $("body").delegate("a", "click", function (e) {
 	e.preventDefault();
 	goto($(this).attr("href"));
 });
-
-$(".pages").delegate(".page", "click", function () {
-	searchPackages($("#search").val(), $(this).attr("page"))
-})
-
-$(".packages").delegate("#install", "click", function () {
-	var packageName = $(this).attr("pkg");
-	changeStatusToWait("Installing "+ packageName + " ....");
-	execute("composer require " + packageName, projectPath, function () {
-		changeStatus("Installed " + packageName);
-	});
-	setTimeout(function () {
-		changeStatusToBSA();
-	}, 3000);
-})
 
 function ae (error) {
 	dialog.showErrorBox("Error", error);
@@ -305,24 +288,24 @@ function newProject () {
 		properties: ["openDirectory", "createDirectory"]
 	}, (folderPath) => {
 		if(folderPath !== undefined) {
-			extract('app/zip/laravel-5.5.zip', {dir: folderPath[0]}, (err) => {
+			extract('app/zip/laravel-5.8.zip', {dir: folderPath[0]}, (err) => {
 				if(err !== undefined) {
 					ae(err)
 				} else {
-					changeStatusToWait("Extracted Laravel 5.5")
+					changeStatusToWait("Extracted Laravel 5.8")
 					var vendorZips = []
-					fs.readdirSync("app/zip/vendors-5.5/").forEach(zipFile => {
+					fs.readdirSync("app/zip/vendors-5.8/").forEach(zipFile => {
 					 	vendorZips.push(zipFile)
 					})
 					var extractCount = 0
 					for(var i = 0; i < vendorZips.length; i++) {
-						extract('app/zip/vendors-5.5/' + vendorZips[i], {dir: folderPath[0] + '/vendor'}, (err) => {
+						extract('app/zip/vendors-5.8/' + vendorZips[i], {dir: folderPath[0] + '/vendor'}, (err) => {
 							if(err !== undefined) {
 								changeStatus(err)
 								ae(err)
 							} else {
 								extractCount++
-								changeStatusToWait("Extracted " + extractCount + "/34 vendor(s)")
+								changeStatusToWait("Extracted " + extractCount + "/38 vendor(s)")
 								if(extractCount === vendorZips.length) {
 									executeCommands(folderPath[0])
 								}
@@ -472,6 +455,20 @@ function openInEditor () {
 	})
 }
 
+function showDonateBox () {
+	dialog.showMessageBox({
+		type: 'info',
+		title: 'Laravel Kit',
+		message: 'Thank you for using Laravel Kit. Want to share some love?',
+		buttons: ['Donate', 'Later']
+	}, (buttonIndex) => {
+		if (buttonIndex === 0) {
+			goto("https://paypal.me/tarequemdhanif")
+			settings.set('donated', 1)
+		}
+	})
+}
+
 function goto (link) {
 	shell.openExternal(link)
 }
@@ -482,45 +479,4 @@ function cmd (command) {
 
 function output (output) {
 	$(".console").append("<div class='output'>" + output + "</div>");
-}
-
-function searchPackages (name, page) {
-	isOnline().then(online => {
-		if(online === true) {
-			changeStatusToWait("");
-			$(".packages").html("<p style='margin-left: 10px;'>Searching...</p>");
-			$(".pages").html("");
-			request({
-				url: "https://packagist.org/search.json",
-				qs: { tag: "laravel", q: name, page: page }
-			}, function (error, response, body) {
-				if(error === null) {
-					var json = JSON.parse(body);
-					var results = json.results;
-					if(results.length > 0) {
-						var total = json.total;
-						var pages = Math.ceil(total / 15);
-						$(".pages").html("");
-						$(".packages").html("");
-						$(".total").text(total);
-						for (var i = 0; i < pages; i++) {
-							$(".pages").append("<button class='btn btn-sm page' page='" + (i+1).toString() + "'>" + (i+1).toString() + "</button>")
-						}
-						$("button.page[page=" + page + "]").addClass("btn-active");
-						for (var i = 0; i < results.length; i++) {
-							$(".packages").append("<div class='package'><p class='title'>" + results[i].name + "</p><p class='desc'>" + results[i].description + "</p><a href='" + results[i].url + "' title='Packagist'><img src='img/packagist.png'></a><a href='" + results[i].repository + "' title='Github'><img src='img/github.png'></a><button class='btn btn-sm' id='install' pkg='" + results[i].name + "'>require</button></div>")
-						}
-					} else {
-						$(".packages").html("<p style='margin-left: 10px;'>Found nothing.</p>")
-					}
-				} else {
-					alert(error + "\nToggle DevTools for more.");
-					console.log(error);
-				}
-				changeStatusToBSA();
-			})
-		} else {
-			ae("Check your internet connection and try again.");
-		}
-	});
 }
