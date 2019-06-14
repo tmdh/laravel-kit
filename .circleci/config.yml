@@ -1,6 +1,29 @@
-deploy-linux:
-  docker:
-    - image: electronuserland/builder:wine
-  steps:
-    - run: yarn --link-duplicates --pure-lockfile
-    - run: yarn release --linux --win
+version: 2
+jobs:
+  build-windows:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: yarn && yarn release --win
+
+  build-macos:
+    macos:
+      xcode: "10.0.0"
+    steps:
+      - checkout
+      - run: yarn && yarn release --mac
+  build-linux:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - run: yarn --link-duplicates --pure-lockfile
+      - run: yarn release --linux --win
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-windows
+      - build-macos
+      - build-linux
