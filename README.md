@@ -21,6 +21,10 @@ You can also install Laravel Kit with [brew](https://caskroom.github.io/) on mac
 
     brew cask install laravel-kit
 
+You can also install Laravel Kit with [AppGet](https://appget.net/packages/i/laravel-kit) on Windows.
+
+    appget install laravel-kit
+
 Find out more [here](https://github.com/tmdh/laravel-kit/releases/latest).
 
 
@@ -29,7 +33,7 @@ Find out more [here](https://github.com/tmdh/laravel-kit/releases/latest).
 
 * **Artisan commands**: You can execute 61 artisan commands with Laravel Kit.
 * **Works offline**: You can create a fresh Laravel 5.8 application without any internet connection.
-* Cross platform support (Windows, macOS and Linux).
+* **Cross platform support**: (Windows, macOS and Linux).
 * **Console**: This feature allows you to see full output of a command.
 * Beautiful UI.
 
