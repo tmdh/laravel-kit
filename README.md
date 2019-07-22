@@ -1,6 +1,6 @@
 # Laravel Kit
 
-[![Build Status](https://travis-ci.org/tmdh/laravel-kit.svg?branch=master)](https://travis-ci.org/tmdh/laravel-kit) [![CircleCI](https://circleci.com/gh/tmdh/laravel-kit/tree/master.svg?style=svg)](https://circleci.com/gh/tmdh/laravel-kit/tree/master) [![Wiki](https://img.shields.io/badge/wiki-available-brightgreen.svg)](https://github.com/tmdh/laravel-kit/wiki) [![Wiki](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/tmdh) [![Downloads](https://img.shields.io/endpoint.svg?color=blueviolet&url=https%3A%2F%2Flk-c2p9jtxghlw9.runkit.sh%2Fdownloads)](#download)
+[![Build Status](https://travis-ci.org/tmdh/laravel-kit.svg?branch=master)](https://travis-ci.org/tmdh/laravel-kit) [![CircleCI](https://circleci.com/gh/tmdh/laravel-kit/tree/master.svg?style=svg)](https://circleci.com/gh/tmdh/laravel-kit/tree/master) [![Wiki](https://img.shields.io/badge/wiki-available-brightgreen.svg)](https://github.com/tmdh/laravel-kit/wiki) [![Wiki](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/tarequemdhanif) [![Downloads](https://img.shields.io/endpoint.svg?color=blueviolet&url=https%3A%2F%2Flk-c2p9jtxghlw9.runkit.sh%2Fdownloads)](#download)
 
 ![Logo](build/icons/png/64x64.png)
 
