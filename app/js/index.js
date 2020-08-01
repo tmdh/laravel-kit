@@ -5,6 +5,8 @@ const {exec, spawn} = require("child_process")
 const extract = require('extract-zip')
 const settings = require("electron-settings")
 const kill = require('tree-kill')
+const isDev = require("electron-is-dev")
+const path = require('path');
 var statusbar = $(".status-bar"), serveBtn = $("#serve.serve"), servingBtn = $("#serve.serving")
 var projectPath = ""
 var serve
@@ -288,24 +290,24 @@ function newProject () {
 		properties: ["openDirectory", "createDirectory"]
 	}, (folderPath) => {
 		if(folderPath !== undefined) {
-			extract('app/zip/laravel-5.8.zip', {dir: folderPath[0]}, (err) => {
+			extract(filePath('laravel-5.8.zip'), {dir: folderPath[0]}, (err) => {
 				if(err !== undefined) {
-					ae(err)
+					ae(err.message)
 				} else {
 					changeStatusToWait("Extracted Laravel 5.8")
 					var vendorZips = []
-					fs.readdirSync("app/zip/vendors-5.8/").forEach(zipFile => {
+					fs.readdirSync(filePath("vendors-5.8/")).forEach(zipFile => {
 					 	vendorZips.push(zipFile)
 					})
 					var extractCount = 0
 					for(var i = 0; i < vendorZips.length; i++) {
-						extract('app/zip/vendors-5.8/' + vendorZips[i], {dir: folderPath[0] + '/vendor'}, (err) => {
+						extract(filePath('vendors-5.8/' + vendorZips[i]), {dir: folderPath[0] + '/vendor'}, (err) => {
 							if(err !== undefined) {
 								changeStatus(err)
 								ae(err)
 							} else {
 								extractCount++
-								changeStatusToWait("Extracted " + extractCount + "/38 vendor(s)")
+								changeStatusToWait("Extracted " + extractCount + "/" + vendorZips.length + " vendor(s)")
 								if(extractCount === vendorZips.length) {
 									executeCommands(folderPath[0])
 								}
@@ -446,7 +448,7 @@ function getProjectName (dir) {
 }
 
 function showInExplorer () {
-	shell.showItemInFolder(projectPath + "\\app")
+	shell.showItemInFolder(projectPath)
 }
 
 function openInEditor () {
@@ -479,4 +481,12 @@ function cmd (command) {
 
 function output (output) {
 	$(".console").append("<div class='output'>" + output + "</div>");
+}
+
+function filePath (zipFileName) {
+	if(isDev) {
+		return path.join(__dirname, 'zip' , zipFileName)
+	} else {
+		return path.join(process.resourcesPath, "app/zip", zipFileName);
+	}
 }

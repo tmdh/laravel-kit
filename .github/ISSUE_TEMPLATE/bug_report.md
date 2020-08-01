@@ -1,9 +1,3 @@
----
-name: Bug report
-about: Create a report to help us improve
-
----
-
 **Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -14,15 +8,10 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
+**Screenshots or any error messages**
+Check **View -> Toggle Developer Tools** and see if there is any error messages in **Console** tab.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. macOS]
- - Laravel Kit version [e.g. 1.0.1]
-
-**Additional context**
-Add any other context about the problem here.
+ - Laravel Kit version [e.g. 1.2.3]

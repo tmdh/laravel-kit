@@ -1,13 +1,14 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Easy Laravel application management",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "electron-builder"
+    "release": "electron-builder",
+    "zip": "bash ./scripts/rzip.sh"
   },
   "build": {
     "appId": "com.tmdh.laravel-kit",
@@ -31,7 +32,8 @@
     },
     "linux": {
       "icon": "build/icons/png/"
-    }
+    },
+    "extraResources": "app/zip"
   },
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
   "license": "MIT",
@@ -42,6 +44,7 @@
     "url": "https://github.com/tmdh/laravel-kit.git"
   },
   "dependencies": {
+    "adm-zip": "^0.4.13",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.4",
     "electron-updater": "^2.18.2",
