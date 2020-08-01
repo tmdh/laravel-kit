@@ -46,4 +46,4 @@ Go to [Laravel Kit wiki](https://github.com/tmdh/laravel-kit/wiki).
 
 ------
 
-Copyright © 2018-2019 by [Tareque Md Hanif](https://github.com/tmdh)
+Copyright © 2018-2020 by [Tareque Md Hanif](https://github.com/tmdh)
