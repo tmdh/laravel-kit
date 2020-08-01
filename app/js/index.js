@@ -290,30 +290,18 @@ function newProject () {
 		properties: ["openDirectory", "createDirectory"]
 	}, (folderPath) => {
 		if(folderPath !== undefined) {
-<<<<<<< Updated upstream
-			extract('app/zip/laravel.zip', {dir: folderPath[0]}, (err) => {
-=======
 			extract(filePath('laravel-5.8.zip'), {dir: folderPath[0]}, (err) => {
->>>>>>> Stashed changes
 				if(err !== undefined) {
 					ae(err.message)
 				} else {
 					changeStatusToWait("Extracted Laravel 5.8")
 					var vendorZips = []
-<<<<<<< Updated upstream
-					fs.readdirSync("app/zip/vendors/").forEach(zipFile => {
-=======
 					fs.readdirSync(filePath("vendors-5.8/")).forEach(zipFile => {
->>>>>>> Stashed changes
 					 	vendorZips.push(zipFile)
 					})
 					var extractCount = 0
 					for(var i = 0; i < vendorZips.length; i++) {
-<<<<<<< Updated upstream
-						extract('app/zip/vendors/' + vendorZips[i], {dir: folderPath[0] + '/vendor'}, (err) => {
-=======
 						extract(filePath('vendors-5.8/' + vendorZips[i]), {dir: folderPath[0] + '/vendor'}, (err) => {
->>>>>>> Stashed changes
 							if(err !== undefined) {
 								changeStatus(err)
 								ae(err)
