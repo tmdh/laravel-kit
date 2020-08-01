@@ -15,7 +15,7 @@ Laravel Kit is a desktop application which can execute almost all Laravel Artisa
 
 | macOS                                    | Windows                                  | Linux                                    |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.3/laravel-kit-1.2.3-mac.zip) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.3/laravel-kit-setup-1.2.3.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.3/laravel-kit-1.2.3-x86_64.AppImage) |
+| [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.4/laravel-kit-1.2.4-mac.zip) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.4/laravel-kit-setup-1.2.4.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v1.2.4/laravel-kit-1.2.4-x86_64.AppImage) |
 
 You can also install Laravel Kit with [brew](https://caskroom.github.io/) on macOS.
 
