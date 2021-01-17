@@ -14,6 +14,7 @@ module.exports = {
     publicPath: "./"
   },
   target: "electron-renderer",
+  devtool: "eval-source-map",
   module: {
     rules: [
       {
@@ -60,5 +61,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "style.css"
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src/renderer/")
+    }
+  }
 };

@@ -5,6 +5,24 @@
 @layer base {
   @font-face {
     font-family: Inter;
+    font-weight: 400;
     src: url(./assets/fonts/Inter-Regular.woff) format("woff");
   }
+  @font-face {
+    font-family: Inter;
+    font-weight: 700;
+    src: url(./assets/fonts/Inter-Bold.woff) format("woff");
+  }
+}
+
+* {
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  background-color: #e4e4e4;
+  width: 0.675rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9d9d9d;
 }
