@@ -1,9 +1,10 @@
 const { app, BrowserWindow } = require("electron");
+const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
@@ -23,7 +24,14 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow);
+app
+  .whenReady()
+  .then(createWindow)
+  .then(() => {
+    installExtension(VUEJS_DEVTOOLS)
+      .then(name => console.log(`Added Extension:  ${name}`))
+      .catch(err => console.log("An error occurred: ", err));
+  });
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
