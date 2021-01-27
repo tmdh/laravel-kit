@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./src/renderer/*.vue", "./src/renderer/components/*.vue"],
+  purge: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
@@ -37,7 +37,8 @@ module.exports = {
         3: "3px"
       },
       fontFamily: {
-        sans: ["Inter", "Helvetica", "Arial", "sans-serif"]
+        sans: ["Inter", "Helvetica", "Arial", "sans-serif"],
+        mono: ["Inconsolata"]
       }
     }
   },

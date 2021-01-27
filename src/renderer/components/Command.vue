@@ -6,63 +6,36 @@
     </div>
     <p class="mt-5 mb-3 text-base">{{ command.description }}</p>
     <div class="h-px bg-gray-300"></div>
-    <div v-if="argumentsLength > 0">
+    <div v-if="getArguments.length > 0">
       <h2 class="text-gray-800 font-bold text-base mt-4">Arguments</h2>
-      <div class="flex flex-row py-2">
-        <div class="w-64">
-          <span class="text-sm text-gray-900">name</span>
-        </div>
-        <div class="flex flex-col">
-          <input type="text" class="h-7 w-72 border-input border-gray-300 border rounded px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500" />
-          <span class="text-xs text-gray-600 mt-1">The name of the class</span>
-        </div>
-      </div>
+      <argument-input v-for="argument in getArguments" :key="argument.name" :field="argument"></argument-input>
     </div>
-    <h2 class="text-gray-800 font-bold text-base mt-4">Options</h2>
-    <div class="flex flex-row py-2">
-      <div class="w-64">
-        <span class="text-sm text-gray-900">api</span>
-      </div>
-      <div class="flex flex-row items-center">
-        <input type="checkbox" class="w-4 h-4 rounded-md text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900" id="api" />
-        <label class="ml-2 text-sm text-gray-600" for="api">Exclude the create and edit methods from the controller.</label>
-      </div>
-    </div>
-    <div class="flex flex-row py-2">
-      <div class="w-64">
-        <span class="text-sm text-gray-900">force</span>
-      </div>
-      <div class="flex flex-row items-center">
-        <input type="checkbox" class="w-4 h-4 rounded-md text-blue-100 focus:ring-0 hover:text-blue  hover:border-gray-900" id="force" />
-        <label class="ml-2 text-sm text-gray-600" for="force">Create the class even if the controller already exists</label>
-      </div>
-    </div>
-    <div class="flex flex-row py-2">
-      <div class="w-64">
-        <span class="text-sm text-gray-900">invokable</span>
-      </div>
-      <div class="flex flex-row items-center">
-        <input type="checkbox" class="w-4 h-4 rounded-md text-blue-100 focus:ring-0 hover:text-blue  hover:border-gray-900" id="invokable" />
-        <label class="ml-2 text-sm text-gray-600" for="invokable">Generate a single method, invokable controller class.</label>
-      </div>
+    <div v-if="getOptions.length > 0">
+      <h2 class="text-gray-800 font-bold text-base mt-4">Options</h2>
+      <option-input v-for="option in getOptions" :key="option.name" :field="option"></option-input>
     </div>
   </div>
 </template>
 
 <script>
+import ArgumentInput from "@/components/ArgumentInput.vue";
+import OptionInput from "@/components/OptionInput.vue";
 export default {
   name: "Command",
+  components: { ArgumentInput, OptionInput },
   props: ["name"],
   computed: {
     command() {
-      return this.$store.getters.getCommand(this.name);
+      return this.$store.state.project.commands.find(command => command.name == this.name);
     },
-    arguments() {
-      let args = this.command.definition.arguments;
-      return Object.keys(args).map(arg => args[arg]);
+    getArguments() {
+      return Object.keys(this.command.definition.arguments).map(argument => this.command.definition.arguments[argument]);
     },
-    argumentsLength() {
-      return this.arguments.length;
+    getOptions() {
+      const remove = ["--help", "--quiet", "--verbose", "--version", "--ansi", "--no-ansi", "--no-interaction", "--env"];
+      return Object.keys(this.command.definition.options)
+        .map(option => this.command.definition.options[option])
+        .filter(option => !remove.includes(option.name));
     }
   }
 };

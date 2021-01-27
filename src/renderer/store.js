@@ -1,24 +1,37 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Project from "@/api/Project";
+import { execSync } from "child_process";
+const { basename } = require("path");
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    project: null
+    project: null,
+    name: null,
+    dir: null,
+    lastArtisan: null
   },
   mutations: {
     openProject(state, dir) {
-      state.project = new Project(dir);
+      let output = artisan("list --format=json", dir);
+      if (output.includes("Laravel")) {
+        state.dir = dir;
+        state.project = JSON.parse(output);
+        state.name = basename(dir);
+      }
     }
   },
   getters: {
-    searchResults: state => keyword => {
-      return state.project.commands.filter(command => command.name.includes(keyword)).sort((a, b) => (a.name > b.name ? 1 : -1)); // function(a, b){return a.name > b.name ? 1 : -1})
-    },
-    getCommand: state => name => {
-      return state.project.commands.find(command => command.name == name);
+    artisan: state => command => {
+      return artisan(command, state.dir);
     }
-  }
+  },
+  actions: {}
 });
+
+function artisan(command, dir) {
+  return execSync(`php artisan ${command}`, { cwd: dir })
+    .toString()
+    .trim();
+}

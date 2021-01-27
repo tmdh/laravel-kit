@@ -7,7 +7,7 @@
   "scripts": {
     "dev:one": "cross-env NODE_ENV=development webpack serve --config webpack.renderer.config.js --color --progress",
     "dev:two": "cross-env NODE_ENV=development webpack --config webpack.main.config.js --color --progress && electron ./dist/main.js",
-    "prod": "cross-env NODE_ENV=production webpack --config webpack.renderer.config.js --color --progress && cross-env NODE_ENV=production webpack --config webpack.main.config.js --color --progress && electron ./dist/main.js",
+    "prod": "cross-env NODE_ENV=production webpack --config webpack.renderer.config.js --color --progress --mode production && cross-env NODE_ENV=production webpack --config webpack.main.config.js --color --progress && electron ./dist/main.js",
     "test": "mocha"
   },
   "dependencies": {

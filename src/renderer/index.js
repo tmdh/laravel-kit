@@ -11,6 +11,11 @@ import "./styles.css";
 
 Vue.use(VueRouter);
 
+Vue.config.errorHandler = function(err) {
+  console.error(err);
+};
+Vue.config.productionTip = false;
+
 const router = new VueRouter({
   routes: [
     { path: "/home", component: Home },

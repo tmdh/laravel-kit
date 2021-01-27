@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: ["plugin:vue/essential", "eslint:recommended"],
   parserOptions: {
-    ecmaVersion: 2015
+    ecmaVersion: 2018
   },
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",

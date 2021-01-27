@@ -13,6 +13,11 @@
     font-weight: 700;
     src: url(./assets/fonts/Inter-Bold.woff) format("woff");
   }
+  @font-face {
+    font-family: Inconsolata;
+    font-weight: 400;
+    src: url(./assets/fonts/Inconsolata-Regular.ttf) format("ttf");
+  }
 }
 
 * {
