@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ path: '/artisan/command/' + commandName }" class="py-1.5 hover:bg-gray-200 text-sm font-mono px-6" :alt="description">{{ commandName }}</router-link>
+  <router-link :to="{ path: '/artisan/command/' + commandName }" class="py-1.5 hover:bg-gray-200 text-xs font-mono px-6" :alt="description">{{ commandName }}</router-link>
 </template>
 
 <script>

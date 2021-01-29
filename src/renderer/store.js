@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
     project: null,
     name: null,
     dir: null,
-    lastArtisan: null
+    lastArtisan: null,
+    recentCommands: []
   },
   mutations: {
     openProject(state, dir) {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
         state.project = JSON.parse(output);
         state.name = basename(dir);
       }
+    },
+    updateLastArtisan(state, command) {
+      state.lastArtisan = command;
     }
   },
   getters: {
@@ -31,7 +35,7 @@ export const store = new Vuex.Store({
 });
 
 function artisan(command, dir) {
-  return execSync(`php artisan ${command}`, { cwd: dir })
+  return execSync(`php artisan ${command} --no-interaction --ansi`, { cwd: dir })
     .toString()
     .trim();
 }

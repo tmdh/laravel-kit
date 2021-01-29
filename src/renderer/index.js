@@ -5,6 +5,7 @@ import App from "@/App.vue";
 import Home from "@/views/Home.vue";
 import Artisan from "@/views/Artisan.vue";
 import Command from "@/components/Command.vue";
+import ArtisanDefault from "@/components/ArtisanDefault.vue";
 import Models from "@/views/Models.vue";
 import Settings from "@/views/Settings.vue";
 import "./styles.css";
@@ -22,7 +23,10 @@ const router = new VueRouter({
     {
       path: "/artisan",
       component: Artisan,
-      children: [{ path: "command/:name", component: Command, props: true }]
+      children: [
+        { path: "command/:name", component: Command, props: true },
+        { path: "", component: ArtisanDefault }
+      ]
     },
     { path: "/models", component: Models },
     { path: "/settings", component: Settings },

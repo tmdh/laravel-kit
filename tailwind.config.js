@@ -24,9 +24,11 @@ module.exports = {
       },
       green: {
         code: "#00BC00",
-        DEFAULT: "#3B9B58",
+        DEFAULT: "#53B771",
         100: "#48BC6B"
-      }
+      },
+      cyan: "#5198BC",
+      purple: "#C005BE"
     },
     extend: {
       spacing: {
@@ -38,7 +40,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Inter", "Helvetica", "Arial", "sans-serif"],
-        mono: ["Inconsolata"]
+        mono: ["FiraCode"]
       }
     }
   },

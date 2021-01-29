@@ -20,7 +20,7 @@
         </div>
       </div>
       <keep-alive>
-        <router-view :key="$route.fullPath" max="5" class="bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl"></router-view>
+        <router-view :key="$route.fullPath" class="bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl"></router-view>
       </keep-alive>
     </div>
   </div>
