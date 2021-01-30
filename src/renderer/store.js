@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { execSync } from "child_process";
-const { basename } = require("path");
+import { execSync, spawn } from "child_process";
+import { basename } from "path";
+import kill from "tree-kill";
 
 Vue.use(Vuex);
 
@@ -10,8 +11,7 @@ export const store = new Vuex.Store({
     project: null,
     name: null,
     dir: null,
-    lastArtisan: null,
-    recentCommands: []
+    serve: null
   },
   mutations: {
     openProject(state, dir) {
@@ -20,6 +20,7 @@ export const store = new Vuex.Store({
         state.dir = dir;
         state.project = JSON.parse(output);
         state.name = basename(dir);
+        document.title = `${state.name} - Kit`;
       }
     },
     updateLastArtisan(state, command) {
@@ -31,7 +32,21 @@ export const store = new Vuex.Store({
       return artisan(command, state.dir);
     }
   },
-  actions: {}
+  actions: {
+    serveService(context) {
+      if (context.state.serve == null) {
+        context.state.serve = spawn("php", ["artisan", "serve"], { cwd: context.state.dir });
+      } else {
+        kill(context.state.serve.pid, "SIGKILL", function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            context.state.serve = null;
+          }
+        });
+      }
+    }
+  }
 });
 
 function artisan(command, dir) {

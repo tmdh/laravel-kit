@@ -1,10 +1,10 @@
 <template>
-  <h1>models</h1>
+  <h1>tinker</h1>
 </template>
 
 <script>
 export default {
-  name: "Artisan"
+  name: "Tinker"
 };
 </script>
 

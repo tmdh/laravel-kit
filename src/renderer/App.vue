@@ -1,7 +1,9 @@
 <template>
   <div class="h-screen flex bg-white-100 antialiased overflow-x-hidden select-none">
     <side-nav></side-nav>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view :key="$route.fullPath"></router-view>
+    </keep-alive>
   </div>
 </template>
 

@@ -4,10 +4,11 @@ import { store } from "./store";
 import App from "@/App.vue";
 import Home from "@/views/Home.vue";
 import Artisan from "@/views/Artisan.vue";
-import Command from "@/components/Command.vue";
-import ArtisanDefault from "@/components/ArtisanDefault.vue";
-import Models from "@/views/Models.vue";
+import Tinker from "@/views/Tinker.vue";
 import Settings from "@/views/Settings.vue";
+import menu from "./menu";
+import { remote } from "electron";
+const { Menu } = remote;
 import "./styles.css";
 
 Vue.use(VueRouter);
@@ -20,15 +21,8 @@ Vue.config.productionTip = false;
 const router = new VueRouter({
   routes: [
     { path: "/home", component: Home },
-    {
-      path: "/artisan",
-      component: Artisan,
-      children: [
-        { path: "command/:name", component: Command, props: true },
-        { path: "", component: ArtisanDefault }
-      ]
-    },
-    { path: "/models", component: Models },
+    { path: "/artisan", component: Artisan },
+    { path: "/tinker", component: Tinker },
     { path: "/settings", component: Settings },
     { path: "/", redirect: "/home" }
   ]
@@ -41,3 +35,5 @@ new Vue({
     return h(App);
   }
 }).$mount("#app");
+
+Menu.setApplicationMenu(menu);
