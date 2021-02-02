@@ -19,7 +19,8 @@
 <script>
 const { remote } = require("electron");
 const { dialog } = remote;
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import bus from "@/bus";
 
 export default {
   name: "Home",
@@ -41,8 +42,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(["project", "name", "dir"]),
-    ...mapGetters(["artisan"])
+    ...mapState(["project", "name", "dir"])
+  },
+  mounted() {
+    bus.$on("openDialog", () => {
+      this.openDialog();
+    });
   }
 };
 </script>

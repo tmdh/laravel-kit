@@ -1,20 +1,28 @@
 import { remote } from "electron";
 const { Menu } = remote;
 const isMac = process.platform === "darwin";
+import bus from "./bus";
+
 const template = [
-  // { role: 'appMenu' }
   ...(isMac
     ? [
         {
           label: "Kit",
-          submenu: [{ role: "about" }, { type: "separator" }, { role: "services" }, { type: "separator" }, { role: "hide" }, { role: "hideothers" }, { role: "unhide" }, { type: "separator" }, { role: "quit" }]
+          submenu: [{ role: "services" }, { type: "separator" }, { role: "hide" }, { role: "hideothers" }, { role: "unhide" }, { type: "separator" }, { role: "quit" }]
         }
       ]
     : []),
-  // { role: 'fileMenu' }
   {
-    label: "File",
-    submenu: [isMac ? { role: "close" } : { role: "quit" }]
+    label: "Project",
+    submenu: [
+      {
+        label: "Open Project...",
+        click() {
+          bus.$emit("openDialog");
+        }
+      },
+      isMac ? { role: "close" } : { role: "quit" }
+    ]
   },
   // { role: 'editMenu' }
   {
@@ -61,16 +69,12 @@ const template = [
         }
       }
     ]
-  },
-  {
-    label: "SSSS",
-    submenu: [
-      {
-        label: "ssss"
-      }
-    ]
   }
 ];
+
+bus.$on("testing", payload => {
+  console.log(`from menu ${payload}`);
+});
 
 const menu = Menu.buildFromTemplate(template);
 

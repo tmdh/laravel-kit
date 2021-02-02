@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { execSync, spawn } from "child_process";
+import { execSync, exec } from "child_process";
 import { basename } from "path";
 import kill from "tree-kill";
 
@@ -15,7 +15,9 @@ export const store = new Vuex.Store({
   },
   mutations: {
     openProject(state, dir) {
-      let output = artisan("list --format=json", dir);
+      let output = execSync("php artisan list --format=json", { cwd: dir })
+        .toString()
+        .trim();
       if (output.includes("Laravel")) {
         state.dir = dir;
         state.project = JSON.parse(output);
@@ -23,34 +25,24 @@ export const store = new Vuex.Store({
         document.title = `${state.name} - Kit`;
       }
     },
-    updateLastArtisan(state, command) {
-      state.lastArtisan = command;
-    }
-  },
-  getters: {
-    artisan: state => command => {
-      return artisan(command, state.dir);
+    stopServeSync(state) {
+      if (state.serve != null) {
+        kill(state.serve.pid, "SIGKILL", function() {
+          state.serve = null;
+        });
+      }
     }
   },
   actions: {
-    serveService(context) {
-      if (context.state.serve == null) {
-        context.state.serve = spawn("php", ["artisan", "serve"], { cwd: context.state.dir });
-      } else {
-        kill(context.state.serve.pid, "SIGKILL", function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            context.state.serve = null;
-          }
+    startServe(context) {
+      context.state.serve = exec("php artisan serve", { cwd: context.state.dir });
+    },
+    stopServe(context) {
+      if (context.state.serve != null) {
+        kill(context.state.serve.pid, "SIGKILL", function() {
+          context.state.serve = null;
         });
       }
     }
   }
 });
-
-function artisan(command, dir) {
-  return execSync(`php artisan ${command} --no-interaction --ansi`, { cwd: dir })
-    .toString()
-    .trim();
-}

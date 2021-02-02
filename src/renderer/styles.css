@@ -27,3 +27,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: #9d9d9d;
 }
+
+.view {
+  @apply bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl;
+}

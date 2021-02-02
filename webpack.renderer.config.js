@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
@@ -47,8 +48,6 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, "../dist/renderer"),
-    historyApiFallback: true,
-    compress: true,
     hot: true,
     port: 4000,
     publicPath: "/"
@@ -60,6 +59,9 @@ module.exports = {
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: "style.css"
+    }),
+    new MonacoWebpackPlugin({
+      languages: []
     })
   ],
   resolve: {

@@ -16,7 +16,7 @@
         <h1 class="font-bold px-5 py-4 text-gray-500">{{ name }}</h1>
         <div class="mr-2">
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null" @click="openServe">http://127.0.0.1:8000</a>
-          <button class="bg-green hover:bg-green-100 w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2 focus:ring-green" @click="serveService">{{ serve == null ? "Serve" : "Serving..." }}</button>
+          <button class="bg-green w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2 focus:ring-green" @click="serveService" v-text="serve == null ? 'Serve' : 'Stop'" :class="[serve == null ? 'hover:bg-green-100' : 'hover:bg-gray-100']"></button>
           <button class="bg-blue hover:bg-blue-100 w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2" @click="openFolder">Open folder</button>
           <button class="bg-blue hover:bg-blue-100 w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2">Open In Editor</button>
         </div>
@@ -48,6 +48,9 @@ export default {
     searchResults() {
       const remove = ["serve", "tinker"];
       return this.$store.state.project.commands.filter(command => command.name.includes(this.searchKeyword) && !remove.includes(command.name)).sort((a, b) => (a.name > b.name ? 1 : -1));
+    },
+    serveText() {
+      return "";
     }
   },
   methods: {
@@ -57,13 +60,20 @@ export default {
     openServe() {
       openExternal("http://127.0.0.1:8000");
     },
-    ...mapActions(["serveService"])
+    ...mapActions(["startServe", "stopServe"]),
+    serveService() {
+      if (this.serve == null) {
+        this.startServe();
+      } else {
+        this.stopServe();
+      }
+    }
   }
 };
 </script>
 
-<style scoped>
-.view {
-  @apply bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl;
-}
+<style>
+/*
+  .view in styles.css
+*/
 </style>

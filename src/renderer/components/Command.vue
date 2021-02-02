@@ -16,18 +16,18 @@
     </div>
     <div>
       <h2 class="text-gray-800 font-bold text-base mt-4">Terminal</h2>
-      <div id="terminal" class="font-mono text-sm mt-3 flex flex-col">
+      <div ref="terminal" class="font-mono text-sm mt-3 flex flex-col">
         <div class="select-text">
-          <span>→</span> <span class="text-cyan">{{ appName }}</span> <span class="text-purple">›</span> <span>php artisan {{ fullCommand }}</span>
+          <span>→</span> <span class="text-cyan">{{ appName }}</span> <span class="text-purple">›</span> <span class="text-green-code">php</span> <span>artisan {{ fullCommand }}</span>
         </div>
         <pre :class="{ 'opacity-50': previousCommand != fullCommand }" class="max-h-64 overflow-y-auto pb-4 select-text overflow-x-auto whitespace-pre-wrap">
 <code v-html="output"></code>
         </pre>
       </div>
+      <div ref="terminal-end"></div>
     </div>
   </div>
 </template>
-
 <script>
 import ArgumentInput from "@/components/ArgumentInput.vue";
 import OptionInput from "@/components/OptionInput.vue";
@@ -93,9 +93,11 @@ export default {
     async getOutputAsync() {
       this.previousCommand = this.fullCommand;
       this.output = "Running...";
-      exec(`php artisan ${this.fullCommand} --ansi`, { cwd: this.$store.state.dir }, (_, stdout) => {
-        this.output = Anser.ansiToHtml(stdout);
+      exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (_, stdout) => {
+        this.output = Anser.ansiToHtml(stdout, { use_classes: true });
+        this.$refs["terminal-end"].scrollIntoView();
       });
+      this.$refs["terminal-end"].scrollIntoView();
     }
   },
   mounted() {
@@ -108,5 +110,17 @@ export default {
 <style>
 ::selection {
   background: #e4e4e4;
+}
+.ansi-yellow-fg {
+  @apply text-terminal-yellow;
+}
+.ansi-green-fg {
+  @apply text-terminal-green;
+}
+.ansi-red-bg {
+  @apply bg-terminal-red;
+}
+.ansi-white-fg {
+  @apply text-gray-900;
 }
 </style>

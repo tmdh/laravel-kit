@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"],
+  purge: {
+    content: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"],
+    options: {
+      safelist: [/^text-terminal-/]
+    }
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
@@ -28,7 +33,12 @@ module.exports = {
         100: "#48BC6B"
       },
       cyan: "#5198BC",
-      purple: "#C005BE"
+      purple: "#C005BE",
+      terminal: {
+        green: "#50A14F",
+        yellow: "#C18401",
+        red: "#ff6666"
+      }
     },
     extend: {
       spacing: {
