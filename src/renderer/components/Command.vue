@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex-1">
     <div class="flex justify-between">
       <h1 class="font-mono text-xl">{{ command.name }}</h1>
       <button class="bg-blue hover:bg-blue-100 w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2" @click="getOutputAsync">Run</button>
@@ -20,7 +20,7 @@
         <div class="select-text">
           <span>→</span> <span class="text-cyan">{{ appName }}</span> <span class="text-purple">›</span> <span class="text-green-code">php</span> <span>artisan {{ fullCommand }}</span>
         </div>
-        <pre :class="{ 'opacity-50': previousCommand != fullCommand }" class="max-h-64 overflow-y-auto pb-4 select-text overflow-x-auto whitespace-pre-wrap">
+        <pre class="max-h-64 overflow-y-auto pb-4 select-text overflow-x-auto whitespace-pre-wrap">
 <code v-html="output"></code>
         </pre>
       </div>
@@ -43,8 +43,7 @@ export default {
     return {
       optionsInit: {},
       argumentsInit: {},
-      output: "",
-      previousCommand: ""
+      output: ""
     };
   },
   computed: {
@@ -54,18 +53,6 @@ export default {
     },
     command() {
       return this.$store.state.project.commands.find(command => command.name == this.name);
-    },
-    getArguments() {
-      return Object.keys(this.command.definition.arguments)
-        .map(argument => this.command.definition.arguments[argument])
-        .map(option => Object.assign({}, option, { value: "" }));
-    },
-    getOptions() {
-      const remove = ["--help", "--quiet", "--verbose", "--version", "--ansi", "--no-ansi", "--no-interaction", "--env"];
-      return Object.keys(this.command.definition.options)
-        .map(option => this.command.definition.options[option])
-        .filter(option => !remove.includes(option.name))
-        .map(option => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
     },
     fullCommand() {
       let argumentsCommand = "",
@@ -90,8 +77,19 @@ export default {
     }
   },
   methods: {
-    async getOutputAsync() {
-      this.previousCommand = this.fullCommand;
+    getArguments() {
+      this.argumentsInit = Object.keys(this.command.definition.arguments)
+        .map(argument => this.command.definition.arguments[argument])
+        .map(option => Object.assign({}, option, { value: "" }));
+    },
+    getOptions() {
+      const remove = ["--help", "--quiet", "--verbose", "--version", "--ansi", "--no-ansi", "--no-interaction", "--env"];
+      this.optionsInit = Object.keys(this.command.definition.options)
+        .map(option => this.command.definition.options[option])
+        .filter(option => !remove.includes(option.name))
+        .map(option => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
+    },
+    getOutputAsync() {
       this.output = "Running...";
       exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (_, stdout) => {
         this.output = Anser.ansiToHtml(stdout, { use_classes: true });
@@ -101,8 +99,8 @@ export default {
     }
   },
   mounted() {
-    this.argumentsInit = this.getArguments;
-    this.optionsInit = this.getOptions;
+    this.getArguments();
+    this.getOptions();
   }
 };
 </script>

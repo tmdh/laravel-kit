@@ -2,7 +2,7 @@
 node_modules
 dist
 laravel-app
-
+test.php
 
 # local env files
 .env.local

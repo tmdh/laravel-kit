@@ -1,7 +1,7 @@
 import { remote } from "electron";
 const { Menu } = remote;
 const isMac = process.platform === "darwin";
-import bus from "./bus";
+import bus from "@/bus";
 
 const template = [
   ...(isMac
@@ -17,46 +17,38 @@ const template = [
     submenu: [
       {
         label: "Open Project...",
+        accelerator: "CmdOrCtrl+O",
         click() {
           bus.$emit("openDialog");
         }
       },
+      {
+        label: "Reload Project",
+        click() {
+          bus.$emit("reloadProject");
+        }
+      },
+      {
+        label: "Close Project",
+        click() {
+          bus.$emit("closeProject");
+        }
+      },
+      { type: "separator" },
       isMac ? { role: "close" } : { role: "quit" }
     ]
   },
-  // { role: 'editMenu' }
   {
     label: "Edit",
-    submenu: [
-      { role: "undo" },
-      { role: "redo" },
-      { type: "separator" },
-      { role: "cut" },
-      { role: "copy" },
-      { role: "paste" },
-      ...(isMac
-        ? [
-            { role: "pasteAndMatchStyle" },
-            { role: "delete" },
-            { role: "selectAll" },
-            { type: "separator" },
-            {
-              label: "Speech",
-              submenu: [{ role: "startSpeaking" }, { role: "stopSpeaking" }]
-            }
-          ]
-        : [{ role: "delete" }, { type: "separator" }, { role: "selectAll" }])
-    ]
+    submenu: [{ role: "undo" }, { role: "redo" }, { type: "separator" }, { role: "cut" }, { role: "copy" }, { role: "paste" }, { role: "selectAll" }]
   },
-  // { role: 'viewMenu' }
   {
     label: "View",
-    submenu: [{ role: "reload" }, { role: "forceReload" }, { role: "toggleDevTools" }, { type: "separator" }, { role: "resetZoom" }, { role: "zoomIn" }, { role: "zoomOut" }, { type: "separator" }, { role: "togglefullscreen" }]
+    submenu: [{ role: "reload" }, { role: "forceReload" }, { role: "toggleDevTools" }, { type: "separator" }, { role: "togglefullscreen" }]
   },
-  // { role: 'windowMenu' }
   {
     label: "Window",
-    submenu: [{ role: "minimize" }, { role: "zoom" }, ...(isMac ? [{ type: "separator" }, { role: "front" }, { type: "separator" }, { role: "window" }] : [{ role: "close" }])]
+    submenu: [{ role: "minimize" }, ...(isMac ? [{ type: "separator" }, { role: "front" }, { type: "separator" }, { role: "window" }] : [{ role: "close" }])]
   },
   {
     role: "help",
@@ -77,5 +69,4 @@ bus.$on("testing", payload => {
 });
 
 const menu = Menu.buildFromTemplate(template);
-
 export default menu;

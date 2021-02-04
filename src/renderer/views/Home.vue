@@ -7,7 +7,7 @@
     <span class="mt-1 text-sm cursor-pointer text-blue" @click="openDialog">Open project...</span>
     <h3 class="mt-6 text-lg">Recent</h3>
     <div class="mt-1 text-sm">
-      <span class="cursor-pointer text-blue" @click="openProject('C:\\Users\\Tareque\\code\\laravel-kit\\laravel-app\\')">laravel-app</span>
+      <span class="cursor-pointer text-blue" @click="openProject({ dir: 'C:\\Users\\Tareque\\code\\laravel-kit\\laravel-app\\' })">laravel-app</span>
       <span class="ml-3">C:\Users\Tareque\code\laravel-kit\laravel-app</span>
     </div>
   </div>
@@ -17,37 +17,15 @@
 </template>
 
 <script>
-const { remote } = require("electron");
-const { dialog } = remote;
-import { mapState, mapMutations } from "vuex";
-import bus from "@/bus";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Home",
   methods: {
-    ...mapMutations(["openProject"]),
-    openDialog() {
-      dialog
-        .showOpenDialog({
-          title: "Open project...",
-          buttonLabel: "Open",
-          properties: ["openDirectory"],
-          multiSelections: false
-        })
-        .then(result => {
-          if (!result.canceled) {
-            this.openProject(result.filePaths[0]);
-          }
-        });
-    }
+    ...mapActions(["openDialog", "openProject"])
   },
   computed: {
     ...mapState(["project", "name", "dir"])
-  },
-  mounted() {
-    bus.$on("openDialog", () => {
-      this.openDialog();
-    });
   }
 };
 </script>

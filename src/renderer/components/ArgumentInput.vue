@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row py-2">
+  <div class="flex flex-col lg:flex-row py-2">
     <div class="w-64">
       <label class="text-sm text-gray-900" :for="field.name">{{ field.name }}</label>
     </div>

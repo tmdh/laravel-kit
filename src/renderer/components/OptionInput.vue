@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row py-2">
+  <div class="flex flex-col lg:flex-row py-2">
     <div class="w-64">
       <label class="text-sm text-gray-900" :for="field.name">{{ cleanName }}</label>
     </div>
@@ -8,7 +8,7 @@
       <label class="text-xs text-gray-600 mt-1" :for="field.name">{{ field.description }}</label>
     </div>
     <div class="flex flex-row items-center" v-else>
-      <input type="checkbox" class="w-4 h-4 rounded-md text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900" :id="field.name" @change="$emit('input', $event.target.checked)" />
+      <input type="checkbox" class="w-4 h-4 rounded-md text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900" :id="field.name" :checked="field.value" @change="$emit('input', $event.target.checked)" />
       <label class="ml-2 text-sm text-gray-600" :for="field.name">{{ field.description }}</label>
     </div>
   </div>

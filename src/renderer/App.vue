@@ -1,20 +1,20 @@
 <template>
-  <div class="h-screen flex bg-white-100 antialiased overflow-x-hidden select-none">
+  <div class="min-h-screen max-h-screen overflow-hidden flex bg-white-100 antialiased overflow-x-hidden select-none">
     <nav class="flex flex-col w-15 justify-between">
       <div>
-        <button @click="tab = 'Home'" class="link" :class="{ 'link-active': tab == 'Home' }">
+        <button @click="tab = 'Home'" class="link" :class="{ 'link-active': tab == 'Home' }" title="Home">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
         </button>
-        <button @click="tab = 'Artisan'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Artisan' }">
+        <button @click="tab = 'Artisan'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Artisan' }" title="Artisan">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
         </button>
-        <button @click="tab = 'Tinker'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Tinker' }">
+        <button @click="tab = 'Tinker'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Tinker' }" title="Tinker">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
           </svg>
         </button>
       </div>
-      <button @click="tab = 'Settings'" class="link" :class="{ 'link-active': tab == 'Settings' }">
+      <button @click="tab = 'Settings'" class="link" :class="{ 'link-active': tab == 'Settings' }" title="Settings">
         <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"
