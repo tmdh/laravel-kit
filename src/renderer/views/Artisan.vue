@@ -32,14 +32,9 @@
         </div>
         <div>
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink"></a>
-          <button
-            class="bg-green px-3 py-1.5 text-white rounded text-sm mx-1 focus:outline-none focus:ring-2 focus:ring-green"
-            @click="serveService"
-            v-text="serve == null ? 'Serve' : 'Stop'"
-            :class="[serve == null ? 'hover:bg-green-100' : 'hover:bg-gray-100']"
-          ></button>
-          <button class="bg-blue hover:bg-blue-100 px-3 py-1.5 text-white rounded text-sm mx-1 focus:outline-none focus:ring-2" @click="openFolder">Open folder</button>
-          <button class="bg-blue hover:bg-blue-100 px-3 py-1.5 text-white rounded text-sm mx-1 focus:outline-none focus:ring-2">Open In Editor</button>
+          <kit-button @click.native="serveService">{{ serve == null ? "Serve" : "Stop" }}</kit-button>
+          <kit-button @click.native="openFolder">Open folder</kit-button>
+          <kit-button>Open In Editor</kit-button>
         </div>
       </div>
       <command v-if="commandName != null" :name="commandName" :key="commandName" class="view"></command>
@@ -49,15 +44,16 @@
 </template>
 
 <script>
-import Command from "@/components/Command.vue";
-import ArtisanDefault from "@/components/ArtisanDefault.vue";
+import KitButton from "@/components/KitButton";
+import Command from "@/components/Command";
+import ArtisanDefault from "@/components/ArtisanDefault";
 import { mapState, mapActions } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;
 
 export default {
   name: "Artisan",
-  components: { Command, ArtisanDefault },
+  components: { KitButton, Command, ArtisanDefault },
   data() {
     return {
       searchKeyword: "",

@@ -1,19 +1,29 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
 import kill from "./tree-kill-sync";
+import windowStateKeeper from "electron-window-state";
 
 const isDev = process.env.NODE_ENV === "development";
 
 function createWindow() {
+  let winState = windowStateKeeper({
+    defaultWidth: 1280,
+    defaultHeight: 720
+  });
   const win = new BrowserWindow({
-    width: 1280,
-    height: 720,
+    x: winState.x,
+    y: winState.y,
+    width: winState.width,
+    height: winState.height,
     backgroundColor: "#fff",
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
-    }
+    },
+    show: false
   });
+
+  winState.manage(win);
 
   if (isDev) {
     win.loadURL(`http://localhost:4000`);
@@ -29,6 +39,10 @@ function createWindow() {
   }
   win.on("close", () => {
     win.webContents.send("app-close");
+  });
+  win.on("ready-to-show", function() {
+    win.show();
+    win.focus();
   });
 }
 

@@ -1,11 +1,11 @@
 import Vue from "vue";
-import { store } from "@/store";
-import App from "@/App.vue";
-import menu from "@/menu";
+import { store } from "@/lib/store";
+import App from "@/App";
+import menu from "@/lib/menu";
 import { ipcRenderer, remote } from "electron";
 const { Menu } = remote;
-import "@/styles.css";
-import bus from "@/bus";
+import "@/styles";
+import bus from "@/lib/bus";
 
 Vue.config.errorHandler = function(err) {
   console.error(err);

@@ -3,7 +3,7 @@
     <div class="flex flex-col flex-1">
       <tinker-editor class="flex-1" v-model="code" language="php-x" theme="atom-one-light"></tinker-editor>
       <div class="py-2 px-3 flex justify-center md:justify-start">
-        <button class="bg-blue hover:bg-blue-100 px-3 py-1.5 text-white rounded text-sm focus:outline-none focus:ring-2 " @click="executeTinker">Tinker</button>
+        <kit-button @click.native="executeTinker">Tinker</kit-button>
       </div>
     </div>
     <tinker-editor class="flex-1" v-model="output" language="php-x" theme="atom-one-light" :options="outputOptions"></tinker-editor>
@@ -11,13 +11,15 @@
 </template>
 
 <script>
-import TinkerEditor from "@/components/TinkerEditor.vue";
+import TinkerEditor from "@/components/TinkerEditor";
+import KitButton from "@/components/KitButton";
 import { mapState } from "vuex";
-const { spawn } = require("child_process");
+import { spawn } from "child_process";
+import "@/lib/tinker";
 
 export default {
   name: "Tinker",
-  components: { TinkerEditor },
+  components: { TinkerEditor, KitButton },
   data() {
     return {
       code: `use Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,

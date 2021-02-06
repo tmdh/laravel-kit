@@ -34,19 +34,17 @@ export const store = new Vuex.Store({
       if (payload.reload == undefined) {
         context.dispatch("closeProject"); //notice
       }
-      exec("php artisan list --format=json", { cwd: payload.dir }, (error, stdout) => {
+      exec("php artisan --format=json", { cwd: payload.dir }, (error, stdout) => {
         if (error) {
-          dialog.showMessageBox(
-            {
-              type: "error",
-              title: "Error",
-              message: `${error}`,
-              buttons: ["Learn more", "OK"]
-            },
-            buttonIndex => {
-              console.log(buttonIndex);
-            }
-          );
+          let message = stdout;
+          if (stdout.includes("Could not open input file: artisan")) {
+            message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
+          }
+          dialog.showMessageBox({
+            type: "error",
+            title: "Error",
+            message
+          });
         } else {
           if (stdout.includes("Laravel")) {
             context.state.dir = payload.dir;

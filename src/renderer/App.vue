@@ -1,12 +1,20 @@
 <template>
-  <div class="min-h-screen max-h-screen overflow-hidden flex bg-white-100 antialiased overflow-x-hidden select-none">
+  <div class="min-h-screen max-h-screen flex overflow-hidden bg-white-100 antialiased select-none">
     <nav class="flex flex-col w-15 justify-between">
       <div>
         <button @click="tab = 'Home'" class="link" :class="{ 'link-active': tab == 'Home' }" title="Home">
-          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
         </button>
         <button @click="tab = 'Artisan'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Artisan' }" title="Artisan">
-          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
         </button>
         <button @click="tab = 'Tinker'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Tinker' }" title="Tinker">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,10 +38,10 @@
 </template>
 
 <script>
-import Home from "@/views/Home.vue";
-import Artisan from "@/views/Artisan.vue";
-import Tinker from "@/views/Tinker.vue";
-import Settings from "@/views/Settings.vue";
+import Home from "@/views/Home";
+import Artisan from "@/views/Artisan";
+import Tinker from "@/views/Tinker";
+import Settings from "@/views/Settings";
 import { mapState } from "vuex";
 
 export default {
@@ -49,10 +57,7 @@ export default {
 </script>
 
 <style>
-.link {
-  @apply flex w-14 h-15 text-gray-400 border-white-100 hover:text-gray-900 border-l-3 justify-center items-center focus:outline-none focus:text-gray-900;
-}
-.link-active {
-  @apply text-gray-900 border-gray-900;
-}
+/*
+  link, link-active in styles
+*/
 </style>

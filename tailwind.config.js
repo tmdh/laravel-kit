@@ -17,7 +17,7 @@ module.exports = {
         400: "#9D9D9D",
         300: "#DCDCDC",
         200: "#DFDFDF",
-        100: "#E4E4E4"
+        100: "#EAEAEB"
       },
       white: {
         DEFAULT: "#FFFFFF",
@@ -26,11 +26,6 @@ module.exports = {
       blue: {
         DEFAULT: "#5871EF",
         100: "#6B83ED"
-      },
-      green: {
-        code: "#00BC00",
-        DEFAULT: "#53B771",
-        100: "#48BC6B"
       },
       cyan: "#5198BC",
       purple: "#C005BE",

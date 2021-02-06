@@ -29,11 +29,13 @@
   </div>
 </template>
 <script>
-import ArgumentInput from "@/components/ArgumentInput.vue";
-import OptionInput from "@/components/OptionInput.vue";
+import ArgumentInput from "@/components/ArgumentInput";
+import OptionInput from "@/components/OptionInput";
 import { mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";
+import { remote } from "electron";
+const { dialog } = remote;
 
 export default {
   name: "Command",
@@ -91,7 +93,17 @@ export default {
     },
     getOutputAsync() {
       this.output = "Running...";
-      exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (_, stdout) => {
+      exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
+        if (error) {
+          if (stdout.includes("Could not open input file: artisan")) {
+            let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
+            dialog.showMessageBox({
+              type: "error",
+              title: "Error",
+              message
+            });
+          }
+        }
         this.output = Anser.ansiToHtml(stdout, { use_classes: true });
         this.$refs["terminal-end"].scrollIntoView();
       });

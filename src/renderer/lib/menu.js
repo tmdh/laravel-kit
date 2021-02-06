@@ -1,7 +1,7 @@
 import { remote } from "electron";
 const { Menu } = remote;
 const isMac = process.platform === "darwin";
-import bus from "@/bus";
+import bus from "@/lib/bus";
 
 const template = [
   ...(isMac
@@ -63,10 +63,6 @@ const template = [
     ]
   }
 ];
-
-bus.$on("testing", payload => {
-  console.log(`from menu ${payload}`);
-});
 
 const menu = Menu.buildFromTemplate(template);
 export default menu;

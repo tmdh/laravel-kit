@@ -31,3 +31,10 @@
 .view {
   @apply bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl;
 }
+
+.link {
+  @apply flex w-14 h-15 text-gray-400 border-white-100 hover:text-gray-900 border-l-3 justify-center items-center focus:outline-none focus:text-gray-900;
+}
+.link-active {
+  @apply text-gray-900 border-gray-900;
+}

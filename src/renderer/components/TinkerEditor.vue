@@ -1,5 +1,4 @@
 <script>
-import "@/views/tinker";
 /*
     thanks egoist
     https://github.com/egoist/vue-monaco/blob/master/src/MonacoEditor.js
@@ -81,8 +80,7 @@ export default {
           language: this.language,
           fontSize: "18px",
           minimap: { enabled: false },
-          lineHeight: 32,
-          automaticLayout: true
+          lineHeight: 32
         },
         this.options
       );
@@ -96,7 +94,9 @@ export default {
           this.$emit("change", value, event);
         }
       });
-
+      window.addEventListener("resize", () => {
+        this.resize();
+      });
       this.$emit("editorDidMount", this.editor);
     },
 
@@ -106,6 +106,10 @@ export default {
 
     focus() {
       this.editor.focus();
+    },
+
+    resize() {
+      this.editor.layout({ width: this.$el.offsetWidth, height: this.$el.offsetHeight });
     }
   },
 
