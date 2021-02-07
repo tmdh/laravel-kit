@@ -3,7 +3,7 @@
     thanks egoist
     https://github.com/egoist/vue-monaco/blob/master/src/MonacoEditor.js
 */
-import * as monaco from "monaco-editor";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 export default {
   name: "TinkerEditor",
   props: {

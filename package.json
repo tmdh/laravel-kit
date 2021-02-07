@@ -4,23 +4,29 @@
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com> (http://tmdh.github.io/)",
   "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
+  "main": "dist/main.js",
   "scripts": {
     "dev:one": "cross-env NODE_ENV=development webpack serve --config webpack.renderer.config.js --color --progress",
-    "dev:two": "cross-env NODE_ENV=development webpack --config webpack.main.config.js --color --progress && electron ./dist/main.js",
-    "prod": "cross-env NODE_ENV=production webpack --config webpack.renderer.config.js --color --progress --mode production && cross-env NODE_ENV=production webpack --config webpack.main.config.js --color --progress && electron ./dist/main.js"
+    "dev:two": "cross-env NODE_ENV=development webpack --config webpack.main.config.js --color --progress && electron .",
+    "prod": "cross-env NODE_ENV=production webpack --config webpack.renderer.config.js --color --progress --mode production && cross-env NODE_ENV=production webpack --config webpack.main.config.js --color --progress",
+    "start": "cross-env NODE_ENV=production electron ."
   },
   "dependencies": {
     "anser": "^2.0.1",
+    "electron-store": "^7.0.1",
     "electron-window-state": "^5.0.3",
     "monaco-editor": "^0.22.3",
+    "semver": "^7.3.4",
     "tree-kill": "^1.2.2",
     "vue": "^2.6.11",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.2.1",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^1.2.0",
     "defer-to-connect": "^2.0.0",
     "electron": "^11.2.1",
     "electron-devtools-installer": "^3.1.1",
@@ -38,6 +44,7 @@
     "vue-loader": "^15.9.6",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^5.11.1",
+    "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.1"
   },
@@ -47,5 +54,22 @@
   },
   "bugs": {
     "url": "https://github.com/tmdh/laravel-kit/issues"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "printWidth": 200
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018
+    }
   }
 }

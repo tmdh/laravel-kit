@@ -4,19 +4,65 @@
 
 @layer base {
   @font-face {
-    font-family: Inter;
-    font-weight: 400;
-    src: url(./assets/fonts/Inter-Regular.woff) format("woff");
-  }
-  @font-face {
-    font-family: Inter;
-    font-weight: 700;
-    src: url(./assets/fonts/Inter-Bold.woff) format("woff");
-  }
-  @font-face {
     font-family: FiraCode;
     font-weight: 400;
     src: url(./assets/fonts/FiraCode-Regular.woff) format("woff");
+  }
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 300;
+    src: local(".SFNS-Light"), local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 300;
+    src: local(".SFNS-LightItalic"), local(".SFNSText-LightItalic"), local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"), local("Segoe UI Light Italic"), local("Ubuntu Light Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 400;
+    src: local(".SFNS-Regular"), local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"), local(".LucidaGrandeUI"), local("Segoe UI"), local("Ubuntu");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 400;
+    src: local(".SFNS-Italic"), local(".SFNSText-Italic"), local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"), local("Segoe UI Italic"), local("Ubuntu Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 500;
+    src: local(".SFNS-Medium"), local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"), local(".LucidaGrandeUI"), local("Segoe UI Semibold"), local("Ubuntu Medium");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 500;
+    src: local(".SFNS-MediumItalic"), local(".SFNSText-MediumItalic"), local(".HelveticaNeueDeskInterface-MediumItalicP4"), local(".LucidaGrandeUI"), local("Segoe UI Semibold Italic"),
+      local("Ubuntu Medium Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 700;
+    src: local(".SFNS-Bold"), local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"), local(".LucidaGrandeUI"), local("Segoe UI Bold"), local("Ubuntu Bold");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 700;
+    src: local(".SFNS-BoldItalic"), local(".SFNSText-BoldItalic"), local(".HelveticaNeueDeskInterface-BoldItalic"), local(".LucidaGrandeUI"), local("Segoe UI Bold Italic"), local("Ubuntu Bold Italic");
   }
 }
 

@@ -5,6 +5,9 @@ import { basename } from "path";
 import kill from "tree-kill";
 import { remote } from "electron";
 const { dialog } = remote;
+import Store from "electron-store";
+import bus from "@/lib/bus";
+const estore = new Store();
 
 Vue.use(Vuex);
 
@@ -14,7 +17,8 @@ export const store = new Vuex.Store({
     name: null,
     dir: null,
     serve: null,
-    serveLink: null
+    serveLink: null,
+    recents: []
   },
   mutations: {
     updateServeLink(state, link) {
@@ -27,12 +31,34 @@ export const store = new Vuex.Store({
           state.serveLink = null;
         });
       }
+    },
+    getRecents(state) {
+      state.recents = estore.get("recents");
+    },
+    addRecent(state, dir) {
+      let newRecents = estore.get("recents").filter(item => item != dir);
+      newRecents.unshift(dir);
+      estore.set("recents", newRecents);
+      state.recents = estore.get("recents");
+      bus.$emit("getRecents");
+    },
+    clearRecents(state) {
+      estore.set("recents", []);
+      state.recents = estore.get("recents");
+    }
+  },
+  getters: {
+    rounded() {
+      if (process.platform.includes("win")) {
+        return "rounded-sm";
+      }
+      return "rounded-md";
     }
   },
   actions: {
     openProject(context, payload) {
       if (payload.reload == undefined) {
-        context.dispatch("closeProject"); //notice
+        context.dispatch("closeProject");
       }
       exec("php artisan --format=json", { cwd: payload.dir }, (error, stdout) => {
         if (error) {
@@ -51,6 +77,7 @@ export const store = new Vuex.Store({
             context.state.project = JSON.parse(stdout);
             context.state.name = basename(payload.dir);
             document.title = `${context.state.name} - Kit`;
+            context.commit("addRecent", payload.dir);
           }
         }
       });

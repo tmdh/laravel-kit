@@ -1,4 +1,4 @@
-import { editor, languages } from "monaco-editor";
+import { editor, languages } from "monaco-editor/esm/vs/editor/editor.api";
 
 languages.register({ id: "php-x" });
 languages.setMonarchTokensProvider("php-x", {
@@ -176,7 +176,22 @@ languages.setMonarchTokensProvider("php-x", {
 
   phpCompileTimeConstants: ["__CLASS__", "__DIR__", "__FILE__", "__LINE__", "__NAMESPACE__", "__METHOD__", "__FUNCTION__", "__TRAIT__"],
 
-  phpPreDefinedVariables: ["$GLOBALS", "$_SERVER", "$_GET", "$_POST", "$_FILES", "$_REQUEST", "$_SESSION", "$_ENV", "$_COOKIE", "$php_errormsg", "$HTTP_RAW_POST_DATA", "$http_response_header", "$argc", "$argv"],
+  phpPreDefinedVariables: [
+    "$GLOBALS",
+    "$_SERVER",
+    "$_GET",
+    "$_POST",
+    "$_FILES",
+    "$_REQUEST",
+    "$_SESSION",
+    "$_ENV",
+    "$_COOKIE",
+    "$php_errormsg",
+    "$HTTP_RAW_POST_DATA",
+    "$http_response_header",
+    "$argc",
+    "$argv"
+  ],
 
   escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/
 });

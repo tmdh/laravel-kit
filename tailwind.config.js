@@ -44,7 +44,7 @@ module.exports = {
         3: "3px"
       },
       fontFamily: {
-        sans: ["Inter", "Helvetica", "Arial", "sans-serif"],
+        sans: ["system-ui", "sans-serif"],
         mono: ["FiraCode"]
       }
     }

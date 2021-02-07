@@ -1,12 +1,13 @@
 <template>
   <div class="flex flex-row flex-1">
     <div class="bg-gray-100 w-44 md:w-72 flex flex-col">
-      <h1 class="uppercase font-bold text-gray-500 px-5 pt-5 pb-4">Artisan</h1>
+      <h1 class="uppercase font-semibold text-gray-500 px-5 pt-5 pb-4 tracking-wide">Artisan</h1>
       <div class="px-3 pb-3">
         <input
           type="text"
           v-model="searchKeyword"
-          class="w-full h-7 border-input border-gray-300 border rounded placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500"
+          class="w-full h-7 border-input border-gray-300 border placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500"
+          :class="rounded"
           placeholder="Search"
         />
       </div>
@@ -27,8 +28,8 @@
     <div class="bg-gray-100 flex flex-col flex-1">
       <div class="flex justify-between items-center px-3 py-3 pr-2">
         <div class="flex flex-row items-center">
-          <span class="font-bold text-gray-500">{{ name }}</span>
-          <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white rounded-md px-1 py-0.5">{{ version }}</span>
+          <span class="font-semibold text-gray-500">{{ name }}</span>
+          <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white px-1 py-0.5" :class="rounded">{{ version }}</span>
         </div>
         <div>
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink"></a>
@@ -47,7 +48,7 @@
 import KitButton from "@/components/KitButton";
 import Command from "@/components/Command";
 import ArtisanDefault from "@/components/ArtisanDefault";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;
 
@@ -62,6 +63,7 @@ export default {
   },
   computed: {
     ...mapState(["name", "serve", "serveLink"]),
+    ...mapGetters(["rounded"]),
     version() {
       return this.$store.state.project.application.version;
     },

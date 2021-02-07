@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
@@ -60,9 +62,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "style.css"
     }),
+    new CssMinimizerPlugin(),
     new MonacoWebpackPlugin({
+      features: ["!codelens", "!fontZoom", "!iPadShowKeyboard", "!snippets"],
       languages: []
-    })
+    }),
+    new CleanWebpackPlugin()
   ],
   resolve: {
     alias: {

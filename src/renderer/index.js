@@ -1,9 +1,8 @@
 import Vue from "vue";
 import { store } from "@/lib/store";
 import App from "@/App";
-import menu from "@/lib/menu";
-import { ipcRenderer, remote } from "electron";
-const { Menu } = remote;
+import "@/lib/menu";
+import { ipcRenderer } from "electron";
 import "@/styles";
 import bus from "@/lib/bus";
 
@@ -27,10 +26,15 @@ const app = new Vue({
     bus.$on("closeProject", () => {
       this.$store.dispatch("closeProject");
     });
+    this.$store.commit("getRecents");
+    bus.$on("clearRecents", () => {
+      this.$store.commit("clearRecents");
+    });
+    bus.$on("openProject", dir => {
+      this.$store.dispatch("openProject", { dir: dir, reload: true });
+    });
   }
 }).$mount("#app");
-
-Menu.setApplicationMenu(menu);
 
 ipcRenderer.on("app-close", () => {
   if (app.$store.state.serve != null) {

@@ -2,7 +2,16 @@ import { app, BrowserWindow, ipcMain } from "electron";
 const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
 import kill from "./tree-kill-sync";
 import windowStateKeeper from "electron-window-state";
+import Store from "electron-store";
 
+const defaults = {
+  recents: [],
+  verbosity: 1,
+  editor: "echo 'No command specified'"
+};
+const store = new Store({ defaults });
+store.clear();
+console.log(store.get("recents"));
 const isDev = process.env.NODE_ENV === "development";
 
 function createWindow() {
@@ -15,7 +24,7 @@ function createWindow() {
     y: winState.y,
     width: winState.width,
     height: winState.height,
-    backgroundColor: "#fff",
+    backgroundColor: "#FAFAFA",
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true

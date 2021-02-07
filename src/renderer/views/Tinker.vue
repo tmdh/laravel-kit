@@ -13,7 +13,7 @@
 <script>
 import TinkerEditor from "@/components/TinkerEditor";
 import KitButton from "@/components/KitButton";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import { spawn } from "child_process";
 import "@/lib/tinker";
 
@@ -33,7 +33,7 @@ export default {
       }
     };
   },
-  computed: mapState(["dir"]),
+  computed: { ...mapState(["dir"]), ...mapGetters(["rounded"]) },
   methods: {
     executeTinker() {
       const tinker = spawn("php", ["artisan", "tinker"], { cwd: this.dir });

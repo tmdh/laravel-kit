@@ -1,6 +1,6 @@
 # laravel-kit
 
-A boilerplate for Electron + Vue + Webpack + Tailwind
+A desktop GUI client for Laravel projects
 
 ## Renderer setup (Compiles and hot-reloads for development)
 

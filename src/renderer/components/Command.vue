@@ -2,7 +2,7 @@
   <div class="flex-1">
     <div class="flex justify-between">
       <h1 class="font-mono text-xl">{{ command.name }}</h1>
-      <button class="bg-blue hover:bg-blue-100 w-29 py-2 text-white rounded text-xs mx-1 focus:outline-none focus:ring-2" @click="getOutputAsync">Run</button>
+      <kit-button @click.native="getOutputAsync">Run</kit-button>
     </div>
     <p class="mt-5 mb-3 text-base">{{ command.description }}</p>
     <div class="h-px bg-gray-300"></div>
@@ -29,9 +29,10 @@
   </div>
 </template>
 <script>
+import KitButton from "@/components/KitButton";
 import ArgumentInput from "@/components/ArgumentInput";
 import OptionInput from "@/components/OptionInput";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";
 import { remote } from "electron";
@@ -39,7 +40,7 @@ const { dialog } = remote;
 
 export default {
   name: "Command",
-  components: { ArgumentInput, OptionInput },
+  components: { KitButton, ArgumentInput, OptionInput },
   props: ["name"],
   data() {
     return {
@@ -50,6 +51,7 @@ export default {
   },
   computed: {
     ...mapState({ appName: "name" }),
+    ...mapGetters(["rounded"]),
     getName() {
       return this.name;
     },
