@@ -77,7 +77,14 @@ export default {
           return `${tempCommand} ${option.name}${option.accept_value ? " " + option.value : ""}`;
         }, "");
       }
-      return this.command.name + argumentsCommand + optionsCommand;
+      let globalCommand = "";
+      if (this.$store.state.env != "") {
+        globalCommand += ` --env ${this.$store.state.env}`;
+      }
+      if (this.$store.state.verbosity != 1) {
+        globalCommand += ` -${"v".repeat(this.$store.state.verbosity)}`;
+      }
+      return this.command.name + argumentsCommand + optionsCommand + globalCommand;
     }
   },
   methods: {
@@ -95,6 +102,7 @@ export default {
     },
     getOutputAsync() {
       this.output = "Running...";
+      this.$store.state.running = true;
       exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
         if (error) {
           if (stdout.includes("Could not open input file: artisan")) {
@@ -108,6 +116,7 @@ export default {
         }
         this.output = Anser.ansiToHtml(stdout, { use_classes: true });
         this.$refs["terminal-end"].scrollIntoView();
+        this.$store.state.running = false;
       });
       this.$refs["terminal-end"].scrollIntoView();
     }

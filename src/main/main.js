@@ -7,6 +7,7 @@ import Store from "electron-store";
 const defaults = {
   recents: [],
   verbosity: 1,
+  env: "",
   editor: "echo 'No command specified'"
 };
 const store = new Store({ defaults });
@@ -49,7 +50,7 @@ function createWindow() {
   win.on("close", () => {
     win.webContents.send("app-close");
   });
-  win.on("ready-to-show", function() {
+  win.once("ready-to-show", () => {
     win.show();
     win.focus();
   });

@@ -195,7 +195,13 @@ languages.setMonarchTokensProvider("php-x", {
 
   escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/
 });
-
+languages.setLanguageConfiguration("php-x", {
+  autoClosingPairs: [
+    { open: "(", close: ")" },
+    { open: "{", close: "}" },
+    { open: "[", close: "]" }
+  ]
+});
 editor.defineTheme("atom-one-light", {
   base: "vs",
   colors: {

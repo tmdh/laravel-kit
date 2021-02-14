@@ -80,7 +80,8 @@ export default {
           language: this.language,
           fontSize: "18px",
           minimap: { enabled: false },
-          lineHeight: 32
+          lineHeight: 32,
+          fontFamily: "RobotoMono"
         },
         this.options
       );

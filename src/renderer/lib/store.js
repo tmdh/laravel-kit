@@ -18,7 +18,13 @@ export const store = new Vuex.Store({
     dir: null,
     serve: null,
     serveLink: null,
-    recents: []
+    recents: [],
+    verbosity: 1,
+    env: "",
+    editor: "",
+    opening: false,
+    running: false,
+    tinkering: false
   },
   mutations: {
     updateServeLink(state, link) {
@@ -45,6 +51,11 @@ export const store = new Vuex.Store({
     clearRecents(state) {
       estore.set("recents", []);
       state.recents = estore.get("recents");
+    },
+    updateSettingsState(state) {
+      state.verbosity = estore.get("verbosity");
+      state.env = estore.get("env");
+      state.editor = estore.get("editor");
     }
   },
   getters: {
@@ -60,6 +71,7 @@ export const store = new Vuex.Store({
       if (payload.reload == undefined) {
         context.dispatch("closeProject");
       }
+      context.state.opening = true;
       exec("php artisan --format=json", { cwd: payload.dir }, (error, stdout) => {
         if (error) {
           let message = stdout;
@@ -71,14 +83,17 @@ export const store = new Vuex.Store({
             title: "Error",
             message
           });
+          context.state.opening = false;
         } else {
           if (stdout.includes("Laravel")) {
             context.state.dir = payload.dir;
             context.state.project = JSON.parse(stdout);
+            context.state.project.namespaces = null;
             context.state.name = basename(payload.dir);
             document.title = `${context.state.name} - Kit`;
             context.commit("addRecent", payload.dir);
           }
+          context.state.opening = false;
         }
       });
     },

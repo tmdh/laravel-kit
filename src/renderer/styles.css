@@ -4,9 +4,9 @@
 
 @layer base {
   @font-face {
-    font-family: FiraCode;
+    font-family: RobotoMono;
     font-weight: 400;
-    src: url(./assets/fonts/FiraCode-Regular.woff) format("woff");
+    src: url(./assets/fonts/RobotoMono-Regular.woff) format("woff");
   }
   @font-face {
     font-family: system-ui;
@@ -83,4 +83,8 @@
 }
 .link-active {
   @apply text-gray-900 border-gray-900;
+}
+
+.status-item {
+  @apply hover:bg-gray-200 px-2 cursor-pointer h-6 flex items-center;
 }

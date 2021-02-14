@@ -32,10 +32,10 @@
           <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white px-1 py-0.5" :class="rounded">{{ version }}</span>
         </div>
         <div>
-          <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink"></a>
-          <kit-button @click.native="serveService">{{ serve == null ? "Serve" : "Stop" }}</kit-button>
-          <kit-button @click.native="openFolder">Open folder</kit-button>
-          <kit-button>Open In Editor</kit-button>
+          <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink" title="Open link in the browser"></a>
+          <kit-button @click.native="serveService" :title="serve == null ? 'Serve the application on the PHP development server' : 'Stop serving'">{{ serve == null ? "Serve" : "Stop" }}</kit-button>
+          <kit-button @click.native="openFolder" title="Open folder in Finder/Explorer">Open folder</kit-button>
+          <kit-button @click.native="openInEditor" title="Execute 'Open in editor' command specified in Settings">Open in editor</kit-button>
         </div>
       </div>
       <command v-if="commandName != null" :name="commandName" :key="commandName" class="view"></command>
@@ -51,6 +51,7 @@ import ArtisanDefault from "@/components/ArtisanDefault";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;
+import { exec } from "child_process";
 
 export default {
   name: "Artisan",
@@ -68,11 +69,10 @@ export default {
       return this.$store.state.project.application.version;
     },
     searchResults() {
-      const remove = ["serve", "tinker"];
-      return this.$store.state.project.commands.filter(command => command.name.includes(this.searchKeyword) && !remove.includes(command.name)).sort((a, b) => (a.name > b.name ? 1 : -1));
-    },
-    serveText() {
-      return "";
+      const remove = ["serve", "tinker", "db"];
+      return this.$store.state.project.commands
+        .filter(command => command.name.includes(this.searchKeyword) && !remove.includes(command.name) && !command.name.includes("queue"))
+        .sort((a, b) => (a.name > b.name ? 1 : -1));
     }
   },
   methods: {
@@ -89,6 +89,9 @@ export default {
       } else {
         this.stopServe();
       }
+    },
+    openInEditor() {
+      exec(this.$store.state.editor, { cwd: this.$store.state.dir });
     }
   }
 };

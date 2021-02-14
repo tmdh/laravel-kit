@@ -37,15 +37,15 @@ module.exports = {
     },
     extend: {
       spacing: {
-        "15": "3.75rem",
-        "29": "7.25rem"
+        "15": "3.75rem"
       },
       borderWidth: {
+        1: "1px",
         3: "3px"
       },
       fontFamily: {
         sans: ["system-ui", "sans-serif"],
-        mono: ["FiraCode"]
+        mono: ["RobotoMono", "monospace"]
       }
     }
   },

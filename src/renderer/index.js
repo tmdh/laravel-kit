@@ -33,6 +33,7 @@ const app = new Vue({
     bus.$on("openProject", dir => {
       this.$store.dispatch("openProject", { dir: dir, reload: true });
     });
+    this.$store.commit("updateSettingsState");
   }
 }).$mount("#app");
 

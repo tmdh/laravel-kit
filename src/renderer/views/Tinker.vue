@@ -22,24 +22,22 @@ export default {
   components: { TinkerEditor, KitButton },
   data() {
     return {
-      code: `use Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
-      output: "",
+      code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
+      output: "// The output is shown here",
       outputOptions: {
-        readOnly: true,
-        wordWrap: "wordWrapColumn",
-        wordWrapColumn: 50,
-        wordWrapMinified: true,
-        wrappingIndent: "indent"
+        readOnly: true
       }
     };
   },
   computed: { ...mapState(["dir"]), ...mapGetters(["rounded"]) },
   methods: {
     executeTinker() {
+      this.$store.state.tinkering = true;
       const tinker = spawn("php", ["artisan", "tinker"], { cwd: this.dir });
       tinker.stdout.setEncoding("utf-8");
       tinker.stdout.on("data", data => {
         this.output = data;
+        this.$store.state.tinkering = false;
       });
       tinker.stdin.write(this.code);
       tinker.stdin.end();

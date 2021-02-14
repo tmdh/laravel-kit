@@ -1,5 +1,5 @@
 <template>
-  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-600">
+  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-600 overflow-y-auto">
     <h1 class="text-4xl">Kit for Laravel</h1>
     <h2 class="mt-3 text-2xl">Artisan evolved</h2>
     <h3 class="mt-3 text-lg">Start</h3>
@@ -26,8 +26,13 @@
       </li>
     </ul>
   </div>
-  <div v-else>
-    <h1>{{ name }}</h1>
+  <div v-else class="bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center">
+    <div class="text-center">
+      <h1 class="text-3xl font-semibold">Build something amazing!</h1>
+      <kit-button class="mt-10" @click.native="changeTab('Artisan')">Go to Artisan</kit-button>
+      <p class="italic text-lg mt-8">or</p>
+      <kit-button class="mt-10" @click.native="changeTab('Tinker')">Start Tinkering</kit-button>
+    </div>
   </div>
 </template>
 
@@ -35,8 +40,10 @@
 import { shell } from "electron";
 import { mapState, mapActions } from "vuex";
 import { basename } from "path";
+import KitButton from "@/components/KitButton";
 export default {
   name: "Home",
+  components: { KitButton },
   data() {
     return {
       helpLinks: [
@@ -65,6 +72,9 @@ export default {
     },
     basename(dir) {
       return basename(dir.toString());
+    },
+    changeTab(tab) {
+      this.$root.$emit("changeTab", tab);
     }
   },
   computed: {
