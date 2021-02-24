@@ -1,21 +1,13 @@
-# laravel-kit
+<p align="center">
+  <img src="./build/icon.png" height="128">
+  <h3 align="center">Laravel Kit</h3>
+  <p align="center">A desktop app for Laravel framework<p>
+</p>
 
-A desktop GUI client for Laravel projects
+## Download
 
-## Renderer setup (Compiles and hot-reloads for development)
+PHP is required.
 
-```
-yarn dev:one
-```
-
-### Main process setup
-
-```
-yarn dev:two
-```
-
-### Compiles and minifies for production
-
-```
-yarn prod
-```
+| macOS                                                                                              | Windows                                                                                              | Linux                                                                                                      |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-2.0.0-mac.zip) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-setup-2.0.0.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-2.0.0-x86_64.AppImage) |

@@ -3,7 +3,7 @@
   "description": "A desktop app for Laravel framework",
   "version": "2.0.0",
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com> (http://tmdh.github.io/)",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "SEE LICENSE IN license.txt",
   "private": true,
   "main": "dist/main.js",
   "scripts": {

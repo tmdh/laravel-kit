@@ -1,6 +1,14 @@
 name: Build/release
 
-on: push
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+    branches:
+      - master
+      - dev
 
 jobs:
   release:
