@@ -27,8 +27,10 @@ jobs:
         with:
           node-version: 14
 
+      - name: Bundle Electron app
+        run: yarn run prod
+
       - name: Build & Release Electron app
         env:
           github_token: ${{ secrets.github_token }}
-        run: yarn run prod
         run: yarn run release
