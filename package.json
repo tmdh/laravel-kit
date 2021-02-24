@@ -95,6 +95,9 @@
       "allowToChangeInstallationDirectory": true
     },
     "linux": {
+      "target": [
+        "AppImage"
+      ],
       "category": "Development"
     }
   }
