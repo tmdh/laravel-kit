@@ -9,7 +9,7 @@
   "scripts": {
     "dev:one": "webpack serve -c webpack.renderer.config.js",
     "dev:two": "webpack -c webpack.main.config.js && electron .",
-    "build": "cross-env NODE_ENV=production webpack -c webpack.renderer.config.js webpack.main.config.js --mode production",
+    "prod": "cross-env NODE_ENV=production webpack -c webpack.renderer.config.js webpack.main.config.js --mode production",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "release": "electron-builder"
