@@ -1,11 +1,8 @@
 module.exports = {
   purge: {
-    content: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"],
-    options: {
-      safelist: [/^text-terminal-/]
-    }
+    content: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"]
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     colors: {
       gray: {
@@ -25,14 +22,34 @@ module.exports = {
       },
       blue: {
         DEFAULT: "#5871EF",
-        100: "#6B83ED"
+        100: "#6B83ED",
+        200: "#3794ff"
       },
-      cyan: "#5198BC",
-      purple: "#C005BE",
       terminal: {
         green: "#50A14F",
         yellow: "#C18401",
-        red: "#ff6666"
+        red: "#ff6666",
+        purple: "#C005BE",
+        cyan: "#5198BC",
+        d: { green: "#69FF94", yellow: "#F1FA8C", red: "#FF5555", purple: "#BD93F9", cyan: "#8BE9FD" }
+      },
+      black: "#000000",
+      d: {
+        blue: {
+          100: "#6272A4",
+          200: "#44475A",
+          300: "#3C3D51",
+          400: "#363949",
+          500: "#343746",
+          600: "#282A36",
+          700: "#21222C",
+          800: "#191A21"
+        },
+        gray: {
+          100: "#CDCDCD",
+          200: "#A7A7A7",
+          300: "#202020"
+        }
       }
     },
     extend: {

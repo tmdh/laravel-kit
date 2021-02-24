@@ -24,7 +24,9 @@ export const store = new Vuex.Store({
     editor: "",
     opening: false,
     running: false,
-    tinkering: false
+    tinkering: false,
+    dark: false,
+    licensed: false
   },
   mutations: {
     updateServeLink(state, link) {
@@ -32,7 +34,7 @@ export const store = new Vuex.Store({
     },
     stopServeSync(state) {
       if (state.serve != null) {
-        kill(state.serve.pid, "SIGKILL", function() {
+        kill(state.serve.pid, "SIGKILL", function () {
           state.serve = null;
           state.serveLink = null;
         });
@@ -42,7 +44,7 @@ export const store = new Vuex.Store({
       state.recents = estore.get("recents");
     },
     addRecent(state, dir) {
-      let newRecents = estore.get("recents").filter(item => item != dir);
+      let newRecents = estore.get("recents").filter((item) => item != dir);
       newRecents.unshift(dir);
       estore.set("recents", newRecents);
       state.recents = estore.get("recents");
@@ -56,6 +58,7 @@ export const store = new Vuex.Store({
       state.verbosity = estore.get("verbosity");
       state.env = estore.get("env");
       state.editor = estore.get("editor");
+      state.dark = estore.get("dark");
     }
   },
   getters: {
@@ -105,7 +108,7 @@ export const store = new Vuex.Store({
           properties: ["openDirectory"],
           multiSelections: false
         })
-        .then(result => {
+        .then((result) => {
           if (!result.canceled) {
             context.dispatch("openProject", { dir: result.filePaths[0] });
           }
@@ -122,7 +125,7 @@ export const store = new Vuex.Store({
     startServe({ state, commit }) {
       state.serve = spawn("php", ["artisan", "serve"], { cwd: state.dir });
       state.serve.stdout.setEncoding("utf-8");
-      state.serve.stdout.on("data", data => {
+      state.serve.stdout.on("data", (data) => {
         if (data.includes("started")) {
           commit("updateServeLink", data.match(/(https?:\/\/[a-zA-Z0-9.]+(:[0-9]+)?)/g)[0]);
         }
@@ -130,7 +133,7 @@ export const store = new Vuex.Store({
     },
     stopServe({ state }) {
       if (state.serve != null) {
-        kill(state.serve.pid, "SIGKILL", function() {
+        kill(state.serve.pid, "SIGKILL", function () {
           state.serve = null;
           state.serveLink = null;
         });

@@ -1,4 +1,5 @@
 const path = require("path");
+const { ProgressPlugin } = require("webpack");
 
 module.exports = {
   entry: {
@@ -8,5 +9,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js"
   },
-  target: "electron-main"
+  target: "electron-main",
+  plugins: [new ProgressPlugin()],
+  stats: {
+    colors: true
+  },
+  mode: "development"
 };

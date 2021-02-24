@@ -7,18 +7,20 @@
     <p class="mt-5 mb-3 text-base">{{ command.description }}</p>
     <div class="h-px bg-gray-300"></div>
     <div v-if="argumentsInit.length > 0">
-      <h2 class="text-gray-800 font-bold text-base mt-4">Arguments</h2>
+      <h2 class="text-gray-800 font-bold text-base mt-4 dark:text-gray-200">Arguments</h2>
       <argument-input v-for="argument in argumentsInit" :key="argument.name" :field="argument" v-model="argument.value"></argument-input>
     </div>
     <div v-if="optionsInit.length > 0">
-      <h2 class="text-gray-800 font-bold text-base mt-4">Options</h2>
+      <h2 class="text-gray-800 font-bold text-base mt-4 dark:text-gray-200">Options</h2>
       <option-input v-for="option in optionsInit" :key="option.name" :field="option" v-model="option.value"></option-input>
     </div>
     <div>
-      <h2 class="text-gray-800 font-bold text-base mt-4">Terminal</h2>
+      <h2 class="text-gray-800 font-bold text-base mt-4 dark:text-gray-200">Terminal</h2>
       <div ref="terminal" class="font-mono text-sm mt-3 flex flex-col">
         <div class="select-text">
-          <span>→</span> <span class="text-cyan">{{ appName }}</span> <span class="text-purple">›</span> <span class="text-green-code">php</span> <span>artisan {{ fullCommand }}</span>
+          <span>→</span> <span class="text-terminal-cyan dark:text-terminal-d-cyan">{{ appName }}</span> <span class="text-terminal-purple dark:text-terminal-d-purple">›</span>
+          <span class="text-terminal-green dark:text-terminal-d-green">php</span>
+          <span>artisan {{ fullCommand }}</span>
         </div>
         <pre class="max-h-64 overflow-y-auto pb-4 select-text overflow-x-auto whitespace-pre-wrap">
 <code v-html="output"></code>
@@ -129,19 +131,5 @@ export default {
 </script>
 
 <style>
-::selection {
-  background: #e4e4e4;
-}
-.ansi-yellow-fg {
-  @apply text-terminal-yellow;
-}
-.ansi-green-fg {
-  @apply text-terminal-green;
-}
-.ansi-red-bg {
-  @apply bg-terminal-red;
-}
-.ansi-white-fg {
-  @apply text-gray-900;
-}
+/* styles in styles.css */
 </style>

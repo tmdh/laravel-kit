@@ -3,6 +3,8 @@ node_modules
 dist
 laravel-app
 test.php
+stats.json
+release
 
 # local env files
 .env.local

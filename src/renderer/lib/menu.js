@@ -1,8 +1,8 @@
-import { remote } from "electron";
+import { remote, shell } from "electron";
 const { Menu } = remote;
-const isMac = process.platform === "darwin";
 import bus from "@/lib/bus";
 import Store from "electron-store";
+const isMac = process.platform === "darwin";
 
 const template = [
   ...(isMac
@@ -41,8 +41,7 @@ const template = [
         label: "Close Project",
         click() {
           bus.$emit("closeProject");
-        },
-        enabled: false
+        }
       },
       { type: "separator" },
       isMac ? { role: "close" } : { role: "quit" }
@@ -64,10 +63,48 @@ const template = [
     role: "help",
     submenu: [
       {
-        label: "Learn More",
-        click: async () => {
-          const { shell } = require("electron");
-          await shell.openExternal("https://electronjs.org");
+        label: "Laravel Kit on GitHub",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit");
+        }
+      },
+      {
+        label: "Laravel Kit Website",
+        click() {
+          openLink("https://tmdh.github.io/laravel-kit");
+        }
+      },
+      {
+        label: "Wiki",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit/wiki");
+        }
+      },
+      {
+        label: "Releases",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit/releases");
+        }
+      },
+      {
+        label: "Report an issue",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit/issues/new");
+        }
+      },
+      {
+        label: "License",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit/blob/master/LICENSE");
+        }
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Buy License",
+        click() {
+          openLink("https://gum.co/laravel-kit");
         }
       }
     ]
@@ -83,9 +120,13 @@ bus.$on("getRecents", () => {
   getRecents();
 });
 
+function openLink(link) {
+  shell.openExternal(link);
+}
+
 function getRecents() {
   let newTemplate = template;
-  const recents = store.get("recents").map(dir =>
+  const recents = store.get("recents").map((dir) =>
     Object.assign({
       label: dir,
       click() {

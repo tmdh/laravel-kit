@@ -1,19 +1,22 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, dialog } from "electron";
 const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
 import kill from "./tree-kill-sync";
 import windowStateKeeper from "electron-window-state";
 import Store from "electron-store";
+import { autoUpdater } from "electron-updater";
+import { format } from "url";
+import { join } from "path";
+
+const isDev = process.env.NODE_ENV === "development";
 
 const defaults = {
   recents: [],
   verbosity: 1,
   env: "",
-  editor: "echo 'No command specified'"
+  editor: "echo 'No command specified'",
+  dark: false
 };
-const store = new Store({ defaults });
-store.clear();
-console.log(store.get("recents"));
-const isDev = process.env.NODE_ENV === "development";
+new Store({ defaults }).clear();
 
 function createWindow() {
   let winState = windowStateKeeper({
@@ -28,7 +31,8 @@ function createWindow() {
     backgroundColor: "#FAFAFA",
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      contextIsolation: false
     },
     show: false
   });
@@ -37,11 +41,10 @@ function createWindow() {
 
   if (isDev) {
     win.loadURL(`http://localhost:4000`);
-    win.webContents.openDevTools();
   } else {
     win.loadURL(
-      require("url").format({
-        pathname: require("path").join(__dirname, "../dist/app/index.html"),
+      format({
+        pathname: join(__dirname, "app", "index.html"),
         protocol: "file:",
         slashes: true
       })
@@ -53,6 +56,42 @@ function createWindow() {
   win.once("ready-to-show", () => {
     win.show();
     win.focus();
+    if (isDev) {
+      win.webContents.openDevTools();
+    }
+  });
+
+  autoUpdater.autoDownload = false;
+  autoUpdater.on("error", (_, error) => {
+    if (!error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
+      dialog.showErrorBox("Error", error == null ? "unknown" : error.toString());
+    }
+  });
+
+  autoUpdater.on("update-available", () => {
+    dialog
+      .showMessageBox({
+        type: "info",
+        title: "Found Updates",
+        message: "Found updates, do you want update now?",
+        buttons: ["Sure", "No"]
+      })
+      .then((result) => {
+        if (result.response == 0) {
+          autoUpdater.downloadUpdate();
+        }
+      });
+  });
+
+  autoUpdater.on("update-downloaded", () => {
+    dialog
+      .showMessageBox({
+        title: "Install Updates",
+        message: "Updates downloaded, application will be quit for update..."
+      })
+      .then(() => {
+        setImmediate(() => autoUpdater.quitAndInstall());
+      });
   });
 }
 
@@ -62,8 +101,10 @@ app
   .then(() => {
     if (isDev) {
       installExtension(VUEJS_DEVTOOLS)
-        .then(name => console.log(`Added Extension:  ${name}`))
-        .catch(err => console.log("An error occurred: ", err));
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log("An error occurred: ", err));
+    } else {
+      autoUpdater.checkForUpdates();
     }
   });
 

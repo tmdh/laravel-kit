@@ -1,20 +1,17 @@
 <template>
-  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-600 overflow-y-auto">
+  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-600 font-light tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
     <h1 class="text-4xl">Kit for Laravel</h1>
     <h2 class="mt-3 text-2xl">Artisan evolved</h2>
     <h3 class="mt-3 text-lg">Start</h3>
     <ul class="text-sm">
       <li class="mt-1">
-        <span class="cursor-pointer text-blue">New project</span>
-      </li>
-      <li class="mt-1">
-        <span class="cursor-pointer text-blue" @click="openDialog">Open project...</span>
+        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openDialog">Open project...</span>
       </li>
     </ul>
     <h3 class="mt-6 text-lg">Recent</h3>
     <ul class="text-sm" v-if="recents.length">
       <li class="mt-1" v-for="recent in recents" :key="recent">
-        <span class="cursor-pointer text-blue" @click="openProject({ dir: recent })" v-text="basename(recent)"></span>
+        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openProject({ dir: recent })" v-text="basename(recent)"></span>
         <span class="ml-3">{{ recent }}</span>
       </li>
     </ul>
@@ -22,11 +19,11 @@
     <h3 class="mt-6 text-lg">Help</h3>
     <ul class="text-sm">
       <li class="mt-1" v-for="link in helpLinks" :key="link.id">
-        <span class="cursor-pointer text-blue" @click="openLink(link)" :title="link.href">{{ link.name }}</span>
+        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openLink(link)" :title="link.href">{{ link.name }}</span>
       </li>
     </ul>
   </div>
-  <div v-else class="bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center">
+  <div v-else class="bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center dark:bg-d-blue-500 dark:text-white">
     <div class="text-center">
       <h1 class="text-3xl font-semibold">Build something amazing!</h1>
       <kit-button class="mt-10" @click.native="changeTab('Artisan')">Go to Artisan</kit-button>
@@ -49,16 +46,11 @@ export default {
       helpLinks: [
         {
           id: 1,
-          name: "Video Tutorials",
-          href: "https://youtube.com"
+          name: "Wiki",
+          href: "https://github.com/tmdh/laravel-kit/wiki/"
         },
         {
           id: 2,
-          name: "Documentation",
-          href: "https://github.com/tmdh/laravel-kit/wiki"
-        },
-        {
-          id: 3,
           name: "GitHub Repository",
           href: "https://github.com/tmdh/laravel-kit/"
         }

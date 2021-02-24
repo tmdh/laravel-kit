@@ -2,7 +2,7 @@ import { editor, languages } from "monaco-editor/esm/vs/editor/editor.api";
 
 languages.register({ id: "php-x" });
 languages.setMonarchTokensProvider("php-x", {
-  defaultToken: "",
+  defaultToken: "invalid",
   tokenPostfix: "",
   // ignoreCase: true,
 
@@ -86,14 +86,12 @@ languages.setMonarchTokensProvider("php-x", {
     phpDoubleQuoteString: [
       [/[^\\"]+/, "string.php"],
       [/@escapes/, "string.escape.php"],
-      [/\\./, "string.escape.invalid.php"],
       [/"/, "string.php", "@pop"]
     ],
 
     phpSingleQuoteString: [
       [/[^\\']+/, "string.php"],
       [/@escapes/, "string.escape.php"],
-      [/\\./, "string.escape.invalid.php"],
       [/'/, "string.php", "@pop"]
     ]
   },
@@ -205,12 +203,6 @@ languages.setLanguageConfiguration("php-x", {
 editor.defineTheme("atom-one-light", {
   base: "vs",
   colors: {
-    "button.background": "#5871EF",
-    "button.foreground": "#FFFFFF",
-    "button.hoverBackground": "#6B83ED",
-    "diffEditor.insertedTextBackground": "#00809B33",
-    "dropdown.background": "#FFFFFF",
-    "dropdown.border": "#DBDBDC",
     "editorIndentGuide.activeBackground": "#626772",
     "editor.background": "#FAFAFA",
     "editor.foreground": "#383A42",
@@ -218,9 +210,6 @@ editor.defineTheme("atom-one-light", {
     "editor.selectionBackground": "#E5E5E6",
     "editorCursor.foreground": "#526FFF",
     "editor.findMatchHighlightBackground": "#526FFF33",
-    "editorGroup.background": "#EAEAEB",
-    "editorGroup.border": "#DBDBDC",
-    "editorGroupHeader.tabsBackground": "#EAEAEB",
     "editorIndentGuide.background": "#383A4233",
     "editorLineNumber.foreground": "#9D9D9F",
     "editorLineNumber.activeForeground": "#383A42",
@@ -248,30 +237,10 @@ editor.defineTheme("atom-one-light", {
     "scrollbarSlider.background": "#4E566680",
     "scrollbarSlider.activeBackground": "#747D9180",
     "scrollbarSlider.hoverBackground": "#5A637580",
-    "sideBar.background": "#EAEAEB",
-    "sideBarSectionHeader.background": "#FAFAFA",
-    "statusBar.background": "#EAEAEB",
-    "statusBar.foreground": "#424243",
-    "statusBarItem.hoverBackground": "#DBDBDC",
-    "statusBar.noFolderBackground": "#EAEAEB",
-    "tab.activeBackground": "#FAFAFA",
-    "tab.activeForeground": "#121417",
-    "tab.border": "#DBDBDC",
-    "tab.inactiveBackground": "#EAEAEB",
-    "titleBar.activeBackground": "#EAEAEB",
-    "titleBar.activeForeground": "#424243",
-    "titleBar.inactiveBackground": "#EAEAEB",
-    "titleBar.inactiveForeground": "#424243",
-    "statusBar.debuggingForeground": "#FFFFFF",
     "extensionButton.prominentBackground": "#3BBA54",
     "extensionButton.prominentHoverBackground": "#4CC263",
     "badge.background": "#526FFF",
-    "badge.foreground": "#FFFFFF",
-    "peekView.border": "#526FFF",
-    "peekViewResult.background": "#EAEAEB",
-    "peekViewResult.selectionBackground": "#DBDBDC",
-    "peekViewTitle.background": "#FFFFFF",
-    "peekViewEditor.background": "#FFFFFF"
+    "badge.foreground": "#FFFFFF"
   },
   inherit: false,
   rules: [
@@ -283,5 +252,80 @@ editor.defineTheme("atom-one-light", {
     { token: "string.php", foreground: "50A14F" },
     { token: "number.php", foreground: "986801" },
     { token: "keyword.php", foreground: "A626A4" }
+  ]
+});
+
+editor.defineTheme("dracula", {
+  base: "vs-dark",
+  colors: {
+    contrastBorder: "#191A21",
+    focusBorder: "#6272A4",
+    foreground: "#F8F8F2",
+    "selection.background": "#BD93F9",
+    errorForeground: "#FF5555",
+    "badge.foreground": "#F8F8F2",
+    "badge.background": "#44475A",
+    "editor.foreground": "#F8F8F2",
+    "editor.background": "#282A36",
+    "editorLineNumber.foreground": "#6272A4",
+    "editor.selectionBackground": "#44475A",
+    "editor.selectionHighlightBackground": "#424450",
+    "editor.foldBackground": "#21222C",
+    "editor.wordHighlightBackground": "#8BE9FD80",
+    "editor.wordHighlightStrongBackground": "#50FA7B80",
+    "editor.findMatchBackground": "#FFB86CCC",
+    "editor.findMatchHighlightBackground": "#FFFFFF66",
+    "editor.findRangeHighlightBackground": "#44475A75",
+    "editor.hoverHighlightBackground": "#8BE9FD80",
+    "editor.lineHighlightBorder": "#44475A",
+    "editorLink.activeForeground": "#8BE9FD",
+    "editor.rangeHighlightBackground": "#BD93F926",
+    "editor.snippetTabstopHighlightBackground": "#282A36",
+    "editor.snippetTabstopHighlightBorder": "#6272A4",
+    "editor.snippetFinalTabstopHighlightBackground": "#282A36",
+    "editor.snippetFinalTabstopHighlightBorder": "#50FA7B",
+    "editorWhitespace.foreground": "#FFFFFF1A",
+    "editorIndentGuide.background": "#FFFFFF1A",
+    "editorIndentGuide.activeBackground": "#FFFFFF73",
+    "editorRuler.foreground": "#FFFFFF1A",
+    "editorOverviewRuler.border": "#191A21",
+    "editorOverviewRuler.selectionHighlightForeground": "#FFB86C",
+    "editorOverviewRuler.wordHighlightForeground": "#8BE9FD",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#50FA7B",
+    "editorOverviewRuler.modifiedForeground": "#8BE9FDCC",
+    "editorOverviewRuler.addedForeground": "#50FA7BCC",
+    "editorOverviewRuler.deletedForeground": "#FF5555CC",
+    "editorOverviewRuler.errorForeground": "#FF5555CC",
+    "editorOverviewRuler.warningForeground": "#FFB86CCC",
+    "editorOverviewRuler.infoForeground": "#8BE9FDCC",
+    "editorError.foreground": "#FF5555",
+    "editorWarning.foreground": "#8BE9FD",
+    "editorGutter.modifiedBackground": "#8BE9FDCC",
+    "editorGutter.addedBackground": "#50FA7BCC",
+    "editorGutter.deletedBackground": "#FF5555CC",
+    "editorMarkerNavigation.background": "#21222C",
+    "editorOverviewRuler.currentContentForeground": "#50FA7B",
+    "editorOverviewRuler.incomingContentForeground": "#BD93F9"
+  },
+  inherit: false,
+  rules: [
+    { token: "comment.php", foreground: "6272A4" },
+    { token: "constant.php", foreground: "BD93F9" },
+    { token: "identifier.php", foreground: "8BE9FD" },
+    { token: "variable.predefined.php", foreground: "F8F8F2" },
+    { token: "variable.php", foreground: "F8F8F2" },
+    { token: "string.php", foreground: "F1FA8C" },
+    { token: "number.php", foreground: "BD93F9" },
+    { token: "number.binary.php", foreground: "BD93F9" },
+    { token: "number.octal.php", foreground: "BD93F9" },
+    { token: "number.hex.php", foreground: "BD93F9" },
+    { token: "number.float.php", foreground: "BD93F9" },
+    { token: "keyword.php", foreground: "FF79C6" },
+    { token: "delimiter.php", foreground: "FF79C6" },
+    { token: "delimiter.parenthesis.php", foreground: "F8F8F2" },
+    { token: "delimiter.bracket.php", foreground: "F8F8F2" },
+    { token: "delimiter.array.php", foreground: "F8F8F2" },
+    { token: "string.escape.php", foreground: "FF79C6" },
+    { token: "invalid", foreground: "F8F8F2" }
   ]
 });

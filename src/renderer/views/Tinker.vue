@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col md:flex-row pt-2">
     <div class="flex flex-col flex-1">
-      <tinker-editor class="flex-1" v-model="code" language="php-x" theme="atom-one-light"></tinker-editor>
+      <tinker-editor class="flex-1" v-model="code" language="php-x" :theme="theme"></tinker-editor>
       <div class="py-2 px-3 flex justify-center md:justify-start">
         <kit-button @click.native="executeTinker">Tinker</kit-button>
       </div>
@@ -25,11 +25,19 @@ export default {
       code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
       output: "// The output is shown here",
       outputOptions: {
-        readOnly: true
+        readOnly: true,
+        wordWrap: "wordWrapColumn",
+        wordWrapColumn: 100
       }
     };
   },
-  computed: { ...mapState(["dir"]), ...mapGetters(["rounded"]) },
+  computed: {
+    ...mapState(["dir"]),
+    ...mapGetters(["rounded"]),
+    theme() {
+      return this.$store.state.dark ? "dracula" : "atom-one-light";
+    }
+  },
   methods: {
     executeTinker() {
       this.$store.state.tinkering = true;

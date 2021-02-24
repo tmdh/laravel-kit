@@ -43,14 +43,8 @@ export default {
       }
     },
 
-    language(newVal) {
-      if (this.editor) {
-        const editor = this.getEditor();
-        this.monaco.editor.setModelLanguage(editor.getModel(), newVal);
-      }
-    },
-
     theme(newVal) {
+      console.log(newVal);
       if (this.editor) {
         this.monaco.editor.setTheme(newVal);
       }
@@ -76,7 +70,7 @@ export default {
         {},
         {
           value: this.value,
-          theme: this.theme,
+          theme: this.$store.state.dark ? "dracula" : "atom-one-light",
           language: this.language,
           fontSize: "18px",
           minimap: { enabled: false },

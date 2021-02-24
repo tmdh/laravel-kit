@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { ProgressPlugin } = require("webpack");
 const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
     index: "./src/renderer/index.js"
   },
   output: {
-    path: path.resolve(__dirname, "dist/app"),
+    path: path.resolve(__dirname, "dist", "app"),
     filename: "[name].js",
     publicPath: "./"
   },
@@ -49,12 +50,13 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, "../dist/renderer"),
     hot: true,
     port: 4000,
     publicPath: "/"
   },
   plugins: [
+    new ProgressPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/renderer/index.html"
     }),
@@ -62,17 +64,22 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "style.css"
     }),
-    new CssMinimizerPlugin(),
     new MonacoWebpackPlugin({
       features: ["!codelens", "!fontZoom", "!iPadShowKeyboard", "!snippets"],
       languages: []
-    }),
-    new CleanWebpackPlugin()
+    })
   ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src/renderer/")
     },
     extensions: [".vue", ".js", ".css"]
-  }
+  },
+  stats: {
+    colors: true
+  },
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()]
+  },
+  mode: "development"
 };
