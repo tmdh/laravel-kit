@@ -1,61 +1,104 @@
 {
   "name": "laravel-kit",
-  "version": "1.2.4",
-  "description": "Easy Laravel application management",
-  "main": "main.js",
+  "description": "A desktop app for Laravel framework",
+  "version": "2.0.0",
+  "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com> (http://tmdh.github.io/)",
+  "license": "SEE LICENSE IN license.txt",
+  "private": true,
+  "main": "dist/main.js",
   "scripts": {
+    "dev:one": "webpack serve -c webpack.renderer.config.js",
+    "dev:two": "webpack -c webpack.main.config.js && electron .",
+    "prod": "cross-env NODE_ENV=production webpack -c webpack.renderer.config.js webpack.main.config.js --mode production",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "release": "electron-builder",
-    "zip": "bash ./scripts/rzip.sh"
+    "release": "electron-builder"
+  },
+  "dependencies": {
+    "anser": "^2.0.1",
+    "axios": "^0.21.1",
+    "electron-store": "^7.0.1",
+    "electron-updater": "^4.3.5",
+    "electron-window-state": "^5.0.3",
+    "monaco-editor": "^0.22.3",
+    "node-machine-id": "^1.1.12",
+    "tree-kill": "^1.2.2",
+    "vue": "^2.6.11",
+    "vuex": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.2.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^1.2.0",
+    "electron": "^11.2.1",
+    "electron-builder": "^22.9.1",
+    "electron-devtools-installer": "^3.1.1",
+    "eslint": "^7.20.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.6.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.2.0",
+    "mini-css-extract-plugin": "^1.3.3",
+    "monaco-editor-webpack-plugin": "^3.0.0",
+    "postcss": "^8.2.4",
+    "postcss-loader": "^5.0.0",
+    "prettier": "^2.2.1",
+    "tailwindcss": "^2.0.2",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmdh/laravel-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tmdh/laravel-kit/issues"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "printWidth": 200
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018
+    }
   },
   "build": {
     "appId": "com.tmdh.laravel-kit",
     "productName": "Laravel Kit",
+    "files": [
+      "dist/**/*",
+      "!node_modules${/*}"
+    ],
+    "directories": {
+      "output": "release"
+    },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "build/icons/mac/icon.icns"
-    },
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "build/icons/win/icon.ico",
-      "publish": [
-        "github"
-      ]
+      "darkModeSupport": true
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
     "linux": {
-      "icon": "build/icons/png/"
-    },
-    "extraResources": "app/zip"
-  },
-  "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com>",
-  "license": "MIT",
-  "homepage": "https://tmdh.github.io/laravel-kit",
-  "url": "https://github.com/tmdh/laravel-kit/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tmdh/laravel-kit.git"
-  },
-  "dependencies": {
-    "adm-zip": "^0.4.13",
-    "electron-is-dev": "^0.3.0",
-    "electron-settings": "^3.1.4",
-    "electron-updater": "^2.18.2",
-    "electron-window-state": "^4.1.1",
-    "extract-zip": "^1.6.6",
-    "is-online": "^7.0.0",
-    "tree-kill": "^1.2.0"
-  },
-  "devDependencies": {
-    "electron": "^1.7.11",
-    "electron-builder": "^19.55.3",
-    "electron-reload": "^1.2.2"
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    }
   }
 }

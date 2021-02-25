@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: RobotoMono;
+    font-weight: 400;
+    src: url(./assets/fonts/RobotoMono-Regular.woff) format("woff");
+  }
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 300;
+    src: local(".SFNS-Light"), local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 300;
+    src: local(".SFNS-LightItalic"), local(".SFNSText-LightItalic"), local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"), local("Segoe UI Light Italic"), local("Ubuntu Light Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 400;
+    src: local(".SFNS-Regular"), local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"), local(".LucidaGrandeUI"), local("Segoe UI"), local("Ubuntu");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 400;
+    src: local(".SFNS-Italic"), local(".SFNSText-Italic"), local(".HelveticaNeueDeskInterface-Italic"), local(".LucidaGrandeUI"), local("Segoe UI Italic"), local("Ubuntu Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 500;
+    src: local(".SFNS-Medium"), local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"), local(".LucidaGrandeUI"), local("Segoe UI Semibold"), local("Ubuntu Medium");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 500;
+    src: local(".SFNS-MediumItalic"), local(".SFNSText-MediumItalic"), local(".HelveticaNeueDeskInterface-MediumItalicP4"), local(".LucidaGrandeUI"), local("Segoe UI Semibold Italic"),
+      local("Ubuntu Medium Italic");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: normal;
+    font-weight: 700;
+    src: local(".SFNS-Bold"), local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"), local(".LucidaGrandeUI"), local("Segoe UI Bold"), local("Ubuntu Bold");
+  }
+
+  @font-face {
+    font-family: system-ui;
+    font-style: italic;
+    font-weight: 700;
+    src: local(".SFNS-BoldItalic"), local(".SFNSText-BoldItalic"), local(".HelveticaNeueDeskInterface-BoldItalic"), local(".LucidaGrandeUI"), local("Segoe UI Bold Italic"), local("Ubuntu Bold Italic");
+  }
+}
+
+::-webkit-scrollbar {
+  background-color: #e4e4e4;
+  width: 0.675rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #9d9d9d;
+}
+
+.dark *::-webkit-scrollbar {
+  background-color: #21222c;
+  width: 0.675rem;
+}
+.dark *::-webkit-scrollbar-thumb {
+  background-color: #44475a;
+}
+
+.view {
+  @apply bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl dark:bg-d-blue-600;
+}
+
+.link {
+  @apply flex w-14 h-15 text-gray-400 border-white-100 hover:text-gray-900 border-l-3 justify-center items-center focus:outline-none focus:text-gray-900 dark:hover:text-white dark:text-d-blue-100 dark:border-d-blue-500;
+}
+.link-active {
+  @apply text-gray-900 border-gray-900 dark:text-white dark:border-blue-100;
+}
+
+.status-item {
+  @apply hover:bg-gray-200 px-2 cursor-pointer h-6 flex items-center dark:hover:bg-d-blue-500;
+}
+
+.input-text {
+  @apply h-7 w-72 border-gray-300 border px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md;
+}
+.input-checkbox {
+  @apply w-4 h-4 text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md;
+}
+
+::selection {
+  background: #e4e4e4;
+}
+.dark *::selection {
+  background: #5e5f68;
+}
+
+.ansi-yellow-fg {
+  @apply text-terminal-yellow dark:text-terminal-d-yellow;
+}
+.ansi-green-fg {
+  @apply text-terminal-green dark:text-terminal-d-green;
+}
+.ansi-red-bg {
+  @apply bg-terminal-red dark:text-terminal-d-red;
+}
+.ansi-white-fg {
+  @apply text-gray-900 dark:text-white;
+}
