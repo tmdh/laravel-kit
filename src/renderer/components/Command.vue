@@ -34,7 +34,7 @@
 import KitButton from "@/components/KitButton";
 import ArgumentInput from "@/components/ArgumentInput";
 import OptionInput from "@/components/OptionInput";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";
 import { remote } from "electron";
@@ -53,12 +53,11 @@ export default {
   },
   computed: {
     ...mapState({ appName: "name" }),
-    ...mapGetters(["rounded"]),
     getName() {
       return this.name;
     },
     command() {
-      return this.$store.state.project.commands.find(command => command.name == this.name);
+      return this.$store.state.project.commands.find((command) => command.name == this.name);
     },
     fullCommand() {
       let argumentsCommand = "",
@@ -92,15 +91,15 @@ export default {
   methods: {
     getArguments() {
       this.argumentsInit = Object.keys(this.command.definition.arguments)
-        .map(argument => this.command.definition.arguments[argument])
-        .map(option => Object.assign({}, option, { value: "" }));
+        .map((argument) => this.command.definition.arguments[argument])
+        .map((option) => Object.assign({}, option, { value: "" }));
     },
     getOptions() {
       const remove = ["--help", "--quiet", "--verbose", "--version", "--ansi", "--no-ansi", "--no-interaction", "--env"];
       this.optionsInit = Object.keys(this.command.definition.options)
-        .map(option => this.command.definition.options[option])
-        .filter(option => !remove.includes(option.name))
-        .map(option => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
+        .map((option) => this.command.definition.options[option])
+        .filter((option) => !remove.includes(option.name))
+        .map((option) => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
     },
     getOutputAsync() {
       this.output = "Running...";

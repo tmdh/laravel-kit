@@ -98,10 +98,10 @@
 }
 
 .input-text {
-  @apply h-7 w-72 border-gray-300 border px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100;
+  @apply h-7 w-72 border-gray-300 border px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md;
 }
 .input-checkbox {
-  @apply w-4 h-4 text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100;
+  @apply w-4 h-4 text-blue-100 focus:ring-0 hover:text-blue hover:border-gray-900 dark:bg-d-blue-700 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md;
 }
 
 ::selection {

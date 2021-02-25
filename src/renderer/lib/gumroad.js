@@ -32,7 +32,6 @@ export const createLicenseManager = (productId, options) => {
     encryptionKey: !(options === null || options === void 0 ? void 0 : options.disableEncryption) ? encryptionKey : undefined,
     clearInvalidConfig: true
   });
-  userStore.clear();
   /**
    * Validates a given license key against Gumroad's API and increases the use
    * count if specified.

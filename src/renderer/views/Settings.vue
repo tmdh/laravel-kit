@@ -6,19 +6,19 @@
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="env">The environment artisan commands should run under</label>
       </div>
-      <input type="text" class="input-text my-2" :class="rounded" spellcheck="false" id="env" v-model="env" />
+      <input type="text" class="input-text my-2" spellcheck="false" id="env" v-model="env" />
     </div>
     <div class="flex flex-col lg:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="editor">Open In Editor command</label>
       </div>
-      <input type="text" class="input-text my-2" :class="rounded" spellcheck="false" id="editor" v-model="editor" />
+      <input type="text" class="input-text my-2" spellcheck="false" id="editor" v-model="editor" />
     </div>
     <div class="flex flex-col lg:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="verbosity">Artisan output verbosity</label>
       </div>
-      <select type="text" class="input-text px-1 py-0 my-2" :class="rounded" spellcheck="false" id="verbosity" v-model="verbosity">
+      <select type="text" class="input-text px-1 py-0 my-2" spellcheck="false" id="verbosity" v-model="verbosity">
         <option :value="1">Normal</option>
         <option :value="2">Verbose</option>
         <option :value="3">Debug</option>
@@ -41,7 +41,7 @@
           <div class="w-96 my-2">
             <label class="text-sm text-gray-900 dark:text-white" for="license">License key</label>
           </div>
-          <input type="text" class="input-text my-2" :class="rounded" spellcheck="false" id="license" v-model="license" />
+          <input type="text" class="input-text my-2" spellcheck="false" id="license" v-model="license" />
         </div>
         <kit-button class="mt-5" @click.native="activateLicense">Activate license key</kit-button>
       </div>
@@ -51,7 +51,7 @@
         <div class="w-96 my-2">
           <label class="text-sm text-gray-900 dark:text-white" for="dark">Color theme</label>
         </div>
-        <select type="text" class="input-text px-1 py-0 my-2" :class="rounded" id="dark" v-model="dark">
+        <select type="text" class="input-text px-1 py-0 my-2" id="dark" v-model="dark">
           <option :value="false">Light</option>
           <option :value="true">Dark</option>
         </select>
@@ -74,7 +74,7 @@
 <script>
 import KitButton from "@/components/KitButton";
 import Store from "electron-store";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import { createLicenseManager } from "@/lib/gumroad";
 import { remote } from "electron";
 const { dialog } = remote;
@@ -92,7 +92,7 @@ export default {
       dark: false
     };
   },
-  computed: { ...mapGetters(["rounded"]), ...mapState(["licensed"]) },
+  computed: { ...mapState(["licensed"]) },
   methods: {
     saveSettings() {
       this.saved = false;

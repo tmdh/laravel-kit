@@ -18,31 +18,6 @@ const app = new Vue({
   render: function (h) {
     return h(App);
   },
-  beforeCreate() {
-    createLicenseManager("laravel-kit", {
-      maxUses: 10,
-      maxDaysBetweenChecks: 30
-    })
-      .checkCurrentLicense()
-      .then((response) => {
-        if (response.status == 0) {
-          this.$store.state.licensed = true;
-        } else {
-          dialog
-            .showMessageBox({
-              type: "info",
-              title: "Thanks",
-              message: "Hello, Thanks for trying out Laravel Kit. Support the development of this project by buying a license.",
-              buttons: ["Sure", "Later"]
-            })
-            .then((result) => {
-              if (result.response == 0) {
-                shell.openExternal("https://gum.co/laravel-kit");
-              }
-            });
-        }
-      });
-  },
   mounted() {
     bus.$on("openDialog", () => {
       this.$store.dispatch("openDialog");
@@ -61,6 +36,29 @@ const app = new Vue({
       this.$store.dispatch("openProject", { dir: dir, reload: true });
     });
     this.$store.commit("updateSettingsState");
+    createLicenseManager("laravel-kit", {
+      maxUses: 10,
+      maxDaysBetweenChecks: 30
+    })
+      .checkCurrentLicense()
+      .then((response) => {
+        if (response.status == 0) {
+          this.$store.state.licensed = true;
+        } else {
+          dialog
+            .showMessageBox({
+              type: "info",
+              title: "Thanks",
+              message: "Hello, Thanks for trying out Laravel Kit.\r\nSupport the development of this project by buying a license.",
+              buttons: ["Later", "Sure"]
+            })
+            .then((result) => {
+              if (result.response == 1) {
+                shell.openExternal("https://gum.co/laravel-kit");
+              }
+            });
+        }
+      });
   }
 }).$mount("#app");
 

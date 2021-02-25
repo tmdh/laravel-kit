@@ -61,14 +61,6 @@ export const store = new Vuex.Store({
       state.dark = estore.get("dark");
     }
   },
-  getters: {
-    rounded() {
-      if (process.platform.includes("win")) {
-        return "rounded-sm";
-      }
-      return "rounded-md";
-    }
-  },
   actions: {
     openProject(context, payload) {
       if (payload.reload == undefined) {

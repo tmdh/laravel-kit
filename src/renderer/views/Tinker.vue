@@ -13,7 +13,7 @@
 <script>
 import TinkerEditor from "@/components/TinkerEditor";
 import KitButton from "@/components/KitButton";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import { spawn } from "child_process";
 import "@/lib/tinker";
 
@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     ...mapState(["dir"]),
-    ...mapGetters(["rounded"]),
     theme() {
       return this.$store.state.dark ? "dracula" : "atom-one-light";
     }
@@ -43,7 +42,7 @@ export default {
       this.$store.state.tinkering = true;
       const tinker = spawn("php", ["artisan", "tinker"], { cwd: this.dir });
       tinker.stdout.setEncoding("utf-8");
-      tinker.stdout.on("data", data => {
+      tinker.stdout.on("data", (data) => {
         this.output = data;
         this.$store.state.tinkering = false;
       });

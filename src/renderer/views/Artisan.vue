@@ -6,8 +6,7 @@
         <input
           type="text"
           v-model="searchKeyword"
-          class="w-full h-7 border-input border-gray-300 border placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100"
-          :class="rounded"
+          class="w-full h-7 border-input border-gray-300 border placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md"
           placeholder="Search"
         />
       </div>
@@ -29,7 +28,7 @@
       <div class="flex justify-between items-center px-3 py-3 pr-2">
         <div class="flex flex-row items-center">
           <span class="font-semibold text-gray-500 dark:text-white">{{ name }}</span>
-          <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white px-1 py-0.5" :class="rounded">{{ version }}</span>
+          <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white px-1 py-0.5 rounded-md">{{ version }}</span>
         </div>
         <div>
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink" title="Open link in the browser"></a>
@@ -48,7 +47,7 @@
 import KitButton from "@/components/KitButton";
 import Command from "@/components/Command";
 import ArtisanDefault from "@/components/ArtisanDefault";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;
 import { exec } from "child_process";
@@ -64,14 +63,13 @@ export default {
   },
   computed: {
     ...mapState(["name", "serve", "serveLink"]),
-    ...mapGetters(["rounded"]),
     version() {
       return this.$store.state.project.application.version;
     },
     searchResults() {
       const remove = ["serve", "tinker", "db", "schedule:work"];
       return this.$store.state.project.commands
-        .filter(command => command.name.includes(this.searchKeyword) && !remove.includes(command.name) && !command.name.includes("queue"))
+        .filter((command) => command.name.includes(this.searchKeyword) && !remove.includes(command.name) && !command.name.includes("queue"))
         .sort((a, b) => (a.name > b.name ? 1 : -1));
     }
   },

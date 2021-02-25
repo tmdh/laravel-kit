@@ -16,7 +16,7 @@ const defaults = {
   editor: "echo 'No command specified'",
   dark: false
 };
-new Store({ defaults }).clear();
+new Store({ defaults });
 
 function createWindow() {
   let winState = windowStateKeeper({
@@ -34,7 +34,8 @@ function createWindow() {
       enableRemoteModule: true,
       contextIsolation: false
     },
-    show: false
+    show: false,
+    title: "Kit"
   });
 
   winState.manage(win);
