@@ -63,9 +63,9 @@
 
 PHP must be installed in your system.
 
-| Windows                                                                                              | macOS                                                                                                         | Linux                                                                                                      |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-setup-2.0.0.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-2.0.0-mac.zip) (untested) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/laravel-kit-2.0.0-x86_64.AppImage) |
+| Windows                                                                                              | macOS                                                                                                     | Linux                                                                                               |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-Setup-2.0.0.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-2.0.0.dmg) (untested) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-2.0.0.AppImage) |
 
 You must [buy](http://gum.co/laravel-kit) a license if more than one person of your team uses Kit.
 
