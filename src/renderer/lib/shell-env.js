@@ -1,4 +1,4 @@
-import execa from "execa";
+import { sync } from "execa";
 import stripAnsi from "strip-ansi";
 const defaultShell = process.env.SHELL || "/bin/bash";
 
@@ -23,19 +23,11 @@ const parseEnv = (env) => {
   return ret;
 };
 
-export function shellEnvSync(shell) {
-  if (process.platform === "win32") {
-    return process.env;
-  }
-
+export function shellEnv() {
   try {
-    const { stdout } = execa.sync(shell || defaultShell, args, { env });
+    const { stdout } = sync(defaultShell, args, { env });
     return parseEnv(stdout);
   } catch (error) {
-    if (shell) {
-      throw error;
-    } else {
-      return process.env;
-    }
+    return process.env;
   }
 }

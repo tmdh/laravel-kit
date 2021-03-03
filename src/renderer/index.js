@@ -9,11 +9,7 @@ import { createLicenseManager } from "@/lib/gumroad";
 import fixPath from "@/lib/fix-path";
 const { dialog } = remote;
 
-dialog.showMessageBoxSync({ message: process.env.PATH });
-
 fixPath();
-
-dialog.showMessageBoxSync({ message: process.env.PATH });
 
 Vue.config.errorHandler = function (err) {
   console.error(err);
