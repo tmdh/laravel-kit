@@ -1,20 +1,6 @@
 name: build
 
-on:
-  push:
-    paths:
-      - "*"
-      - "!screenshots/**"
-      - "!*.md"
-      - "!*.txt"
-      - "!*.json"
-  pull_request:
-    paths:
-      - "*"
-      - "!screenshots/**"
-      - "!*.md"
-      - "!*.txt"
-      - "!*.json"
+on: [push, pull_request]
 
 jobs:
   release:
