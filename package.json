@@ -20,8 +20,10 @@
     "electron-store": "^7.0.1",
     "electron-updater": "^4.3.5",
     "electron-window-state": "^5.0.3",
+    "execa": "^5.0.0",
     "monaco-editor": "^0.22.3",
     "node-machine-id": "^1.1.12",
+    "strip-ansi": "^6.0.0",
     "tree-kill": "^1.2.2",
     "vue": "^2.6.11",
     "vuex": "^3.6.0"
