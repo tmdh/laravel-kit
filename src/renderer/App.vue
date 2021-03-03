@@ -85,7 +85,7 @@ export default {
       this.tab = tab;
     });
     setInterval(() => {
-      if (this.$el.className.includes("dark")) {
+      if (this.$el.className.includes("dark") && this.$store.state.licensed == false) {
         this.$el.classList.remove("dark");
       }
     }, 10000);
