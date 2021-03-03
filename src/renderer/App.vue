@@ -81,9 +81,14 @@ export default {
   },
   computed: mapState(["project", "opening", "running", "tinkering", "dark", "licensed"]),
   mounted() {
-    this.$root.$on("changeTab", tab => {
+    this.$root.$on("changeTab", (tab) => {
       this.tab = tab;
     });
+    setInterval(() => {
+      if (this.$el.className.includes("dark")) {
+        this.$el.classList.remove("dark");
+      }
+    }, 10000);
   }
 };
 </script>
