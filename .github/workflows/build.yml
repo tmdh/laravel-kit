@@ -1,6 +1,12 @@
 name: build
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "screenshots/**"
+      - "README.md"
 
 jobs:
   release:
