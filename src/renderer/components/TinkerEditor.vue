@@ -44,7 +44,6 @@ export default {
     },
 
     theme(newVal) {
-      console.log(newVal);
       if (this.editor) {
         this.monaco.editor.setTheme(newVal);
       }
@@ -70,7 +69,7 @@ export default {
         {},
         {
           value: this.value,
-          theme: this.$store.state.dark ? "dracula" : "atom-one-light",
+          theme: this.$store.state.dark && this.$store.state.licensed ? "dracula" : "atom-one-light",
           language: this.language,
           fontSize: "18px",
           minimap: { enabled: false },
@@ -83,7 +82,7 @@ export default {
 
       // @event `change`
       const editor = this.getEditor();
-      editor.onDidChangeModelContent(event => {
+      editor.onDidChangeModelContent((event) => {
         const value = editor.getValue();
         if (this.value !== value) {
           this.$emit("change", value, event);

@@ -200,7 +200,7 @@ languages.setLanguageConfiguration("php-x", {
     { open: "[", close: "]" }
   ]
 });
-editor.defineTheme("atom-one-light", {
+editor.defineTheme("one-light", {
   base: "vs",
   colors: {
     "editorIndentGuide.activeBackground": "#626772",
