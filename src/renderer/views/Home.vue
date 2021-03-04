@@ -1,17 +1,17 @@
 <template>
-  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-600 font-light tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
+  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-700 tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
     <h1 class="text-4xl">Kit for Laravel</h1>
     <h2 class="mt-3 text-2xl">Artisan evolved</h2>
     <h3 class="mt-3 text-lg">Start</h3>
     <ul class="text-sm">
       <li class="mt-1">
-        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openDialog">Open project...</span>
+        <span class="cursor-pointer text-blue dark:text-blue-100" @click="openDialog">Open project...</span>
       </li>
     </ul>
     <h3 class="mt-6 text-lg">Recent</h3>
     <ul class="text-sm" v-if="recents.length">
       <li class="mt-1" v-for="recent in recents" :key="recent">
-        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openProject({ dir: recent })" v-text="basename(recent)"></span>
+        <span class="cursor-pointer text-blue dark:text-blue-100" @click="openProject({ dir: recent })" v-text="basename(recent)"></span>
         <span class="ml-3">{{ recent }}</span>
       </li>
     </ul>
@@ -19,7 +19,7 @@
     <h3 class="mt-6 text-lg">Help</h3>
     <ul class="text-sm">
       <li class="mt-1" v-for="link in helpLinks" :key="link.id">
-        <span class="cursor-pointer text-blue dark:text-blue-200" @click="openLink(link)" :title="link.href">{{ link.name }}</span>
+        <span class="cursor-pointer text-blue dark:text-blue-100" @click="openLink(link)" :title="link.href">{{ link.name }}</span>
       </li>
     </ul>
   </div>
@@ -75,4 +75,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h1,
+h2,
+h3 {
+  font-weight: 300;
+}
+</style>

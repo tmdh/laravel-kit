@@ -51,12 +51,12 @@
 
 ## Features
 
+- No configuration required.
 - Execute Artisan commands easily in a nice interface.
 - Tinker with your project in a magical code editor.
 - Serve your Laravel application locally with a click of a button (so convenient :star_struck: ).
 - Beautiful user interface inspired by VSCode.
 - Artisan commands are retrieved from your Laravel project.
-- Your eyes don't need to hurt. Get the dark theme from [here](https://gum.co/laravel-kit).
 - Many more features yet to come.
 
 ## Download
