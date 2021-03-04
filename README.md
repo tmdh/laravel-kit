@@ -6,6 +6,7 @@
   A simple and elegant desktop application for managing your Laravel applications.<br>
   <sub>Available for Windows, Linux and macOS.</sub>
 </div>
+<br>
 <div align="center">
   <!-- Version -->
   <a href="https://tmdh.github.io/laravel-kit">
@@ -63,9 +64,9 @@
 
 PHP must be installed in your system.
 
-| Windows                                                                                              | macOS                                                                                                     | Linux                                                                                               |
-| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-Setup-2.0.0.exe) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-2.0.0.dmg) (untested) | [Download](https://github.com/tmdh/laravel-kit/releases/download/v2.0.0/Laravel-Kit-2.0.0.AppImage) |
+| Windows                                                                                                 | macOS                                                                                                                                                                                      | Linux                                                                                               |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| [Setup (exe)](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-Setup-2.0.1.exe) | [dmg](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1.dmg) or [zip](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1-mac.zip) | [AppImage](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1.AppImage) |
 
 You must [buy](http://gum.co/laravel-kit) a license if more than one person of your team uses Kit.
 
