@@ -68,6 +68,12 @@ PHP must be installed in your system.
 | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | [Setup (exe)](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-Setup-2.0.1.exe) | [dmg](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1.dmg) or [zip](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1-mac.zip) | [AppImage](https://github.com/tmdh/laravel-kit/releases/download/v2.0.1/Laravel-Kit-2.0.1.AppImage) |
 
+You can also install Laravel Kit with [brew](https://brew.sh/).
+
+```
+brew install laravel-kit
+```
+
 You must [buy](http://gum.co/laravel-kit) a license if more than one person of your team uses Kit.
 
 ## Screenshots
