@@ -16,17 +16,20 @@
     </div>
     <div>
       <h2 class="text-gray-800 font-bold text-base mt-4 dark:text-gray-200">Terminal</h2>
+      <div class="flex flex-row items-center mt-2" v-if="routes.isJSON">
+        <input type="checkbox" class="input-checkbox" id="routeTable" :checked="routeTable" v-model="routeTable" />
+        <label class="ml-2 text-sm text-gray-600 dark:text-white" for="routeTable">Show JSON as table</label>
+      </div>
       <div ref="terminal" class="font-mono text-sm mt-3 flex flex-col">
         <div class="select-text">
           <span>→</span> <span class="text-terminal-cyan dark:text-terminal-d-cyan">{{ appName }}</span> <span class="text-terminal-purple dark:text-terminal-d-purple">›</span>
           <span class="text-terminal-green dark:text-terminal-d-green">php</span>
           <span>artisan {{ fullCommand }}</span>
         </div>
-        <pre class="max-h-64 overflow-y-auto pb-4 select-text overflow-x-auto whitespace-pre-wrap">
-<code v-html="output"></code>
-        </pre>
+        <pre class="max-h-64 overflow-y-auto pb-4 select-text whitespace-pre-wrap break-all" v-html="output"></pre>
       </div>
       <div ref="terminal-end"></div>
+      <route-table v-if="routes.isJSON && routeTable" :routes="routes" :key="output"></route-table>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@
 import KitButton from "@/components/KitButton";
 import ArgumentInput from "@/components/ArgumentInput";
 import OptionInput from "@/components/OptionInput";
+import RouteTable from "@/components/RouteTable";
 import { mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";
@@ -42,13 +46,14 @@ const { dialog } = remote;
 
 export default {
   name: "Command",
-  components: { KitButton, ArgumentInput, OptionInput },
+  components: { KitButton, ArgumentInput, OptionInput, RouteTable },
   props: ["name"],
   data() {
     return {
       optionsInit: {},
       argumentsInit: {},
-      output: ""
+      output: "",
+      routeTable: false
     };
   },
   computed: {
@@ -86,6 +91,16 @@ export default {
         globalCommand += ` -${"v".repeat(this.$store.state.verbosity)}`;
       }
       return this.command.name + argumentsCommand + optionsCommand + globalCommand;
+    },
+    routes() {
+      if (this.name == "route:list") {
+        try {
+          return { isJSON: true, list: JSON.parse(this.output.trim()) };
+        } catch (e) {
+          return { isJSON: false };
+        }
+      }
+      return { isJSON: false };
     }
   },
   methods: {
@@ -115,7 +130,7 @@ export default {
             });
           }
         }
-        this.output = Anser.ansiToHtml(stdout, { use_classes: true });
+        this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });
         this.$refs["terminal-end"].scrollIntoView();
         this.$store.state.running = false;
       });
