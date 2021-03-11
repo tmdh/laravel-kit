@@ -1,47 +1,65 @@
-@font-face {
-    font-family: 'Source Sans Pro';
-    src: url('SourceSansPro.ttf');
+* {
+  text-align: center;
+  font-family: "Inter", sans-serif;
 }
 body {
-    background: #eb5757;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-* {
-    text-align: center;
-    color: #fff;
-    font-family: 'Source Sans Pro';
+h1 {
+  font-size: 1.125rem;
+  margin-top: 1.5rem;
 }
-.app-icon {
-    width: 70px;
-    margin-top: 30px;
-}
-.app-title {
-    font-size: 24px;
-    margin-top: 5px;
-}
-.desc {
-    font-size: 36px;
-    margin-bottom: 18px;
+article {
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
 }
 .download {
-	background: #eb5757;
-	border: 2px solid white;
-	border-radius: 4px;
-	font-size: 20px;
-	padding: 8px 16px;
-    cursor: pointer;
+  margin-top: 2rem;
+  display: inline-block;
+  background: #5871ef;
+  border-radius: 4px;
+  font-size: 0.875;
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  color: white;
 }
 .download:hover {
-    background: white;
-    color: #eb5757;
+  background: #6b83ed;
 }
-ul.links {
-    padding: 0;
+.download:visited {
+  color: white;
 }
-ul.links > li {
-    display: inline;
-    margin-right: 15px;
-    list-style: none;
+ul {
+  padding: 0;
+}
+li {
+  display: inline;
+  margin-right: 15px;
+  list-style: none;
+}
+a:visited {
+  color: black;
 }
 .screenshot {
-    max-width: 700px;
+  max-width: 100%;
+  width: 600px;
+}
+footer {
+  font-size: 0.875rem;
+  margin-top: 2rem;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #282a36;
+    color: white;
+  }
+  a {
+    color: white;
+  }
+  a:visited {
+    color: white;
+  }
 }

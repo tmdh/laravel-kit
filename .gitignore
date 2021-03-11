@@ -1,0 +1,4 @@
+node_modules
+laravel-app
+dist
+release
