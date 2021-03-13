@@ -9,8 +9,8 @@
 <br>
 <div align="center">
   <!-- Version -->
-  <a href="https://tmdh.github.io/laravel-kit">
-    <img src="https://img.shields.io/github/package-json/v/tmdh/laravel-kit" alt="website">
+  <a href="https://github.com/tmdh/laravel-kit/releases/latest">
+    <img src="https://badgen.net/github/release/tmdh/laravel-kit" alt="Latest release">
   </a>
   <!-- Build Status -->
   <a href="https://github.com/tmdh/laravel-kit/actions/workflows/build.yml">
@@ -19,6 +19,10 @@
   <!-- Downloads total -->
   <a href="https://github.com/tmdh/laravel-kit/releases">
     <img src="https://img.shields.io/github/downloads/tmdh/laravel-kit/total">
+  </a>
+  <!-- Product Hunt total -->
+  <a href="https://www.producthunt.com/posts/laravel-kit-2">
+    <img src="https://badgen.net/https/tmdh-api.vercel.app/api/ph-kit">
   </a>
 </div>
 <div align="center">
@@ -88,7 +92,6 @@ You must [buy](http://gum.co/laravel-kit) a license if more than one person of y
 ## Contribution
 
 - [Become a backer](https://gum.co/laravel-kit) and get the dark theme.
-
 - [Request a new feature or report an issue](https://github.com/tmdh/laravel-kit/issues/new/).
 
 ## Documentation
