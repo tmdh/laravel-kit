@@ -16,6 +16,8 @@ import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
 import { spawn } from "child_process";
 import "@/lib/tinker.js";
+import { remote } from "electron";
+const { dialog } = remote;
 
 export default {
   name: "Tinker",
@@ -53,16 +55,20 @@ export default {
   },
   methods: {
     executeTinker() {
-      this.$store.state.tinkering = true;
-      const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
-      tinker.stdout.setEncoding("utf-8");
-      this.$store.state.output = "";
-      tinker.stdout.on("data", (data) => {
-        this.$store.state.output += data;
-        this.$store.state.tinkering = false;
-      });
-      tinker.stdin.write(this.code);
-      tinker.stdin.end();
+      if (this.$store.state.php !== "") {
+        this.$store.state.tinkering = true;
+        const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
+        tinker.stdout.setEncoding("utf-8");
+        this.$store.state.output = "";
+        tinker.stdout.on("data", (data) => {
+          this.$store.state.output += data;
+          this.$store.state.tinkering = false;
+        });
+        tinker.stdin.write(this.code);
+        tinker.stdin.end();
+      } else {
+        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+      }
     }
   }
 };

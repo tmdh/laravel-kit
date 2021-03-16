@@ -117,24 +117,28 @@ export default {
         .map((option) => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
     },
     getOutputAsync() {
-      this.output = "Running...";
-      this.$store.state.running = true;
-      exec(`"${this.$store.state.php}" artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
-        if (error) {
-          if (stdout.includes("Could not open input file: artisan")) {
-            let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
-            dialog.showMessageBox({
-              type: "error",
-              title: "Error",
-              message
-            });
+      if (this.$store.state.php !== "") {
+        this.output = "Running...";
+        this.$store.state.running = true;
+        exec(`"${this.$store.state.php}" artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
+          if (error) {
+            if (stdout.includes("Could not open input file: artisan")) {
+              let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
+              dialog.showMessageBox({
+                type: "error",
+                title: "Error",
+                message
+              });
+            }
           }
-        }
-        this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });
+          this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });
+          this.$refs["terminal-end"].scrollIntoView();
+          this.$store.state.running = false;
+        });
         this.$refs["terminal-end"].scrollIntoView();
-        this.$store.state.running = false;
-      });
-      this.$refs["terminal-end"].scrollIntoView();
+      } else {
+        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+      }
     }
   },
   mounted() {
