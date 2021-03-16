@@ -7,8 +7,9 @@
         <label class="text-sm text-gray-900 dark:text-white" for="php">PHP executable path</label>
       </div>
       <input type="text" class="input-text my-2" spellcheck="false" id="php" v-model="php" />
-      <kit-button class="mx-2 my-2 h-7" @click.native="selectExecutable">Select</kit-button>
     </div>
+    <kit-button class="mb-2 h-7 inline-block" @click.native="selectExecutable">Select</kit-button>
+    <div class="text-xs">Detected PHP version: {{ this.phpv }}</div>
     <div class="flex flex-col lg:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="env">The environment artisan commands should run under</label>
@@ -86,6 +87,8 @@ import { createLicenseManager } from "@/lib/gumroad.js";
 import { remote } from "electron";
 const { dialog } = remote;
 const estore = new Store();
+import { exec } from "child_process";
+
 export default {
   name: "Settings",
   components: { KitButton },
@@ -97,7 +100,8 @@ export default {
       editor: "",
       saved: false,
       license: "",
-      dark: false
+      dark: false,
+      phpv: ""
     };
   },
   computed: { ...mapState(["licensed"]) },
@@ -114,6 +118,19 @@ export default {
           }
         });
     },
+    getPHPv() {
+      exec(`"${this.php}" -v`, (error, stdout) => {
+        if (error) {
+          dialog.showErrorBox("Error", "PHP detection failed.");
+          this.updatePHPv("unavailable");
+        } else {
+          this.updatePHPv(stdout.split("\n")[0]);
+        }
+      });
+    },
+    updatePHPv(text) {
+      this.phpv = text;
+    },
     saveSettings() {
       this.saved = false;
       estore.set("php", this.php);
@@ -125,6 +142,7 @@ export default {
       setTimeout(() => {
         this.saved = true;
       }, 500);
+      this.getPHPv();
     },
     activateLicense() {
       const licenseManager = createLicenseManager("laravel-kit");
@@ -143,6 +161,7 @@ export default {
     this.env = estore.get("env");
     this.editor = estore.get("editor");
     this.dark = estore.get("dark");
+    this.getPHPv();
     this.$store.commit("updateSettingsState");
   }
 };

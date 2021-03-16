@@ -67,34 +67,38 @@ export const store = new Vuex.Store({
   },
   actions: {
     openProject(context, payload) {
-      if (payload.reload == undefined) {
-        context.dispatch("closeProject");
-      }
-      context.state.opening = true;
-      exec(`"${context.state.php}" artisan --format=json`, { cwd: payload.dir }, (error, stdout) => {
-        if (error) {
-          let message = stdout.length > 0 ? stdout : `${error}`;
-          if (stdout.includes("Could not open input file: artisan")) {
-            message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
-          }
-          dialog.showMessageBox({
-            type: "error",
-            title: "Error",
-            message
-          });
-          context.state.opening = false;
-        } else {
-          if (stdout.includes("Laravel")) {
-            context.state.dir = payload.dir;
-            context.state.project = JSON.parse(stdout);
-            context.state.project.namespaces = null;
-            context.state.name = basename(payload.dir);
-            document.title = `${context.state.name} - Kit`;
-            context.commit("addRecent", payload.dir);
-          }
-          context.state.opening = false;
+      if (context.state.php !== "") {
+        if (payload.reload == undefined) {
+          context.dispatch("closeProject");
         }
-      });
+        context.state.opening = true;
+        exec(`"${context.state.php}" artisan --format=json`, { cwd: payload.dir }, (error, stdout) => {
+          if (error) {
+            let message = stdout.length > 0 ? stdout : `${error}`;
+            if (stdout.includes("Could not open input file: artisan")) {
+              message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
+            }
+            dialog.showMessageBox({
+              type: "error",
+              title: "Error",
+              message
+            });
+            context.state.opening = false;
+          } else {
+            if (stdout.includes("Laravel")) {
+              context.state.dir = payload.dir;
+              context.state.project = JSON.parse(stdout);
+              context.state.project.namespaces = null;
+              context.state.name = basename(payload.dir);
+              document.title = `${context.state.name} - Kit`;
+              context.commit("addRecent", payload.dir);
+            }
+            context.state.opening = false;
+          }
+        });
+      } else {
+        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+      }
     },
     openDialog(context) {
       dialog
