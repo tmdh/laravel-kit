@@ -34,7 +34,9 @@
           </svg>
         </button>
       </nav>
-      <component :is="tab" class="border-l-1 dark:border-d-blue-800"></component>
+      <keep-alive exclude="Tinker">
+        <component :is="tab" class="border-l-1 dark:border-d-blue-800"></component>
+      </keep-alive>
     </div>
     <div class="h-6 text-xs flex flex-row bg-gray-100 text-gray-800 dark:bg-d-blue-800 dark:text-white">
       <div class="bg-blue hover:bg-blue-100 px-3 cursor-pointer h-6 flex items-center">
