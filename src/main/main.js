@@ -14,7 +14,8 @@ const defaults = {
   verbosity: 1,
   env: "",
   editor: "echo 'No command specified'",
-  dark: false
+  dark: false,
+  php: ""
 };
 new Store({ defaults });
 

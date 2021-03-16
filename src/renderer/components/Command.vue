@@ -119,7 +119,7 @@ export default {
     getOutputAsync() {
       this.output = "Running...";
       this.$store.state.running = true;
-      exec(`php artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
+      exec(`"${this.$store.state.php}" artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
         if (error) {
           if (stdout.includes("Could not open input file: artisan")) {
             let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;

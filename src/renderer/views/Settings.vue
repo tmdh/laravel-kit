@@ -4,6 +4,13 @@
     <div class="h-px bg-gray-300"></div>
     <div class="flex flex-col lg:flex-row py-1">
       <div class="w-96 my-2">
+        <label class="text-sm text-gray-900 dark:text-white" for="php">PHP executable path</label>
+      </div>
+      <input type="text" class="input-text my-2" spellcheck="false" id="php" v-model="php" />
+      <kit-button class="mx-2 my-2 h-7" @click.native="selectExecutable">Select</kit-button>
+    </div>
+    <div class="flex flex-col lg:flex-row py-1">
+      <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="env">The environment artisan commands should run under</label>
       </div>
       <input type="text" class="input-text my-2" spellcheck="false" id="env" v-model="env" />
@@ -84,6 +91,7 @@ export default {
   components: { KitButton },
   data() {
     return {
+      php: "",
       verbosity: 1,
       env: "",
       editor: "",
@@ -94,8 +102,21 @@ export default {
   },
   computed: { ...mapState(["licensed"]) },
   methods: {
+    selectExecutable() {
+      dialog
+        .showOpenDialog({
+          title: "Select php executable",
+          properties: ["openFile"]
+        })
+        .then((result) => {
+          if (!result.canceled) {
+            this.php = result.filePaths[0];
+          }
+        });
+    },
     saveSettings() {
       this.saved = false;
+      estore.set("php", this.php);
       estore.set("verbosity", this.verbosity);
       estore.set("env", this.env);
       estore.set("editor", this.editor);
@@ -117,6 +138,7 @@ export default {
     }
   },
   mounted() {
+    this.php = estore.get("php");
     this.verbosity = estore.get("verbosity");
     this.env = estore.get("env");
     this.editor = estore.get("editor");

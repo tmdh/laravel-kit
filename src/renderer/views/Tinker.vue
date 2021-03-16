@@ -54,7 +54,7 @@ export default {
   methods: {
     executeTinker() {
       this.$store.state.tinkering = true;
-      const tinker = spawn("php", ["artisan", "tinker"], { cwd: this.dir });
+      const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
       tinker.stdout.setEncoding("utf-8");
       this.$store.state.output = "";
       tinker.stdout.on("data", (data) => {

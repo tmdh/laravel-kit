@@ -28,7 +28,8 @@ export const store = new Vuex.Store({
     dark: false,
     licensed: false,
     code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
-    output: "// The output is shown here"
+    output: "// The output is shown here",
+    php: ""
   },
   mutations: {
     updateServeLink(state, link) {
@@ -61,6 +62,7 @@ export const store = new Vuex.Store({
       state.env = estore.get("env");
       state.editor = estore.get("editor");
       state.dark = estore.get("dark");
+      state.php = estore.get("php");
     }
   },
   actions: {
@@ -69,9 +71,9 @@ export const store = new Vuex.Store({
         context.dispatch("closeProject");
       }
       context.state.opening = true;
-      exec("php artisan --format=json", { cwd: payload.dir }, (error, stdout) => {
+      exec(`"${context.state.php}" artisan --format=json`, { cwd: payload.dir }, (error, stdout) => {
         if (error) {
-          let message = stdout;
+          let message = stdout.length > 0 ? stdout : `${error}`;
           if (stdout.includes("Could not open input file: artisan")) {
             message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
           }
@@ -117,7 +119,7 @@ export const store = new Vuex.Store({
       }
     },
     startServe({ state, commit }) {
-      state.serve = spawn("php", ["artisan", "serve"], { cwd: state.dir });
+      state.serve = spawn(state.php, ["artisan", "serve"], { cwd: state.dir });
       state.serve.stdout.setEncoding("utf-8");
       state.serve.stdout.on("data", (data) => {
         if (data.includes("started")) {

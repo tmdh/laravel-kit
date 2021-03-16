@@ -8,8 +8,20 @@ import bus from "@/lib/bus.js";
 import { createLicenseManager } from "@/lib/gumroad.js";
 import fixPath from "@/lib/fix-path.js";
 const { dialog } = remote;
+import which from "which";
+import Store from "electron-store";
+const estore = new Store();
 
 fixPath();
+if (estore.get("php") == "") {
+  which("php")
+    .then((resolvedPath) => {
+      estore.set("php", resolvedPath);
+    })
+    .catch(() => {
+      dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+    });
+}
 
 Vue.config.errorHandler = function (err) {
   console.error(err);
