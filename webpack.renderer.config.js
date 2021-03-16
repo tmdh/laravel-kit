@@ -72,8 +72,7 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src/renderer/")
-    },
-    extensions: [".vue", ".js", ".css"]
+    }
   },
   stats: {
     colors: true

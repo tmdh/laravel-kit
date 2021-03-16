@@ -37,7 +37,7 @@
 import { shell } from "electron";
 import { mapState, mapActions } from "vuex";
 import { basename } from "path";
-import KitButton from "@/components/KitButton";
+import KitButton from "@/components/KitButton.vue";
 export default {
   name: "Home",
   components: { KitButton },

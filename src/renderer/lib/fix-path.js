@@ -1,4 +1,4 @@
-import { shellEnv } from "@/lib/shell-env";
+import { shellEnv } from "@/lib/shell-env.js";
 
 export default function () {
   if (process.platform !== "darwin") {

@@ -6,7 +6,7 @@ import kill from "tree-kill";
 import { remote } from "electron";
 const { dialog } = remote;
 import Store from "electron-store";
-import bus from "@/lib/bus";
+import bus from "@/lib/bus.js";
 const estore = new Store();
 
 Vue.use(Vuex);

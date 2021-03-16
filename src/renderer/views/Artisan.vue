@@ -44,9 +44,9 @@
 </template>
 
 <script>
-import KitButton from "@/components/KitButton";
-import Command from "@/components/Command";
-import ArtisanDefault from "@/components/ArtisanDefault";
+import KitButton from "@/components/KitButton.vue";
+import Command from "@/components/Command.vue";
+import ArtisanDefault from "@/components/ArtisanDefault.vue";
 import { mapState, mapActions } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;

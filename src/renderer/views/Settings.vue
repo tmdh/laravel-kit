@@ -72,10 +72,10 @@
 </template>
 
 <script>
-import KitButton from "@/components/KitButton";
+import KitButton from "@/components/KitButton.vue";
 import Store from "electron-store";
 import { mapState } from "vuex";
-import { createLicenseManager } from "@/lib/gumroad";
+import { createLicenseManager } from "@/lib/gumroad.js";
 import { remote } from "electron";
 const { dialog } = remote;
 const estore = new Store();

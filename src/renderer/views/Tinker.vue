@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import TinkerEditor from "@/components/TinkerEditor";
-import KitButton from "@/components/KitButton";
+import TinkerEditor from "@/components/TinkerEditor.vue";
+import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
 import { spawn } from "child_process";
-import "@/lib/tinker";
+import "@/lib/tinker.js";
 
 export default {
   name: "Tinker",

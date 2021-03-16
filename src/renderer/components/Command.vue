@@ -34,10 +34,10 @@
   </div>
 </template>
 <script>
-import KitButton from "@/components/KitButton";
-import ArgumentInput from "@/components/ArgumentInput";
-import OptionInput from "@/components/OptionInput";
-import RouteTable from "@/components/RouteTable";
+import KitButton from "@/components/KitButton.vue";
+import ArgumentInput from "@/components/ArgumentInput.vue";
+import OptionInput from "@/components/OptionInput.vue";
+import RouteTable from "@/components/RouteTable.vue";
 import { mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";

@@ -1,12 +1,12 @@
 import Vue from "vue";
-import { store } from "@/lib/store";
-import App from "@/App";
-import "@/lib/menu";
+import { store } from "@/lib/store.js";
+import App from "@/App.vue";
+import "@/lib/menu.js";
 import { ipcRenderer, remote, shell } from "electron";
-import "@/styles";
-import bus from "@/lib/bus";
-import { createLicenseManager } from "@/lib/gumroad";
-import fixPath from "@/lib/fix-path";
+import "@/styles.css";
+import bus from "@/lib/bus.js";
+import { createLicenseManager } from "@/lib/gumroad.js";
+import fixPath from "@/lib/fix-path.js";
 const { dialog } = remote;
 
 fixPath();

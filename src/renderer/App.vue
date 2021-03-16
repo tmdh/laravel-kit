@@ -64,12 +64,12 @@
 </template>
 
 <script>
-import Home from "@/views/Home";
-import Artisan from "@/views/Artisan";
-import Tinker from "@/views/Tinker";
-import Settings from "@/views/Settings";
+import Home from "@/views/Home.vue";
+import Artisan from "@/views/Artisan.vue";
+import Tinker from "@/views/Tinker.vue";
+import Settings from "@/views/Settings.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 import { mapState } from "vuex";
-import LoadingIcon from "@/components/LoadingIcon";
 
 export default {
   name: "App",

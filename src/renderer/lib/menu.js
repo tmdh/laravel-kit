@@ -1,6 +1,6 @@
 import { remote, shell } from "electron";
 const { Menu } = remote;
-import bus from "@/lib/bus";
+import bus from "@/lib/bus.js";
 import Store from "electron-store";
 const isMac = process.platform === "darwin";
 
