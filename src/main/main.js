@@ -106,7 +106,13 @@ app
         .then((name) => console.log(`Added Extension:  ${name}`))
         .catch((err) => console.log("An error occurred: ", err));
     } else {
-      autoUpdater.checkForUpdates();
+      autoUpdater.checkForUpdates().catch((error) => {
+        if (error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
+          console.log("Auto update failed, reason: network offline.");
+        } else {
+          console.log(error);
+        }
+      });
     }
   });
 
