@@ -36,7 +36,8 @@ function createWindow() {
       contextIsolation: false
     },
     show: false,
-    title: "Kit"
+    title: "Kit",
+    icon: join(__dirname + process.platform === "win32" ? "build/icon.ico" : "build/icon.png")
   });
 
   winState.manage(win);

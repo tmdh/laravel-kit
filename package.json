@@ -87,6 +87,9 @@
       "dist/**/*",
       "!node_modules${/*}"
     ],
+    "extraFiles": [
+      "build/**/*"
+    ],
     "directories": {
       "output": "release"
     },
