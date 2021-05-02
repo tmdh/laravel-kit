@@ -6,13 +6,11 @@ import { ipcRenderer, remote, shell } from "electron";
 import "@/styles.css";
 import bus from "@/lib/bus.js";
 import { createLicenseManager } from "@/lib/gumroad.js";
-import fixPath from "@/lib/fix-path.js";
 const { dialog } = remote;
 import which from "which";
 import Store from "electron-store";
 const estore = new Store();
 
-fixPath();
 if (estore.get("php") == "") {
   which("php")
     .then((resolvedPath) => {

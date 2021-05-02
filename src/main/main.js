@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog } from "electron";
 const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
-import kill from "./tree-kill-sync";
+import kill from "./tree-kill-sync.js";
+import fixPath from "./fix-path.js";
 import windowStateKeeper from "electron-window-state";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
@@ -8,6 +9,8 @@ import { format } from "url";
 import { join } from "path";
 
 const isDev = process.env.NODE_ENV === "development";
+
+fixPath();
 
 const defaults = {
   recents: [],
