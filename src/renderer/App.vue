@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen max-h-screen flex overflow-hidden antialiased select-none flex-col" :class="[dark && licensed ? 'dark bg-d-blue-500 text-white' : 'bg-white-100']">
+  <div class="min-h-screen max-h-screen flex overflow-hidden antialiased select-none flex-col" :class="[dark ? 'dark bg-d-blue-500 text-white' : 'bg-white-100']">
     <div class="flex-1 overflow-hidden flex">
       <nav class="flex flex-col w-15 justify-between">
         <div>
@@ -81,16 +81,11 @@ export default {
       tab: "Home"
     };
   },
-  computed: mapState(["project", "opening", "running", "tinkering", "dark", "licensed"]),
+  computed: mapState(["project", "opening", "running", "tinkering", "dark"]),
   mounted() {
     this.$root.$on("changeTab", (tab) => {
       this.tab = tab;
     });
-    setInterval(() => {
-      if (this.$el.className.includes("dark") && this.$store.state.licensed == false) {
-        this.$el.classList.remove("dark");
-      }
-    }, 10000);
   }
 };
 </script>

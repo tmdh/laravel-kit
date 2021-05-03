@@ -34,7 +34,7 @@ export default {
   computed: {
     ...mapState(["dir"]),
     theme() {
-      return this.$store.state.dark && this.$store.state.licensed ? "dracula" : "one-light";
+      return this.$store.state.dark ? "dracula" : "one-light";
     },
     code: {
       set(value) {

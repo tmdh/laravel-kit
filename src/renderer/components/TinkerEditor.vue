@@ -69,7 +69,7 @@ export default {
         {},
         {
           value: this.value,
-          theme: this.$store.state.dark && this.$store.state.licensed ? "dracula" : "atom-one-light",
+          theme: this.$store.state.dark ? "dracula" : "atom-one-light",
           language: this.language,
           fontSize: "18px",
           minimap: { enabled: false },

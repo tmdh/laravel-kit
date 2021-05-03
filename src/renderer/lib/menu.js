@@ -111,12 +111,6 @@ const template = [
       {
         type: "separator"
       },
-      {
-        label: "Buy License",
-        click() {
-          openLink("https://gum.co/laravel-kit");
-        }
-      }
     ]
   }
 ];
