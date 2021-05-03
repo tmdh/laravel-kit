@@ -20,7 +20,7 @@
   <a href="https://github.com/tmdh/laravel-kit/releases">
     <img src="https://img.shields.io/github/downloads/tmdh/laravel-kit/total">
   </a>
-  <!-- Product Hunt total -->
+  <!-- Product Hunt upvotes -->
   <a href="https://www.producthunt.com/posts/laravel-kit-2">
     <img src="https://badgen.net/https/tmdh-api.vercel.app/api/ph-kit">
   </a>
