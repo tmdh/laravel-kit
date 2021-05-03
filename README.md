@@ -60,7 +60,7 @@
 - Execute Artisan commands easily in a nice interface.
 - Tinker with your project in a magical code editor.
 - Serve your Laravel application locally with a click of a button (so convenient :star_struck: ).
-- Beautiful user interface inspired by VSCode.
+- Beautiful user interface inspired by VSCode and dark theme.
 - Artisan commands are retrieved from your Laravel project.
 - Many more features yet to come.
 
@@ -78,8 +78,6 @@ You can also install Laravel Kit with [brew](https://brew.sh/).
 brew install laravel-kit
 ```
 
-You must [buy](http://gum.co/laravel-kit) a license if more than one person of your team uses Kit.
-
 ## Screenshots
 
 <h4 align="center"> :high_brightness: themes :crescent_moon: </h4>
@@ -91,7 +89,6 @@ You must [buy](http://gum.co/laravel-kit) a license if more than one person of y
 
 ## Contribution
 
-- [Become a backer](https://gum.co/laravel-kit) and get the dark theme.
 - [Request a new feature or report an issue](https://github.com/tmdh/laravel-kit/issues/new/).
 
 ## Documentation
