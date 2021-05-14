@@ -1,6 +1,6 @@
 <template>
   <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-700 tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
-    <h1 class="text-4xl">Kit for Laravel</h1>
+    <h1 class="text-4xl">Laravel Kit</h1>
     <h2 class="mt-3 text-2xl">Artisan evolved</h2>
     <h3 class="mt-3 text-lg">Start</h3>
     <ul class="text-sm">

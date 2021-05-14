@@ -54,7 +54,7 @@ module.exports = {
     },
     extend: {
       spacing: {
-        "15": "3.75rem"
+        15: "3.75rem"
       },
       borderWidth: {
         1: "1px",
@@ -64,6 +64,10 @@ module.exports = {
         sans: ["system-ui", "sans-serif"],
         mono: ["RobotoMono", "monospace"]
       }
+    },
+    screens: {
+      md: { min: "875px" },
+      sm: { min: "540px" }
     }
   },
   variants: {

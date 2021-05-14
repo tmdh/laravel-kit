@@ -45,7 +45,7 @@ function createWindow() {
   winState.manage(win);
 
   if (isDev) {
-    win.loadURL(`http://localhost:4000`);
+    win.loadURL(`http://localhost:4999`);
   } else {
     win.loadURL(
       format({

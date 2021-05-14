@@ -26,15 +26,22 @@
     </div>
     <div class="bg-gray-100 flex flex-col flex-1 dark:bg-d-blue-700">
       <div class="flex justify-between items-center px-3 py-3 pr-2">
-        <div class="flex flex-row items-center">
+        <div class="hidden flex-row items-center sm:flex">
           <span class="font-semibold text-gray-500 dark:text-white">{{ name }}</span>
           <span class="ml-2 text-xs bg-blue hover:bg-blue-100 text-white px-1 py-0.5 rounded-md">{{ version }}</span>
         </div>
         <div>
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink" title="Open link in the browser"></a>
-          <kit-button @click.native="serveService" :title="serve == null ? 'Serve the application on the PHP development server' : 'Stop serving'">{{ serve == null ? "Serve" : "Stop" }}</kit-button>
-          <kit-button @click.native="openFolder" title="Open folder in Finder/Explorer">Open folder</kit-button>
-          <kit-button @click.native="openInEditor" title="Execute 'Open in editor' command specified in Settings">Open in editor</kit-button>
+          <kit-button @click.native="serveService" :title="serve == null ? 'Serve the application on the PHP development server' : 'Stop serving'" class="inline-flex items-center">
+            <component :is="serve == null ? 'ServeIcon' : 'StopIcon'" class="mr-0 md:mr-2 mt-0.5"></component>
+            <span class="hidden md:block" v-text="serve == null ? 'Serve' : 'Stop'"></span>
+          </kit-button>
+          <kit-button @click.native="openFolder" title="Open folder in Explorer/Finder" class="inline-flex items-center">
+            <folder-icon class="mr-0 md:mr-2 mt-0.5"></folder-icon> <span class="hidden md:block">Open folder</span>
+          </kit-button>
+          <kit-button @click.native="openInEditor" title="Execute 'Open in editor' command specified in Settings" class="inline-flex items-center">
+            <editor-icon class="mr-0 md:mr-2 mt-0.5"></editor-icon> <span class="hidden md:block">Open in editor</span>
+          </kit-button>
         </div>
       </div>
       <command v-if="commandName != null" :name="commandName" :key="commandName" class="view"></command>
@@ -47,6 +54,10 @@
 import KitButton from "@/components/KitButton.vue";
 import Command from "@/components/Command.vue";
 import ArtisanDefault from "@/components/ArtisanDefault.vue";
+import ServeIcon from "@/components/icons/ServeIcon.vue";
+import StopIcon from "@/components/icons/StopIcon.vue";
+import FolderIcon from "@/components/icons/FolderIcon.vue";
+import EditorIcon from "@/components/icons/EditorIcon.vue";
 import { mapState, mapActions } from "vuex";
 import { remote } from "electron";
 const { showItemInFolder, openExternal } = remote.shell;
@@ -54,7 +65,7 @@ import { exec } from "child_process";
 
 export default {
   name: "Artisan",
-  components: { KitButton, Command, ArtisanDefault },
+  components: { KitButton, Command, ArtisanDefault, ServeIcon, StopIcon, FolderIcon, EditorIcon },
   data() {
     return {
       searchKeyword: "",
