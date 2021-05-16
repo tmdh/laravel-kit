@@ -87,9 +87,23 @@ brew install laravel-kit
 | ![](screenshots/artisan-light.jpg) | ![](screenshots/artisan-dark.jpg) |
 | ![](screenshots/tinker-light.jpg)  | ![](screenshots/tinker-dark.jpg)  |
 
-## Contribution
+## Development
 
-- [Request a new feature or report an issue](https://github.com/tmdh/laravel-kit/issues/new/).
+Laravel Kit is made with [Electron](https://electronjs.org), [Vue.js 2](https://vuejs.org), [Tailwind CSS](https://tailwindcss.com) and [Webpack](https://webpack.js.org).
+
+```bash
+# For development,
+# Start development server with Webpack
+yarn run dev:one
+# Start Electron
+yarn run dev:two
+
+# For production,
+# Build files with Webpack
+yarn run prod
+# Make executable
+yarn run pack
+```
 
 ## Documentation
 
