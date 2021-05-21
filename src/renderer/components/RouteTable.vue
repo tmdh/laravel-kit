@@ -20,13 +20,6 @@ export default {
   computed: {
     cols() {
       return Object.keys(this.routes.list[0]);
-    },
-    colName(col) {
-      if (col === "uri") {
-        return "URI";
-      } else {
-        return col[0].toUpperCase() + col.slice(1);
-      }
     }
   }
 };
