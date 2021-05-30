@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
     tinkering: false,
     dark: false,
     code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
+    autoTinker: false,
     output: "// The output is shown here",
     php: ""
   },

@@ -3,7 +3,8 @@
     <div class="flex flex-col flex-1">
       <tinker-editor class="flex-1" v-model="code" language="php-x" theme="one-light"></tinker-editor>
       <div class="py-2 px-3 flex justify-center md:justify-start">
-        <kit-button @click.native="executeTinker">Tinker</kit-button>
+        <checkbox-input :checked="autoTinker" @change.native="enableautoTinker($event.target.checked)">Auto Execute</checkbox-input>
+        <kit-button @click.native="executeTinker" class="ml-auto">Tinker</kit-button>
       </div>
     </div>
     <tinker-editor class="flex-1" v-model="output" language="php-x" theme="one-light" :options="outputOptions"></tinker-editor>
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+import CheckboxInput from "@/components/CheckboxInput.vue";
 import TinkerEditor from "@/components/TinkerEditor.vue";
 import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
@@ -21,20 +23,29 @@ const { dialog } = remote;
 
 export default {
   name: "Tinker",
-  components: { TinkerEditor, KitButton },
+  components: { TinkerEditor, KitButton, CheckboxInput },
   data() {
     return {
       outputOptions: {
         readOnly: true,
         wordWrap: "wordWrapColumn",
         wordWrapColumn: 100
-      }
+      },
+      awaitingWrite: false,
     };
   },
   computed: {
     ...mapState(["dir"]),
     theme() {
       return this.$store.state.dark ? "dracula" : "one-light";
+    },
+    autoTinker: {
+      set(value) {
+        this.$store.state.autoTinker = value;
+      },
+      get() {
+        return this.$store.state.autoTinker;
+      }
     },
     code: {
       set(value) {
@@ -53,7 +64,31 @@ export default {
       }
     }
   },
+  watch: {
+    code: function() {
+      if (!this.$store.state.autoTinker) {
+        return;
+      }
+
+      if (!this.awaitingWrite) {
+        setTimeout(() => {
+          if (this.code.trim() != '') {
+            this.executeTinker()
+          }
+          this.awaitingWrite = false;
+        }, 800);
+      }
+      this.awaitingWrite = true;
+    }
+  },
   methods: {
+    enableautoTinker(value) {
+      if (typeof this.$store.state.autoTinker === 'undefined') {
+        this.$store.state.autoTinker = false;
+      } else {
+        this.$store.state.autoTinker = value;
+      }
+    },
     executeTinker() {
       if (this.$store.state.php !== "") {
         this.$store.state.tinkering = true;
