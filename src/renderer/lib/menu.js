@@ -105,7 +105,7 @@ const template = [
       {
         label: "License",
         click() {
-          openLink("https://github.com/tmdh/laravel-kit/blob/master/LICENSE");
+          openLink("https://github.com/tmdh/laravel-kit/blob/master/license.txt");
         }
       },
       {
