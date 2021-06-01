@@ -3,7 +3,10 @@
     <div class="flex flex-col flex-1">
       <tinker-editor class="flex-1" v-model="code" language="php-x" theme="one-light"></tinker-editor>
       <div class="py-2 px-3 flex justify-center md:justify-start">
-        <checkbox-input :checked="autoTinker" @change.native="enableautoTinker($event.target.checked)">Auto Execute</checkbox-input>
+        <div class="flex flex-row items-center">
+          <input type="checkbox" class="input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
+          <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">Auto Tinker</label>
+        </div>
         <kit-button @click.native="executeTinker" class="ml-auto">Tinker</kit-button>
       </div>
     </div>
@@ -12,7 +15,6 @@
 </template>
 
 <script>
-import CheckboxInput from "@/components/CheckboxInput.vue";
 import TinkerEditor from "@/components/TinkerEditor.vue";
 import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
@@ -23,7 +25,7 @@ const { dialog } = remote;
 
 export default {
   name: "Tinker",
-  components: { TinkerEditor, KitButton, CheckboxInput },
+  components: { TinkerEditor, KitButton },
   data() {
     return {
       outputOptions: {
@@ -31,7 +33,7 @@ export default {
         wordWrap: "wordWrapColumn",
         wordWrapColumn: 100
       },
-      awaitingWrite: false,
+      awaitingWrite: false
     };
   },
   computed: {
@@ -65,15 +67,15 @@ export default {
     }
   },
   watch: {
-    code: function() {
+    code: function () {
       if (!this.$store.state.autoTinker) {
         return;
       }
 
       if (!this.awaitingWrite) {
         setTimeout(() => {
-          if (this.code.trim() != '') {
-            this.executeTinker()
+          if (this.code.trim() != "") {
+            this.executeTinker();
           }
           this.awaitingWrite = false;
         }, 800);
@@ -83,7 +85,7 @@ export default {
   },
   methods: {
     enableautoTinker(value) {
-      if (typeof this.$store.state.autoTinker === 'undefined') {
+      if (typeof this.$store.state.autoTinker === "undefined") {
         this.$store.state.autoTinker = false;
       } else {
         this.$store.state.autoTinker = value;
