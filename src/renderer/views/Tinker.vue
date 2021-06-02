@@ -33,7 +33,7 @@ export default {
         wordWrap: "wordWrapColumn",
         wordWrapColumn: 100
       },
-      awaitingWrite: false
+      timeOut: 0
     };
   },
   computed: {
@@ -71,16 +71,10 @@ export default {
       if (!this.$store.state.autoTinker) {
         return;
       }
-
-      if (!this.awaitingWrite) {
-        setTimeout(() => {
-          if (this.code.trim() != "") {
-            this.executeTinker();
-          }
-          this.awaitingWrite = false;
-        }, 800);
-      }
-      this.awaitingWrite = true;
+      clearTimeout(this.timeOut);
+      this.timeOut = setTimeout(() => {
+        this.executeTinker();
+      }, 800);
     }
   },
   methods: {
