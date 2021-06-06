@@ -6,7 +6,7 @@ import windowStateKeeper from "electron-window-state";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
 import { format } from "url";
-import { join } from "path";
+import { join, resolve } from "path";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -36,7 +36,8 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation: false
+      contextIsolation: false,
+      preload: resolve(join(__dirname, "preload.js"))
     },
     show: false,
     title: "Kit"
@@ -121,6 +122,14 @@ app
 
 ipcMain.on("stopServe", (e, pid) => {
   kill(pid, "SIGKILL");
+});
+
+ipcMain.on("dialog", (e, type) => {
+  switch (type) {
+    case "phpNotFound":
+      dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+      break;
+  }
 });
 
 app.on("window-all-closed", () => {
