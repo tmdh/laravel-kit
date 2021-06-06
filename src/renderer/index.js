@@ -2,7 +2,7 @@ import Vue from "vue";
 import { store } from "@/lib/store.js";
 import App from "@/App.vue";
 import "@/lib/menu.js";
-import { ipcRenderer, remote, shell } from "electron";
+import { ipcRenderer, remote } from "electron";
 import "@/styles.css";
 import bus from "@/lib/bus.js";
 const { dialog } = remote;
