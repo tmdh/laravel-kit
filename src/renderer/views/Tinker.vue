@@ -20,8 +20,6 @@ import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
 import { spawn } from "child_process";
 import "@/lib/tinker.js";
-import { remote } from "electron";
-const { dialog } = remote;
 
 export default {
   name: "Tinker",
@@ -98,7 +96,7 @@ export default {
         tinker.stdin.write(this.code);
         tinker.stdin.end();
       } else {
-        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+        window.Electron.dialogPhpNotFound();
       }
     }
   }

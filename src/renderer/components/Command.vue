@@ -137,7 +137,7 @@ export default {
         });
         this.$refs["terminal-end"].scrollIntoView();
       } else {
-        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+        window.Electron.dialogPhpNotFound();
       }
     }
   },

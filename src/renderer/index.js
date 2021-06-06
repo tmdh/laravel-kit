@@ -2,10 +2,9 @@ import Vue from "vue";
 import { store } from "@/lib/store.js";
 import App from "@/App.vue";
 import "@/lib/menu.js";
-import { ipcRenderer, remote } from "electron";
+import { ipcRenderer } from "electron";
 import "@/styles.css";
 import bus from "@/lib/bus.js";
-const { dialog } = remote;
 import which from "which";
 import Store from "electron-store";
 const estore = new Store();
@@ -15,7 +14,7 @@ if (estore.get("php") == "") {
       estore.set("php", resolvedPath);
     })
     .catch(() => {
-      dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+      window.Electron.dialogPhpNotFound();
     });
 }
 
