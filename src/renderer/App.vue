@@ -70,7 +70,7 @@ import Home from "@/views/Home.vue";
 import Artisan from "@/views/Artisan.vue";
 import Tinker from "@/views/Tinker.vue";
 import Settings from "@/views/Settings.vue";
-import LoadingIcon from "@/components/LoadingIcon.vue";
+import LoadingIcon from "@/components/icons/LoadingIcon.vue";
 import { mapState } from "vuex";
 
 export default {
