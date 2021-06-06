@@ -58,7 +58,6 @@
 <script>
 import KitButton from "@/components/KitButton.vue";
 import Store from "electron-store";
-import { mapState } from "vuex";
 import { remote } from "electron";
 const { dialog } = remote;
 const estore = new Store();
@@ -94,7 +93,7 @@ export default {
     getPHPv() {
       exec(`"${this.php}" -v`, (error, stdout) => {
         if (error) {
-          dialog.showErrorBox("Error", "PHP detection failed.");
+          window.Electron.dialogError("PHP detection failed.");
           this.updatePHPv("unavailable");
         } else {
           this.updatePHPv(stdout.split("\n")[0]);

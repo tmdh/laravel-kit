@@ -41,8 +41,6 @@ import RouteTable from "@/components/RouteTable.vue";
 import { mapState } from "vuex";
 import Anser from "anser";
 import { exec } from "child_process";
-import { remote } from "electron";
-const { dialog } = remote;
 
 export default {
   name: "Command",
@@ -124,11 +122,7 @@ export default {
           if (error) {
             if (stdout.includes("Could not open input file: artisan")) {
               let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
-              dialog.showMessageBox({
-                type: "error",
-                title: "Error",
-                message
-              });
+              window.Electron.dialogError(message);
             }
           }
           this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });

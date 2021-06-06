@@ -124,12 +124,11 @@ ipcMain.on("stopServe", (e, pid) => {
   kill(pid, "SIGKILL");
 });
 
-ipcMain.on("dialog", (e, type) => {
-  switch (type) {
-    case "phpNotFound":
-      dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
-      break;
+ipcMain.on("dialogError", (e, message) => {
+  if (message === "phpNotFound") {
+    message = "php executable not found.\r\nGo to Settings and choose an executable.";
   }
+  dialog.showErrorBox("Error", message);
 });
 
 app.on("window-all-closed", () => {

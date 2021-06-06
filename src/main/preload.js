@@ -1,9 +1,14 @@
 import { ipcRenderer } from "electron";
 
 window.Electron = {
-  dialogPhpNotFound
+  dialogPhpNotFound,
+  dialogError
 };
 
+function dialogError(message) {
+  ipcRenderer.send("dialogError", message);
+}
+
 function dialogPhpNotFound() {
-  ipcRenderer.send("dialog", "phpNotFound");
+  dialogError("phpNotFound");
 }

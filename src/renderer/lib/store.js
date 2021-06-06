@@ -78,11 +78,7 @@ export const store = new Vuex.Store({
             if (stdout.includes("Could not open input file: artisan")) {
               message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
             }
-            dialog.showMessageBox({
-              type: "error",
-              title: "Error",
-              message
-            });
+            window.Electron.dialogError(message);
             context.state.opening = false;
           } else {
             if (stdout.includes("Laravel")) {
