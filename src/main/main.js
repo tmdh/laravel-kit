@@ -1,12 +1,12 @@
-import { app, BrowserWindow, ipcMain, dialog } from "electron";
+import { app, BrowserWindow, dialog } from "electron";
 const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
-import kill from "./tree-kill-sync.js";
 import fixPath from "./fix-path.js";
 import windowStateKeeper from "electron-window-state";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
 import { format } from "url";
 import { join, resolve } from "path";
+import initIpcMain from "./ipc.js";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -120,16 +120,7 @@ app
     }
   });
 
-ipcMain.on("stopServe", (e, pid) => {
-  kill(pid, "SIGKILL");
-});
-
-ipcMain.on("dialogError", (e, message) => {
-  if (message === "phpNotFound") {
-    message = "php executable not found.\r\nGo to Settings and choose an executable.";
-  }
-  dialog.showErrorBox("Error", message);
-});
+initIpcMain();
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

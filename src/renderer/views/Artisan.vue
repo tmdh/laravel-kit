@@ -6,7 +6,21 @@
         <input
           type="text"
           v-model="searchKeyword"
-          class="w-full h-7 border-input border-gray-300 border placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md"
+          class="
+            w-full
+            h-7
+            border-input border-gray-300 border
+            placeholder-gray-800
+            px-2.5
+            text-sm
+            hover:border-gray-400
+            focus:outline-none
+            focus:border-gray-500
+            dark:bg-d-blue-600
+            dark:border-d-gray-300
+            dark:placeholder-d-blue-100
+            rounded-md
+          "
           placeholder="Search"
         />
       </div>
@@ -59,8 +73,6 @@ import StopIcon from "@/components/icons/StopIcon.vue";
 import FolderIcon from "@/components/icons/FolderIcon.vue";
 import EditorIcon from "@/components/icons/EditorIcon.vue";
 import { mapState, mapActions } from "vuex";
-import { remote } from "electron";
-const { showItemInFolder, openExternal } = remote.shell;
 import { exec } from "child_process";
 
 export default {
@@ -86,10 +98,10 @@ export default {
   },
   methods: {
     openFolder() {
-      showItemInFolder(this.$store.state.dir);
+      window.Electron.showItemInFolder(this.$store.state.dir);
     },
     openServe() {
-      openExternal(this.serveLink);
+      window.Electron.openExternal(this.serveLink);
     },
     ...mapActions(["startServe", "stopServe"]),
     serveService() {
