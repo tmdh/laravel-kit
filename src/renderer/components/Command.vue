@@ -143,5 +143,16 @@ export default {
 </script>
 
 <style>
-/* styles in styles.css */
+.ansi-yellow-fg {
+  @apply text-terminal-yellow dark:text-terminal-d-yellow;
+}
+.ansi-green-fg {
+  @apply text-terminal-green dark:text-terminal-d-green;
+}
+.ansi-red-bg {
+  @apply bg-terminal-red dark:text-terminal-d-red;
+}
+.ansi-white-fg {
+  @apply text-gray-900 dark:text-white;
+}
 </style>

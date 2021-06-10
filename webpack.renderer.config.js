@@ -31,7 +31,7 @@ module.exports = {
           isDev ? "vue-style-loader" : MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
-            options: { esModule: false, sourceMap: isDev }
+            options: { esModule: false, sourceMap: isDev, importLoaders: 1 }
           },
           "postcss-loader"
         ]

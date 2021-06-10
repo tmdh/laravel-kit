@@ -91,7 +91,13 @@ export default {
 </script>
 
 <style>
-/*
-  link, link-active in styles
-*/
+.link {
+  @apply flex w-14 h-15 text-gray-400 border-white-100 hover:text-gray-900 border-l-3 justify-center items-center focus:outline-none focus:text-gray-900 dark:hover:text-white dark:text-d-blue-100 dark:border-d-blue-500;
+}
+.link-active {
+  @apply text-gray-900 border-gray-900 dark:text-white dark:border-blue-100;
+}
+.status-item {
+  @apply hover:bg-gray-200 px-2 cursor-pointer h-6 flex items-center dark:hover:bg-d-blue-500;
+}
 </style>

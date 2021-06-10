@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style>
-/*
-  .view in styles.css
-*/
+.view {
+  @apply bg-white-100 flex-1 overflow-y-auto pl-7 pr-2 py-5 text-xl dark:bg-d-blue-600;
+}
 </style>
