@@ -2,12 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { exec, spawn } from "child_process";
 import { basename } from "path";
-import kill from "tree-kill";
 import { remote } from "electron";
 const { dialog } = remote;
-import Store from "electron-store";
 import bus from "@/lib/bus.js";
-const estore = new Store();
 
 Vue.use(Vuex);
 
@@ -37,32 +34,32 @@ export const store = new Vuex.Store({
     },
     stopServeSync(state) {
       if (state.serve != null) {
-        kill(state.serve.pid, "SIGKILL", function () {
+        window.Electron.kill(state.serve.pid, "SIGKILL", function () {
           state.serve = null;
           state.serveLink = null;
         });
       }
     },
     getRecents(state) {
-      state.recents = estore.get("recents");
+      state.recents = window.store.get("recents");
     },
     addRecent(state, dir) {
-      let newRecents = estore.get("recents").filter((item) => item != dir);
+      let newRecents = window.store.get("recents").filter((item) => item != dir);
       newRecents.unshift(dir);
-      estore.set("recents", newRecents);
-      state.recents = estore.get("recents");
+      window.store.set("recents", newRecents);
+      state.recents = window.store.get("recents");
       bus.$emit("getRecents");
     },
     clearRecents(state) {
-      estore.set("recents", []);
-      state.recents = estore.get("recents");
+      window.store.set("recents", []);
+      state.recents = window.store.get("recents");
     },
     updateSettingsState(state) {
-      state.verbosity = estore.get("verbosity");
-      state.env = estore.get("env");
-      state.editor = estore.get("editor");
-      state.dark = estore.get("dark");
-      state.php = estore.get("php");
+      state.verbosity = window.store.get("verbosity");
+      state.env = window.store.get("env");
+      state.editor = window.store.get("editor");
+      state.dark = window.store.get("dark");
+      state.php = window.store.get("php");
     }
   },
   actions: {
@@ -129,7 +126,7 @@ export const store = new Vuex.Store({
     },
     stopServe({ state }) {
       if (state.serve != null) {
-        kill(state.serve.pid, "SIGKILL", function () {
+        window.Electron.kill(state.serve.pid, "SIGKILL", function () {
           state.serve = null;
           state.serveLink = null;
         });

@@ -6,12 +6,11 @@ import { ipcRenderer } from "electron";
 import "@/styles.css";
 import bus from "@/lib/bus.js";
 import which from "which";
-import Store from "electron-store";
-const estore = new Store();
-if (estore.get("php") == "") {
+
+if (window.store.get("php") == "") {
   which("php")
     .then((resolvedPath) => {
-      estore.set("php", resolvedPath);
+      window.store.set("php", resolvedPath);
     })
     .catch(() => {
       window.Electron.dialogPhpNotFound();

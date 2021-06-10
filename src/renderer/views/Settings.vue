@@ -57,10 +57,8 @@
 
 <script>
 import KitButton from "@/components/KitButton.vue";
-import Store from "electron-store";
 import { remote } from "electron";
 const { dialog } = remote;
-const estore = new Store();
 import { exec } from "child_process";
 
 export default {
@@ -105,11 +103,11 @@ export default {
     },
     saveSettings() {
       this.saved = false;
-      estore.set("php", this.php);
-      estore.set("verbosity", this.verbosity);
-      estore.set("env", this.env);
-      estore.set("editor", this.editor);
-      estore.set("dark", this.dark);
+      window.store.set("php", this.php);
+      window.store.set("verbosity", this.verbosity);
+      window.store.set("env", this.env);
+      window.store.set("editor", this.editor);
+      window.store.set("dark", this.dark);
       this.$store.commit("updateSettingsState");
       setTimeout(() => {
         this.saved = true;
@@ -118,11 +116,11 @@ export default {
     }
   },
   mounted() {
-    this.php = estore.get("php");
-    this.verbosity = estore.get("verbosity");
-    this.env = estore.get("env");
-    this.editor = estore.get("editor");
-    this.dark = estore.get("dark");
+    this.php = window.store.get("php");
+    this.verbosity = window.store.get("verbosity");
+    this.env = window.store.get("env");
+    this.editor = window.store.get("editor");
+    this.dark = window.store.get("dark");
     this.getPHPv();
     this.$store.commit("updateSettingsState");
   }
