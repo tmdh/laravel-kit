@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
     opening: false,
     running: false,
     tinkering: false,
-    dark: false,
+    dark: window.dark,
     code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
     autoTinker: false,
     output: "// The output is shown here",
@@ -40,26 +40,16 @@ export const store = new Vuex.Store({
         });
       }
     },
-    getRecents(state) {
-      state.recents = window.store.get("recents");
-    },
-    addRecent(state, dir) {
-      let newRecents = window.store.get("recents").filter((item) => item != dir);
-      newRecents.unshift(dir);
-      window.store.set("recents", newRecents);
-      state.recents = window.store.get("recents");
-      bus.$emit("getRecents");
-    },
     clearRecents(state) {
       window.store.set("recents", []);
-      state.recents = window.store.get("recents");
+      state.recents = [];
     },
-    updateSettingsState(state) {
-      state.verbosity = window.store.get("verbosity");
-      state.env = window.store.get("env");
-      state.editor = window.store.get("editor");
-      state.dark = window.store.get("dark");
-      state.php = window.store.get("php");
+    updateSettingsStateFromData(state, data) {
+      state.verbosity = data.verbosity;
+      state.env = data.env;
+      state.editor = data.editor;
+      state.dark = data.dark;
+      state.php = data.php;
     }
   },
   actions: {
@@ -84,7 +74,7 @@ export const store = new Vuex.Store({
               context.state.project.namespaces = null;
               context.state.name = basename(payload.dir);
               document.title = `${context.state.name} - Kit`;
-              context.commit("addRecent", payload.dir);
+              context.dispatch("addRecent", payload.dir);
             }
             context.state.opening = false;
           }
@@ -131,6 +121,24 @@ export const store = new Vuex.Store({
           state.serveLink = null;
         });
       }
+    },
+    async getRecents(state) {
+      state.recents = await window.store.get("recents");
+    },
+    async addRecent(state, dir) {
+      let newRecents = await window.store.get("recents").filter((item) => item != dir);
+      newRecents.unshift(dir);
+      window.store.set("recents", newRecents);
+      state.recents = window.store.get("recents");
+      bus.$emit("getRecents");
+    },
+    async updateSettingsState(state) {
+      const verbosity = await window.store.get("verbosity");
+      const env = await window.store.get("env");
+      const editor = await window.store.get("editor");
+      const dark = await window.store.get("dark");
+      const php = await window.store.get("php");
+      state.commit("updateSettingsStateFromData", { verbosity, env, editor, dark, php });
     }
   }
 });

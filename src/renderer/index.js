@@ -5,17 +5,6 @@ import "@/lib/menu.js";
 import { ipcRenderer } from "electron";
 import "@/styles.css";
 import bus from "@/lib/bus.js";
-import which from "which";
-
-if (window.store.get("php") == "") {
-  which("php")
-    .then((resolvedPath) => {
-      window.store.set("php", resolvedPath);
-    })
-    .catch(() => {
-      window.Electron.dialogPhpNotFound();
-    });
-}
 
 Vue.config.errorHandler = function (err) {
   console.error(err);
@@ -37,14 +26,14 @@ const app = new Vue({
     bus.$on("closeProject", () => {
       this.$store.dispatch("closeProject");
     });
-    this.$store.commit("getRecents");
+    this.$store.dispatch("getRecents");
     bus.$on("clearRecents", () => {
       this.$store.commit("clearRecents");
     });
     bus.$on("openProject", (dir) => {
       this.$store.dispatch("openProject", { dir: dir, reload: true });
     });
-    this.$store.commit("updateSettingsState");
+    this.$store.dispatch("updateSettingsState");
   }
 }).$mount("#app");
 

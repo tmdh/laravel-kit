@@ -57,8 +57,6 @@
 
 <script>
 import KitButton from "@/components/KitButton.vue";
-import { remote } from "electron";
-const { dialog } = remote;
 import { exec } from "child_process";
 
 export default {
@@ -76,17 +74,11 @@ export default {
     };
   },
   methods: {
-    selectExecutable() {
-      dialog
-        .showOpenDialog({
-          title: "Select php executable",
-          properties: ["openFile"]
-        })
-        .then((result) => {
-          if (!result.canceled) {
-            this.php = result.filePaths[0];
-          }
-        });
+    async selectExecutable() {
+      const result = await window.Electron.choosePhpExecutable();
+      if (!result.canceled) {
+        this.php = result.filePaths[0];
+      }
     },
     getPHPv() {
       exec(`"${this.php}" -v`, (error, stdout) => {
@@ -108,21 +100,21 @@ export default {
       window.store.set("env", this.env);
       window.store.set("editor", this.editor);
       window.store.set("dark", this.dark);
-      this.$store.commit("updateSettingsState");
+      this.$store.dispatch("updateSettingsState");
       setTimeout(() => {
         this.saved = true;
       }, 500);
       this.getPHPv();
     }
   },
-  mounted() {
-    this.php = window.store.get("php");
-    this.verbosity = window.store.get("verbosity");
-    this.env = window.store.get("env");
-    this.editor = window.store.get("editor");
-    this.dark = window.store.get("dark");
+  async mounted() {
+    this.php = await window.store.get("php");
+    this.verbosity = await window.store.get("verbosity");
+    this.env = await window.store.get("env");
+    this.editor = await window.store.get("editor");
+    this.dark = await window.store.get("dark");
     this.getPHPv();
-    this.$store.commit("updateSettingsState");
+    this.$store.dispatch("updateSettingsState");
   }
 };
 </script>

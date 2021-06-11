@@ -1,8 +1,7 @@
 import { app, BrowserWindow, dialog } from "electron";
-const { default: installExtension, VUEJS_DEVTOOLS } = require("electron-devtools-installer");
+import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import fixPath from "./fix-path.js";
 import windowStateKeeper from "electron-window-state";
-import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
 import { format } from "url";
 import { join, resolve } from "path";
@@ -11,16 +10,6 @@ import initIpcMain from "./ipc.js";
 const isDev = process.env.NODE_ENV === "development";
 
 fixPath();
-
-const defaults = {
-  recents: [],
-  verbosity: 1,
-  env: "",
-  editor: "echo 'No command specified'",
-  dark: false,
-  php: ""
-};
-new Store({ defaults });
 
 function createWindow() {
   let winState = windowStateKeeper({
