@@ -1,5 +1,5 @@
 import { ipcMain, dialog, shell } from "electron";
-import kill from "./tree-kill-sync.js";
+import killSync from "./tree-kill-sync.js";
 import Store from "electron-store";
 import which from "which";
 
@@ -13,9 +13,9 @@ const defaults = {
 };
 const store = new Store({ defaults });
 
-export default function () {
+export default async function () {
   ipcMain.on("stopServe", (e, pid) => {
-    kill(pid, "SIGKILL");
+    killSync(pid, "SIGKILL");
   });
 
   ipcMain.on("dialogError", (e, message) => {
@@ -23,6 +23,16 @@ export default function () {
       message = "php executable not found.\r\nGo to Settings and choose an executable.";
     }
     dialog.showErrorBox("Error", message);
+  });
+
+  ipcMain.handle("dialogFolder", async () => {
+    const result = await dialog.showOpenDialog({
+      title: "Open project...",
+      buttonLabel: "Open",
+      properties: ["openDirectory"],
+      multiSelections: false
+    });
+    return result;
   });
 
   ipcMain.on("showItemInFolder", (e, message) => {
@@ -47,13 +57,11 @@ export default function () {
   });
 
   if (store.get("php") === "") {
-    (async () => {
-      try {
-        const resolvedPath = await which("php");
-        store.set("php", resolvedPath);
-      } catch (e) {
-        dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
-      }
-    })();
+    try {
+      const resolvedPath = await which("php");
+      store.set("php", resolvedPath);
+    } catch (e) {
+      dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
+    }
   }
 }

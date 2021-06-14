@@ -1,9 +1,8 @@
-import { remote, shell } from "electron";
-const { Menu } = remote;
-import bus from "@/lib/bus.js";
+import { BrowserWindow, ipcMain, Menu, shell, app } from "electron";
+import Store from "electron-store";
 const isMac = process.platform === "darwin";
-
-const template = [
+const store = new Store();
+const template = (win) => [
   ...(isMac
     ? [
         {
@@ -19,7 +18,7 @@ const template = [
         label: "Open Project...",
         accelerator: "CmdOrCtrl+O",
         click() {
-          bus.$emit("openDialog");
+          win.webContents.send("openDialog");
         }
       },
       {
@@ -33,13 +32,13 @@ const template = [
       {
         label: "Reload Project",
         click() {
-          bus.$emit("reloadProject");
+          win.webContents.send("reloadProject");
         }
       },
       {
         label: "Close Project",
         click() {
-          bus.$emit("closeProject");
+          win.webContents.send("closeProject");
         }
       },
       { type: "separator" },
@@ -108,34 +107,28 @@ const template = [
         }
       },
       {
-        type: "separator"
+        label: `App version: ${app.getVersion()}`,
+        enabled: false
       }
     ]
   }
 ];
-const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
 
-(async () => {
-  await getRecents();
-})();
-
-bus.$on("getRecents", () => {
-  getRecents();
+ipcMain.on("getRecents", async () => {
+  await getRecents(BrowserWindow.getAllWindows()[0]);
 });
 
 function openLink(link) {
   shell.openExternal(link);
 }
 
-async function getRecents() {
-  let newTemplate = template;
-  let recents = await window.store.get("recents");
-  recents = recents.map((dir) =>
+async function getRecents(win) {
+  let newTemplate = template(win);
+  const recents = store.get("recents").map((dir) =>
     Object.assign({
       label: dir,
       click() {
-        bus.$emit("openProject", dir);
+        win.webContents.send("openProject", dir);
       }
     })
   );
@@ -144,10 +137,16 @@ async function getRecents() {
     {
       label: "Clear Recently Opened",
       click() {
-        bus.$emit("clearRecents");
+        win.webContents.send("clearRecents");
       }
     }
   ];
   newTemplate[isMac ? 1 : 0].submenu[1] = Object.assign({ label: "Open Recents", submenu: [...recents, ...extraMenus] });
   Menu.setApplicationMenu(Menu.buildFromTemplate(newTemplate));
+}
+
+export default async function (win) {
+  const menu = Menu.buildFromTemplate(template(win));
+  Menu.setApplicationMenu(menu);
+  await getRecents(win);
 }

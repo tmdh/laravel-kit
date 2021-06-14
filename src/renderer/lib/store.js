@@ -2,9 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { exec, spawn } from "child_process";
 import { basename } from "path";
-import { remote } from "electron";
-const { dialog } = remote;
-import bus from "@/lib/bus.js";
+// import bus from "@/lib/bus.js";
 
 Vue.use(Vuex);
 
@@ -43,6 +41,7 @@ export const store = new Vuex.Store({
     clearRecents(state) {
       window.store.set("recents", []);
       state.recents = [];
+      window.Electron.getRecents();
     },
     updateSettingsStateFromData(state, data) {
       state.verbosity = data.verbosity;
@@ -57,8 +56,11 @@ export const store = new Vuex.Store({
   },
   actions: {
     openProject(context, payload) {
+      if (payload.dir === null) {
+        return;
+      }
       if (context.state.php !== "") {
-        if (payload.reload == undefined) {
+        if (payload.reload === undefined) {
           context.dispatch("closeProject");
         }
         context.state.opening = true;
@@ -87,18 +89,13 @@ export const store = new Vuex.Store({
       }
     },
     async openDialog(context) {
-      const result = await dialog.showOpenDialog({
-        title: "Open project...",
-        buttonLabel: "Open",
-        properties: ["openDirectory"],
-        multiSelections: false
-      });
+      const result = await window.Electron.dialogFolder();
       if (!result.canceled) {
         context.dispatch("openProject", { dir: result.filePaths[0] });
       }
     },
     closeProject({ state, dispatch }) {
-      if (state.project != null) {
+      if (state.project !== null) {
         state.project = null;
         state.name = null;
         state.dir = null;
@@ -132,7 +129,7 @@ export const store = new Vuex.Store({
       newRecents.unshift(dir);
       window.store.set("recents", newRecents);
       state.dispatch("getRecents");
-      bus.$emit("getRecents");
+      window.Electron.getRecents();
     },
     async updateSettingsState(state) {
       const verbosity = await window.store.get("verbosity");

@@ -10,10 +10,12 @@ window.store = {
 window.Electron = {
   dialogPhpNotFound,
   dialogError,
+  dialogFolder,
   kill,
   showItemInFolder,
   openExternal,
-  choosePhpExecutable
+  choosePhpExecutable,
+  getRecents
 };
 
 window.dark = true;
@@ -21,12 +23,38 @@ window.dark = true;
   window.dark = await getStore("dark");
 })();
 
+ipcRenderer.on("app-close", () => {
+  if (window.app.$store.state.serve != null) {
+    ipcRenderer.send("stopServe", window.app.$store.state.serve.pid);
+  }
+});
+
+ipcRenderer.on("openDialog", () => {
+  window.app.$store.dispatch("openDialog");
+});
+ipcRenderer.on("reloadProject", () => {
+  window.app.$store.dispatch("openProject", { dir: window.app.$store.state.dir, reload: true });
+});
+ipcRenderer.on("closeProject", () => {
+  window.app.$store.dispatch("closeProject");
+});
+ipcRenderer.on("clearRecents", () => {
+  window.app.$store.commit("clearRecents");
+});
+ipcRenderer.on("openProject", (e, dir) => {
+  window.app.$store.dispatch("openProject", { dir, reload: true });
+});
+
 function dialogError(message) {
   ipcRenderer.send("dialogError", message);
 }
 
 function dialogPhpNotFound() {
   dialogError("phpNotFound");
+}
+
+async function dialogFolder() {
+  return await ipcRenderer.invoke("dialogFolder");
 }
 
 function showItemInFolder(fullPath) {
@@ -49,4 +77,8 @@ async function getStore(key) {
 
 function setStore(key, value) {
   ipcRenderer.invoke("setStore", { key, value });
+}
+
+function getRecents() {
+  ipcRenderer.send("getRecents");
 }

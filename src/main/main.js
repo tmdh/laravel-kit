@@ -6,6 +6,7 @@ import { autoUpdater } from "electron-updater";
 import { format } from "url";
 import { join, resolve } from "path";
 import initIpcMain from "./ipc.js";
+import initMenu from "./menu.js";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -24,7 +25,6 @@ function createWindow() {
     backgroundColor: "#FAFAFA",
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true,
       contextIsolation: false,
       preload: resolve(join(__dirname, "preload.js"))
     },
@@ -82,6 +82,7 @@ function createWindow() {
     });
     setImmediate(() => autoUpdater.quitAndInstall());
   });
+  initMenu(win);
 }
 
 (async () => {
