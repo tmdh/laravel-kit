@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { exec, spawn } from "child_process";
-import { basename } from "path";
+import basename from "basename";
 // import bus from "@/lib/bus.js";
 
 Vue.use(Vuex);

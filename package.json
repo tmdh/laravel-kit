@@ -17,6 +17,7 @@
   "dependencies": {
     "anser": "^2.0.1",
     "axios": "^0.21.1",
+    "basename": "^0.1.2",
     "electron-store": "^8.0.0",
     "electron-updater": "^4.3.9",
     "electron-window-state": "^5.0.3",

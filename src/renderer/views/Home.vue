@@ -34,9 +34,8 @@
 </template>
 
 <script>
-import { shell } from "electron";
 import { mapState, mapActions } from "vuex";
-import { basename } from "path";
+import basename from "basename";
 import KitButton from "@/components/KitButton.vue";
 export default {
   name: "Home",
@@ -60,7 +59,7 @@ export default {
   methods: {
     ...mapActions(["openDialog", "openProject"]),
     openLink(link) {
-      shell.openExternal(link.href);
+      window.Electron.openExternal(link.href);
     },
     basename(dir) {
       return basename(dir.toString());
