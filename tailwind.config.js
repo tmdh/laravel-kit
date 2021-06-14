@@ -66,7 +66,7 @@ module.exports = {
       }
     },
     screens: {
-      md: { min: "875px" },
+      md: { min: "934px" },
       sm: { min: "540px" }
     }
   },

@@ -3,6 +3,7 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import fixPath from "./fix-path.js";
 import windowStateKeeper from "electron-window-state";
 import { autoUpdater } from "electron-updater";
+import Store from "electron-store";
 import { format } from "url";
 import { join, resolve } from "path";
 import initIpcMain from "./ipc.js";
@@ -22,7 +23,7 @@ function createWindow() {
     y: winState.y,
     width: winState.width,
     height: winState.height,
-    backgroundColor: "#FAFAFA",
+    backgroundColor: new Store().get("dark") ? "#282A36" : "#FAFAFA",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,

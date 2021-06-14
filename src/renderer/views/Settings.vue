@@ -1,8 +1,8 @@
 <template>
-  <div class="flex-1 p-8">
+  <div class="flex-1 p-8 overflow-y-scroll">
     <h1 class="text-xl mb-2">Settings</h1>
     <div class="h-px bg-gray-300"></div>
-    <div class="flex flex-col lg:flex-row py-1">
+    <div class="flex flex-col sm:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="php">PHP executable path</label>
       </div>
@@ -10,19 +10,19 @@
     </div>
     <kit-button class="mb-2 h-7 inline-block" @click.native="selectExecutable">Select</kit-button>
     <div class="text-xs">Detected PHP version: {{ this.phpv }}</div>
-    <div class="flex flex-col lg:flex-row py-1">
+    <div class="flex flex-col md:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="env">The environment artisan commands should run under</label>
       </div>
       <input type="text" class="input-text my-2" spellcheck="false" id="env" v-model="env" />
     </div>
-    <div class="flex flex-col lg:flex-row py-1">
+    <div class="flex flex-col md:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="editor">Open In Editor command</label>
       </div>
       <input type="text" class="input-text my-2" spellcheck="false" id="editor" v-model="editor" />
     </div>
-    <div class="flex flex-col lg:flex-row py-1">
+    <div class="flex flex-col md:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="verbosity">Artisan output verbosity</label>
       </div>
@@ -32,7 +32,7 @@
         <option :value="3">Debug</option>
       </select>
     </div>
-    <div class="flex flex-col lg:flex-row py-1">
+    <div class="flex flex-col md:flex-row py-1">
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="dark">Color theme</label>
       </div>
@@ -41,7 +41,7 @@
         <option :value="true">Dark</option>
       </select>
     </div>
-    <div class="flex flex-row items-center">
+    <div class="flex items-center">
       <kit-button class="mt-2" @click.native="saveSettings">Save settings</kit-button>
       <transition name="fade">
         <span class="flex flex-row items-center ml-4 text-blue dark:text-blue-100" v-if="saved">
