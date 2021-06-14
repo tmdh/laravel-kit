@@ -50,6 +50,9 @@ export const store = new Vuex.Store({
       state.editor = data.editor;
       state.dark = data.dark;
       state.php = data.php;
+    },
+    updateRecentsFromData(state, data) {
+      state.recents = data;
     }
   },
   actions: {
@@ -83,19 +86,16 @@ export const store = new Vuex.Store({
         window.Electron.dialogPhpNotFound();
       }
     },
-    openDialog(context) {
-      dialog
-        .showOpenDialog({
-          title: "Open project...",
-          buttonLabel: "Open",
-          properties: ["openDirectory"],
-          multiSelections: false
-        })
-        .then((result) => {
-          if (!result.canceled) {
-            context.dispatch("openProject", { dir: result.filePaths[0] });
-          }
-        });
+    async openDialog(context) {
+      const result = await dialog.showOpenDialog({
+        title: "Open project...",
+        buttonLabel: "Open",
+        properties: ["openDirectory"],
+        multiSelections: false
+      });
+      if (!result.canceled) {
+        context.dispatch("openProject", { dir: result.filePaths[0] });
+      }
     },
     closeProject({ state, dispatch }) {
       if (state.project != null) {
@@ -123,13 +123,15 @@ export const store = new Vuex.Store({
       }
     },
     async getRecents(state) {
-      state.recents = await window.store.get("recents");
+      const recents = await window.store.get("recents");
+      state.commit("updateRecentsFromData", recents);
     },
     async addRecent(state, dir) {
-      let newRecents = await window.store.get("recents").filter((item) => item != dir);
+      let newRecents = await window.store.get("recents");
+      newRecents = newRecents.filter((item) => item != dir);
       newRecents.unshift(dir);
       window.store.set("recents", newRecents);
-      state.recents = window.store.get("recents");
+      state.dispatch("getRecents");
       bus.$emit("getRecents");
     },
     async updateSettingsState(state) {

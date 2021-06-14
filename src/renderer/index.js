@@ -31,7 +31,7 @@ const app = new Vue({
       this.$store.commit("clearRecents");
     });
     bus.$on("openProject", (dir) => {
-      this.$store.dispatch("openProject", { dir: dir, reload: true });
+      this.$store.dispatch("openProject", { dir, reload: true });
     });
     this.$store.dispatch("updateSettingsState");
   }

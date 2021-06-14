@@ -63,51 +63,49 @@ function createWindow() {
     }
   });
 
-  autoUpdater.on("update-available", () => {
-    dialog
-      .showMessageBox({
-        type: "info",
-        title: "Found Updates",
-        message: "Found updates, do you want update now?",
-        buttons: ["Sure", "No"]
-      })
-      .then((result) => {
-        if (result.response == 0) {
-          autoUpdater.downloadUpdate();
-        }
-      });
+  autoUpdater.on("update-available", async () => {
+    const result = await dialog.showMessageBox({
+      type: "info",
+      title: "Found Updates",
+      message: "Found updates, do you want update now?",
+      buttons: ["Sure", "No"]
+    });
+    if (result.response == 0) {
+      autoUpdater.downloadUpdate();
+    }
   });
 
-  autoUpdater.on("update-downloaded", () => {
-    dialog
-      .showMessageBox({
-        title: "Install Updates",
-        message: "Updates downloaded, application will be quit for update..."
-      })
-      .then(() => {
-        setImmediate(() => autoUpdater.quitAndInstall());
-      });
+  autoUpdater.on("update-downloaded", async () => {
+    await dialog.showMessageBox({
+      title: "Install Updates",
+      message: "Updates downloaded, application will be quit for update..."
+    });
+    setImmediate(() => autoUpdater.quitAndInstall());
   });
 }
 
-app
-  .whenReady()
-  .then(createWindow)
-  .then(() => {
-    if (isDev) {
-      installExtension(VUEJS_DEVTOOLS)
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log("An error occurred: ", err));
-    } else {
-      autoUpdater.checkForUpdates().catch((error) => {
-        if (error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
-          console.log("Auto update failed, reason: network offline.");
-        } else {
-          console.log(error);
-        }
-      });
+(async () => {
+  await app.whenReady();
+  createWindow();
+  if (isDev) {
+    try {
+      const name = await installExtension(VUEJS_DEVTOOLS);
+      console.log(`Added Extension:  ${name}`);
+    } catch (e) {
+      console.log("An error occurred: ", e);
     }
-  });
+  } else {
+    try {
+      await autoUpdater.checkForUpdates();
+    } catch (e) {
+      if (e.toString().includes("ERR_NAME_NOT_RESOLVED")) {
+        console.log("Auto update failed, reason: network offline.");
+      } else {
+        console.log(e);
+      }
+    }
+  }
+})();
 
 initIpcMain();
 

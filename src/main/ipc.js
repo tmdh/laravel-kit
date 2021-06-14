@@ -47,12 +47,13 @@ export default function () {
   });
 
   if (store.get("php") === "") {
-    which("php")
-      .then((resolvedPath) => {
+    (async () => {
+      try {
+        const resolvedPath = await which("php");
         store.set("php", resolvedPath);
-      })
-      .catch(() => {
+      } catch (e) {
         dialog.showErrorBox("Error", "php executable not found.\r\nGo to Settings and choose an executable.");
-      });
+      }
+    })();
   }
 }

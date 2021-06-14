@@ -17,9 +17,9 @@ window.Electron = {
 };
 
 window.dark = true;
-getStore("dark").then((dark) => {
-  window.dark = dark;
-});
+(async () => {
+  window.dark = await getStore("dark");
+})();
 
 function dialogError(message) {
   ipcRenderer.send("dialogError", message);

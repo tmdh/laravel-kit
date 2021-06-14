@@ -1,7 +1,6 @@
 import { remote, shell } from "electron";
 const { Menu } = remote;
 import bus from "@/lib/bus.js";
-import Store from "electron-store";
 const isMac = process.platform === "darwin";
 
 const template = [
@@ -110,15 +109,16 @@ const template = [
       },
       {
         type: "separator"
-      },
+      }
     ]
   }
 ];
-const store = new Store();
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
 
-getRecents();
+(async () => {
+  await getRecents();
+})();
 
 bus.$on("getRecents", () => {
   getRecents();
@@ -128,9 +128,10 @@ function openLink(link) {
   shell.openExternal(link);
 }
 
-function getRecents() {
+async function getRecents() {
   let newTemplate = template;
-  const recents = store.get("recents").map((dir) =>
+  let recents = await window.store.get("recents");
+  recents = recents.map((dir) =>
     Object.assign({
       label: dir,
       click() {
