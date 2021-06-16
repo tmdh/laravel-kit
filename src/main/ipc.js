@@ -1,5 +1,6 @@
 import { ipcMain, dialog, shell } from "electron";
 import killSync from "./tree-kill-sync.js";
+import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
 
@@ -14,7 +15,7 @@ const defaults = {
 const store = new Store({ defaults });
 
 export default async function () {
-  ipcMain.on("stopServe", (e, pid) => {
+  ipcMain.on("stopServeSync", (e, pid) => {
     killSync(pid, "SIGKILL");
   });
 
@@ -33,6 +34,10 @@ export default async function () {
       multiSelections: false
     });
     return result;
+  });
+
+  ipcMain.handle("kill", async (e, pid) => {
+    kill(pid, "SIGKILL");
   });
 
   ipcMain.on("showItemInFolder", (e, message) => {

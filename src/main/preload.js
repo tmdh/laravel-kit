@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import kill from "tree-kill";
+// import kill from "tree-kill";
 
 // Electron Store
 window.store = {
@@ -25,7 +25,7 @@ window.dark = true;
 
 ipcRenderer.on("app-close", () => {
   if (window.app.$store.state.serve != null) {
-    ipcRenderer.send("stopServe", window.app.$store.state.serve.pid);
+    ipcRenderer.send("stopServeSync", window.app.$store.state.serve.pid);
   }
 });
 
@@ -55,6 +55,10 @@ function dialogPhpNotFound() {
 
 async function dialogFolder() {
   return await ipcRenderer.invoke("dialogFolder");
+}
+
+async function kill(pid) {
+  await ipcRenderer.invoke("kill", pid);
 }
 
 function showItemInFolder(fullPath) {

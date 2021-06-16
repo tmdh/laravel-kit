@@ -30,14 +30,6 @@ export const store = new Vuex.Store({
     updateServeLink(state, link) {
       state.serveLink = link;
     },
-    stopServeSync(state) {
-      if (state.serve != null) {
-        window.Electron.kill(state.serve.pid, "SIGKILL", function () {
-          state.serve = null;
-          state.serveLink = null;
-        });
-      }
-    },
     clearRecents(state) {
       window.store.set("recents", []);
       state.recents = [];
@@ -111,12 +103,11 @@ export const store = new Vuex.Store({
         }
       });
     },
-    stopServe({ state }) {
+    async stopServe({ state }) {
       if (state.serve != null) {
-        window.Electron.kill(state.serve.pid, "SIGKILL", function () {
-          state.serve = null;
-          state.serveLink = null;
-        });
+        await window.Electron.kill(state.serve.pid);
+        state.serve = null;
+        state.serveLink = null;
       }
     },
     async getRecents(state) {
