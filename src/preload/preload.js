@@ -1,5 +1,4 @@
 import { ipcRenderer } from "electron";
-// import kill from "tree-kill";
 
 // Electron Store
 window.store = {

@@ -1,11 +1,9 @@
 /*
     https://github.com/pkrumins/node-tree-kill/blob/master/index.js
 */
-var childProcess = require("child_process");
-var spawn = childProcess.spawnSync; // changed spawn to spawnSync
-var exec = childProcess.execSync; // changed exec to execSync
+import { spawnSync as spawn, execSync as exec } from "child_process";
 
-module.exports = function(pid, signal, callback) {
+export default function (pid, signal, callback) {
   if (typeof signal === "function" && callback === undefined) {
     callback = signal;
     signal = undefined;
@@ -34,10 +32,10 @@ module.exports = function(pid, signal, callback) {
         pid,
         tree,
         pidsToProcess,
-        function(parentPid) {
+        function (parentPid) {
           return spawn("pgrep", ["-P", parentPid]);
         },
-        function() {
+        function () {
           killAll(tree, signal, callback);
         }
       );
@@ -53,22 +51,22 @@ module.exports = function(pid, signal, callback) {
         pid,
         tree,
         pidsToProcess,
-        function(parentPid) {
+        function (parentPid) {
           return spawn("ps", ["-o", "pid", "--no-headers", "--ppid", parentPid]);
         },
-        function() {
+        function () {
           killAll(tree, signal, callback);
         }
       );
       break;
   }
-};
+}
 
 function killAll(tree, signal, callback) {
   var killed = {};
   try {
-    Object.keys(tree).forEach(function(pid) {
-      tree[pid].forEach(function(pidpid) {
+    Object.keys(tree).forEach(function (pid) {
+      tree[pid].forEach(function (pidpid) {
         if (!killed[pidpid]) {
           killPid(pidpid, signal);
           killed[pidpid] = 1;
@@ -102,11 +100,11 @@ function killPid(pid, signal) {
 function buildProcessTree(parentPid, tree, pidsToProcess, spawnChildProcessesList, cb) {
   var ps = spawnChildProcessesList(parentPid);
   var allData = "";
-  ps.stdout.on("data", function(data) {
+  ps.stdout.on("data", function (data) {
     allData += data.toString("ascii");
   });
 
-  var onClose = function(code) {
+  var onClose = function (code) {
     delete pidsToProcess[parentPid];
 
     if (code != 0) {
@@ -117,7 +115,7 @@ function buildProcessTree(parentPid, tree, pidsToProcess, spawnChildProcessesLis
       return;
     }
 
-    allData.match(/\d+/g).forEach(function(pid) {
+    allData.match(/\d+/g).forEach(function (pid) {
       pid = parseInt(pid, 10);
       tree[parentPid].push(pid);
       tree[pid] = [];

@@ -5,5 +5,5 @@
       "@/*": ["src/renderer/*"]
     }
   },
-  "exclude": ["dist", "node_modules", "release"]
+  "exclude": ["dist/*", "node_modules/**/*", "release/*"]
 }
