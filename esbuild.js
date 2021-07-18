@@ -12,8 +12,10 @@ buildSync({
   outfile: "dist/main.js",
   ...options
 });
+console.log("built src/main/main.js -> dist/main.js");
 buildSync({
   entryPoints: ["src/preload/preload.js"],
   outfile: "dist/preload.js",
   ...options
 });
+console.log("built src/preload/preload.js -> dist/preload.js");
