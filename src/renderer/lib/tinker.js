@@ -199,7 +199,11 @@ export default function () {
       { open: "(", close: ")" },
       { open: "{", close: "}" },
       { open: "[", close: "]" }
-    ]
+    ],
+    comments: {
+      lineComment: "//",
+      blockComment: ["/*", "*/"]
+    }
   });
   editor.defineTheme("one-light", {
     base: "vs",
