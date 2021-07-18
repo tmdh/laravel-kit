@@ -5,6 +5,7 @@ laravel-app
 test.php
 stats.json
 release
+test.js
 
 # local env files
 .env.local
