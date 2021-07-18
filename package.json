@@ -7,7 +7,7 @@
   "private": true,
   "main": "dist/main.js",
   "scripts": {
-    "dev:one": "webpack serve -c webpack.renderer.config.js",
+    "dev:one": "webpack serve",
     "dev:two": "node esbuild.js --dev && electron .",
     "prod": "cross-env NODE_ENV=production webpack --mode production && node esbuild.js --prod",
     "start": "electron .",
