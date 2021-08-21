@@ -18,7 +18,7 @@ function createWindow() {
     defaultWidth: 1280,
     defaultHeight: 720
   });
-  const win = new BrowserWindow({
+  let browserWindowOptions = {
     x: winState.x,
     y: winState.y,
     width: winState.width,
@@ -31,7 +31,11 @@ function createWindow() {
     },
     show: false,
     title: "Kit"
-  });
+  };
+  if ((process.platform === "linux" && !isDev) || isDev) {
+    browserWindowOptions.icon = resolve(process.cwd(), "build/icon.png");
+  }
+  const win = new BrowserWindow(browserWindowOptions);
 
   winState.manage(win);
 
