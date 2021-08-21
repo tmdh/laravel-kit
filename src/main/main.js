@@ -10,6 +10,7 @@ import initIpcMain from "./ipc.js";
 import initMenu from "./menu.js";
 
 const isDev = process.env.NODE_ENV === "development";
+const isWindows = process.platform === "win32";
 
 fixPath();
 
@@ -60,33 +61,34 @@ function createWindow() {
       win.webContents.openDevTools();
     }
   });
-
-  autoUpdater.autoDownload = false;
-  autoUpdater.on("error", (_, error) => {
-    if (!error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
-      dialog.showErrorBox("Error", error == null ? "unknown" : error.toString());
-    }
-  });
-
-  autoUpdater.on("update-available", async () => {
-    const result = await dialog.showMessageBox({
-      type: "info",
-      title: "Found Updates",
-      message: "Found updates, do you want update now?",
-      buttons: ["Sure", "No"]
+  if (isWindows) {
+    autoUpdater.autoDownload = false;
+    autoUpdater.on("error", (_, error) => {
+      if (!error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
+        dialog.showErrorBox("Error", error == null ? "unknown" : error.toString());
+      }
     });
-    if (result.response == 0) {
-      autoUpdater.downloadUpdate();
-    }
-  });
 
-  autoUpdater.on("update-downloaded", async () => {
-    await dialog.showMessageBox({
-      title: "Install Updates",
-      message: "Updates downloaded, application will be quit for update..."
+    autoUpdater.on("update-available", async () => {
+      const result = await dialog.showMessageBox({
+        type: "info",
+        title: "Found Updates",
+        message: "Found updates, do you want update now?",
+        buttons: ["Sure", "No"]
+      });
+      if (result.response == 0) {
+        autoUpdater.downloadUpdate();
+      }
     });
-    setImmediate(() => autoUpdater.quitAndInstall());
-  });
+
+    autoUpdater.on("update-downloaded", async () => {
+      await dialog.showMessageBox({
+        title: "Install Updates",
+        message: "Updates downloaded, application will be quit for update..."
+      });
+      setImmediate(() => autoUpdater.quitAndInstall());
+    });
+  }
   initMenu(win);
 }
 
@@ -100,7 +102,7 @@ function createWindow() {
     } catch (e) {
       console.log("An error occurred: ", e);
     }
-  } else {
+  } else if (isWindows) {
     try {
       await autoUpdater.checkForUpdates();
     } catch (e) {

@@ -4,7 +4,8 @@ const options = {
   bundle: true,
   external: ["electron"],
   define: {
-    "process.env.NODE_ENV": `"${process.argv[2] === "--dev" ? "development" : "production"}"`
+    "process.env.NODE_ENV": `"${process.argv[2] === "--dev" ? "development" : "production"}"`,
+    "process.platform": `"${process.platform}"`
   }
 };
 buildSync({
