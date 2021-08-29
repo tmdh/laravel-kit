@@ -73,7 +73,6 @@ import StopIcon from "@/components/icons/StopIcon.vue";
 import FolderIcon from "@/components/icons/FolderIcon.vue";
 import EditorIcon from "@/components/icons/EditorIcon.vue";
 import { mapState, mapActions } from "vuex";
-import { exec } from "child_process";
 
 export default {
   name: "Artisan",
@@ -112,7 +111,7 @@ export default {
       }
     },
     openInEditor() {
-      exec(this.$store.state.editor, { cwd: this.$store.state.dir });
+      window.Electron.openInEditor(this.$store.state.dir);
     }
   }
 };

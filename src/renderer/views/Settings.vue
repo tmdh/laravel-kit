@@ -57,7 +57,6 @@
 
 <script>
 import KitButton from "@/components/KitButton.vue";
-import { exec } from "child_process";
 
 export default {
   name: "Settings",
@@ -80,18 +79,9 @@ export default {
         this.php = result.filePaths[0];
       }
     },
-    getPHPv() {
-      exec(`"${this.php}" -v`, (error, stdout) => {
-        if (error) {
-          window.Electron.dialogError("PHP detection failed.");
-          this.updatePHPv("unavailable");
-        } else {
-          this.updatePHPv(stdout.split("\n")[0]);
-        }
-      });
-    },
-    updatePHPv(text) {
-      this.phpv = text;
+    async getPhpVersion() {
+      const result = await window.Electron.getPhpVersion();
+      this.phpv = result;
     },
     saveSettings() {
       this.saved = false;
@@ -104,7 +94,7 @@ export default {
       setTimeout(() => {
         this.saved = true;
       }, 500);
-      this.getPHPv();
+      this.getPhpVersion();
     }
   },
   async mounted() {
@@ -113,7 +103,7 @@ export default {
     this.env = await window.store.get("env");
     this.editor = await window.store.get("editor");
     this.dark = await window.store.get("dark");
-    this.getPHPv();
+    this.getPhpVersion();
     this.$store.dispatch("updateSettingsState");
   }
 };

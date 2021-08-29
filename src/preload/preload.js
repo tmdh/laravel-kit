@@ -12,8 +12,10 @@ window.Electron = {
   dialogFolder,
   kill,
   showItemInFolder,
+  openInEditor,
   openExternal,
   choosePhpExecutable,
+  getPhpVersion,
   getRecents
 };
 
@@ -64,12 +66,21 @@ function showItemInFolder(fullPath) {
   ipcRenderer.send("showItemInFolder", fullPath);
 }
 
+function openInEditor(dir) {
+  ipcRenderer.send("openInEditor", dir);
+}
+
 function openExternal(fullPath) {
   ipcRenderer.send("openExternal", fullPath);
 }
 
 async function choosePhpExecutable() {
   const result = await ipcRenderer.invoke("choosePhpExecutable");
+  return result;
+}
+
+async function getPhpVersion() {
+  const result = await ipcRenderer.invoke("getPhpVersion");
   return result;
 }
 

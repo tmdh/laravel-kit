@@ -1,8 +1,10 @@
+import { exec } from "child_process";
 import { ipcMain, dialog, shell } from "electron";
 import killSync from "./tree-kill-sync.js";
 import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
+import execa from "execa";
 
 const defaults = {
   recents: [],
@@ -44,6 +46,10 @@ export default async function () {
     shell.showItemInFolder(message);
   });
 
+  ipcMain.on("openInEditor", (e, dir) => {
+    exec(store.get("editor"), { cwd: dir })
+  });
+
   ipcMain.on("openExternal", (e, message) => {
     shell.openExternal(message);
   });
@@ -51,6 +57,15 @@ export default async function () {
   ipcMain.handle("choosePhpExecutable", async () => {
     const result = await dialog.showOpenDialog({ title: "Select php executable", properties: ["openFile"] });
     return result;
+  });
+
+  ipcMain.handle("getPhpVersion", async () => {
+    try {
+      const {stdout} = await execa(store.get("php"), ["-v"]);
+      return stdout;
+    } catch(e) {
+      return "PHP detection failed."
+    }
   });
 
   ipcMain.handle("getStore", (e, key) => {
