@@ -78,11 +78,7 @@ export default {
   },
   methods: {
     enableautoTinker(value) {
-      if (typeof this.$store.state.autoTinker === "undefined") {
-        this.$store.state.autoTinker = false;
-      } else {
-        this.$store.state.autoTinker = value;
-      }
+      this.$store.state.autoTinker = typeof this.$store.state.autoTinker === "undefined" ? false : value;
     },
     executeTinker() {
       if (this.$store.state.php !== "") {
