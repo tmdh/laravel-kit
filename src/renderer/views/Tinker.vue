@@ -92,6 +92,13 @@ export default {
         this.$store.state.output = "";
         tinker.stdout.on("data", (data) => {
           this.$store.state.output += data;
+          tinker.kill();
+        });
+        tinker.stderr.on("data", (err) => {
+          this.$store.state.output = err.toString().replace(/<[^>]*>?/gm, "");
+          tinker.kill();
+        });
+        tinker.on("close", () => {
           this.$store.state.tinkering = false;
         });
         tinker.stdin.write(this.code);
