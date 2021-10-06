@@ -81,27 +81,32 @@ export default {
       this.$store.state.autoTinker = typeof this.$store.state.autoTinker === "undefined" ? false : value;
     },
     executeTinker() {
-      if (this.$store.state.php !== "") {
-        this.$store.state.tinkering = true;
-        const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
-        tinker.stdout.setEncoding("utf-8");
-        this.$store.state.output = "";
-        tinker.stdout.on("data", (data) => {
-          this.$store.state.output += data;
-          tinker.kill();
-        });
-        tinker.stderr.on("data", (err) => {
-          this.$store.state.output = err.toString().replace(/<[^>]*>?/gm, "");
-          tinker.kill();
-        });
-        tinker.on("close", () => {
-          this.$store.state.tinkering = false;
-        });
-        tinker.stdin.write(this.code);
-        tinker.stdin.end();
-      } else {
-        window.Electron.dialogPhpNotFound();
+      if (this.$store.state.php === "") {
+        return window.Electron.dialogPhpNotFound();
       }
+
+      this.$store.state.output = "";
+      this.$store.state.tinkering = true;
+
+      const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
+      tinker.stdout.setEncoding("utf-8");
+      tinker.stdin.write(this.code);
+      tinker.stdin.end();
+
+      tinker.stdout.on("data", (data) => {
+        this.$store.state.output += data;
+        tinker.kill();
+      });
+      tinker.stderr.on("data", (err) => {
+        this.$store.state.output = err.toString().replace(/<[^>]*>?/gm, "");
+        tinker.kill();
+      });
+      tinker.on("error", (err) => {
+        this.$store.state.output = err.toString();
+      });
+      tinker.on("close", () => {
+        this.$store.state.tinkering = false;
+      });
     }
   }
 };
