@@ -18,7 +18,6 @@
 import TinkerEditor from "@/components/TinkerEditor.vue";
 import KitButton from "@/components/KitButton.vue";
 import { mapState } from "vuex";
-import { spawn } from "child_process";
 import initTinker from "@/lib/tinker.js";
 initTinker();
 
@@ -84,18 +83,11 @@ export default {
         this.$store.state.autoTinker = value;
       }
     },
-    executeTinker() {
+    async executeTinker() {
       if (this.$store.state.php !== "") {
         this.$store.state.tinkering = true;
-        const tinker = spawn(this.$store.state.php, ["artisan", "tinker"], { cwd: this.dir });
-        tinker.stdout.setEncoding("utf-8");
-        this.$store.state.output = "";
-        tinker.stdout.on("data", (data) => {
-          this.$store.state.output += data;
-          this.$store.state.tinkering = false;
-        });
-        tinker.stdin.write(this.code);
-        tinker.stdin.end();
+        this.$store.state.output = await window.Electron.tinker(this.dir, this.code);
+        this.$store.state.tinkering = false;
       } else {
         window.Electron.dialogPhpNotFound();
       }

@@ -5,13 +5,14 @@ import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
 import execa from "execa";
+import {join} from "path";
 
 const defaults = {
   recents: [],
   verbosity: 1,
   env: "",
   editor: "echo 'No command specified'",
-  dark: false,
+  dark: true,
   php: ""
 };
 const store = new Store({ defaults });
@@ -74,6 +75,16 @@ export default async function () {
 
   ipcMain.handle("setStore", (e, { key, value }) => {
     return store.set(key, value);
+  });
+
+  ipcMain.handle("tinker", async (e, {dir, code}) => {
+    console.log(process.cwd());
+    try {
+      const { stdout } = await execa(store.get("php"), [join(__dirname, "tinker.php"), dir, code]);
+      return stdout;
+    } catch(e) {
+      return "Output Error";
+    }
   });
 
   if (store.get("php") === "") {

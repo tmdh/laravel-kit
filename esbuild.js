@@ -1,4 +1,5 @@
 const { buildSync } = require("esbuild");
+const { copyFileSync } = require("fs");
 const options = {
   platform: "node",
   bundle: true,
@@ -20,3 +21,4 @@ buildSync({
   ...options
 });
 console.log("built src/preload/preload.js -> dist/preload.js");
+copyFileSync("tinker.php", "dist/tinker.php");

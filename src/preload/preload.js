@@ -16,7 +16,8 @@ window.Electron = {
   openExternal,
   choosePhpExecutable,
   getPhpVersion,
-  getRecents
+  getRecents,
+  tinker
 };
 
 window.dark = true;
@@ -95,4 +96,9 @@ function setStore(key, value) {
 
 function getRecents() {
   ipcRenderer.send("getRecents");
+}
+
+async function tinker(dir, code) {
+  const output = await ipcRenderer.invoke("tinker", {dir, code});
+  return output;
 }
