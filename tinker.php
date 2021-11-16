@@ -181,7 +181,6 @@ class Tinker
         $config = new Configuration([
             'updateCheck' => 'never',
             'usePcntl' => false,
-            'interactiveMode' => Configuration::INTERACTIVE_MODE_DISABLED,
             'rawOutput' => true,
         ]);
 

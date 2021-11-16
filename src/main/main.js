@@ -113,7 +113,6 @@ function createWindow() {
       }
     }
   }
-  console.log(__dirname);
 })();
 
 initIpcMain();

@@ -78,7 +78,6 @@ export default async function () {
   });
 
   ipcMain.handle("tinker", async (e, {dir, code}) => {
-    console.log(process.cwd());
     try {
       const { stdout } = await execa(store.get("php"), [join(__dirname, "tinker.php"), dir, code]);
       return stdout;
