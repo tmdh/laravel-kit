@@ -21,4 +21,5 @@ buildSync({
   ...options
 });
 console.log("built src/preload/preload.js -> dist/preload.js");
-copyFileSync("tinker.php", "dist/tinker.php");
+copyFileSync("src/main/tinker.php", "dist/tinker.php");
+console.log("copied src/main/tinker.php -> dist/tinker.php");

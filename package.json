@@ -8,15 +8,14 @@
   "main": "dist/main.js",
   "scripts": {
     "dev:one": "webpack serve",
-    "dev:two": "node esbuild.js --dev && electron .",
-    "prod": "cross-env NODE_ENV=production webpack --mode production && node esbuild.js --prod",
+    "dev:two": "node build.js --dev && electron .",
+    "prod": "cross-env NODE_ENV=production webpack --mode production && node build.js --prod",
     "start": "electron .",
     "pack": "electron-builder --dir",
     "release": "electron-builder"
   },
   "dependencies": {
     "anser": "^2.0.1",
-    "axios": "^0.21.1",
     "basename": "^0.1.2",
     "electron-store": "^8.0.0",
     "electron-updater": "^4.3.9",

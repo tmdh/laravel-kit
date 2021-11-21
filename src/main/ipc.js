@@ -82,7 +82,8 @@ export default async function () {
       const { stdout } = await execa(store.get("php"), [join(__dirname, "tinker.php"), dir, code]);
       return stdout;
     } catch(e) {
-      return "Output Error";
+      console.error(e);
+      return e;
     }
   });
 
