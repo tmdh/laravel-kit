@@ -20,10 +20,6 @@
   <a href="https://github.com/tmdh/laravel-kit/releases">
     <img src="https://img.shields.io/github/downloads/tmdh/laravel-kit/total">
   </a>
-  <!-- Product Hunt upvotes -->
-  <a href="https://www.producthunt.com/posts/laravel-kit-2">
-    <img src="https://badgen.net/https/tmdh-api.vercel.app/api/ph-kit">
-  </a>
 </div>
 <div align="center">
   <h3>
@@ -36,7 +32,7 @@
     </a>
     <span> | </span>
     <a href="https://github.com/tmdh/laravel-kit#download">
-      Downloads
+      Installation
     </a>
     <span> | </span>
     <a href="https://github.com/tmdh/laravel-kit#contribution">
@@ -64,19 +60,34 @@
 - Artisan commands are retrieved from your Laravel project.
 - Many more features yet to come.
 
-## Download
+## Installation
 
 PHP must be installed in your system.
 
-| Windows                                                                                                 | macOS                                                                                                                                                                                      | Linux                                                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Setup (exe)](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-Setup-2.0.4.exe) | [dmg](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-2.0.4.dmg) or [zip](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-2.0.4-mac.zip) | [AppImage](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-2.0.4.AppImage) or [deb](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/laravel-kit_2.0.4_amd64.deb) |
+### Windows
 
-You can also install Laravel Kit with [brew](https://brew.sh/).
+[Download the setup file](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-Setup-2.0.4.exe) and install it. Updates will be installed automatically.
 
+### macOS
+
+The recommended way to install on macOS is by using [brew](https://brew.sh/).
 ```
 brew install laravel-kit
 ```
+Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/laravel-kit/releases) page.
+
+### Ubuntu and other derivatives
+
+Run these commands from the terminal:
+```
+wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/laravel-kit_2.0.4_amd64.deb
+sudo apt install ./laravel-kit_2.0.4_amd64.deb
+```
+
+### Other Linux distributions
+
+Only AppImage format is available for other Linux distributions. Download it from the [Releases](https://github.com/tmdh/laravel-kit/releases) page. Proper methods will be added very soon.
+                                          
 
 ## Screenshots
 
