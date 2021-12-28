@@ -5,7 +5,7 @@ import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
 import execa from "execa";
-import {join} from "path";
+import { join } from "path";
 
 const defaults = {
   recents: [],
@@ -48,7 +48,7 @@ export default async function () {
   });
 
   ipcMain.on("openInEditor", (e, dir) => {
-    exec(store.get("editor"), { cwd: dir })
+    exec(store.get("editor"), { cwd: dir });
   });
 
   ipcMain.on("openExternal", (e, message) => {
@@ -62,10 +62,10 @@ export default async function () {
 
   ipcMain.handle("getPhpVersion", async () => {
     try {
-      const {stdout} = await execa(store.get("php"), ["-v"]);
+      const { stdout } = await execa(store.get("php"), ["-v"]);
       return stdout;
-    } catch(e) {
-      return "PHP detection failed."
+    } catch (e) {
+      return "PHP detection failed.";
     }
   });
 
@@ -77,11 +77,11 @@ export default async function () {
     return store.set(key, value);
   });
 
-  ipcMain.handle("tinker", async (e, {dir, code}) => {
+  ipcMain.handle("tinker", async (e, { dir, code }) => {
     try {
       const { stdout } = await execa(store.get("php"), [join(__dirname, "tinker.php"), dir, code]);
       return stdout;
-    } catch(e) {
+    } catch (e) {
       console.error(e);
       return e;
     }

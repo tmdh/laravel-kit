@@ -14,11 +14,8 @@
             px-2.5
             text-sm
             hover:border-gray-400
-            focus:outline-none
-            focus:border-gray-500
-            dark:bg-d-blue-600
-            dark:border-d-gray-300
-            dark:placeholder-d-blue-100
+            focus:outline-none focus:border-gray-500
+            dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100
             rounded-md
           "
           placeholder="Search"

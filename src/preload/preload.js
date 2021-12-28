@@ -99,6 +99,6 @@ function getRecents() {
 }
 
 async function tinker(dir, code) {
-  const output = await ipcRenderer.invoke("tinker", {dir, code});
+  const output = await ipcRenderer.invoke("tinker", { dir, code });
   return output;
 }
