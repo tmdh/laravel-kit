@@ -52,7 +52,9 @@ module.exports = {
   devServer: {
     hot: true,
     port: 4999,
-    publicPath: "/"
+    devMiddleware: {
+      publicPath: "/"
+    }
   },
   plugins: [
     new ProgressPlugin(),
