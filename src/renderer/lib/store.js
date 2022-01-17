@@ -82,6 +82,17 @@ export const store = new Vuex.Store({
         dispatch("stopServe");
       }
     },
+    async executeTinker({ state }) {
+      if (state.project !== null) {
+        if (state.php !== "") {
+          state.tinkering = true;
+          state.output = await window.Electron.tinker(state.dir, state.code);
+          state.tinkering = false;
+        } else {
+          window.Electron.dialogPhpNotFound();
+        }
+      }
+    },
     startServe({ state, commit }) {
       state.serve = spawn(state.php, ["artisan", "serve"], { cwd: state.dir });
       state.serve.stdout.setEncoding("utf-8");

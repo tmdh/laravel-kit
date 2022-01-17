@@ -48,6 +48,9 @@ ipcRenderer.on("clearRecents", () => {
 ipcRenderer.on("openProject", (e, dir) => {
   window.app.$store.dispatch("openProject", { dir, reload: true });
 });
+ipcRenderer.on("executeTinker", () => {
+  window.app.$store.dispatch("executeTinker");
+});
 
 function dialogError(message) {
   ipcRenderer.send("dialogError", message);

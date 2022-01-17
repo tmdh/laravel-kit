@@ -17,7 +17,7 @@
 <script>
 import TinkerEditor from "@/components/TinkerEditor.vue";
 import KitButton from "@/components/KitButton.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import initTinker from "@/lib/tinker.js";
 initTinker();
 
@@ -83,15 +83,7 @@ export default {
         this.$store.state.autoTinker = value;
       }
     },
-    async executeTinker() {
-      if (this.$store.state.php !== "") {
-        this.$store.state.tinkering = true;
-        this.$store.state.output = await window.Electron.tinker(this.dir, this.code);
-        this.$store.state.tinkering = false;
-      } else {
-        window.Electron.dialogPhpNotFound();
-      }
-    }
+    ...mapActions(["executeTinker"])
   }
 };
 </script>

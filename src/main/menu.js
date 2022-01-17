@@ -46,6 +46,18 @@ const template = (win) => [
     ]
   },
   {
+    label: "Laravel",
+    submenu: [
+      {
+        label: "Tinker Now",
+        accelerator: "CmdOrCtrl+T",
+        click() {
+          win.webContents.send("executeTinker");
+        }
+      }
+    ]
+  },
+  {
     label: "Edit",
     submenu: [{ role: "undo" }, { role: "redo" }, { type: "separator" }, { role: "cut" }, { role: "copy" }, { role: "paste" }, { role: "selectAll" }]
   },
@@ -71,27 +83,9 @@ const template = (win) => [
     role: "help",
     submenu: [
       {
-        label: "Laravel Kit on GitHub",
-        click() {
-          openLink("https://github.com/tmdh/laravel-kit");
-        }
-      },
-      {
-        label: "Laravel Kit Website",
-        click() {
-          openLink("https://tmdh.github.io/laravel-kit");
-        }
-      },
-      {
         label: "Wiki",
         click() {
           openLink("https://github.com/tmdh/laravel-kit/wiki");
-        }
-      },
-      {
-        label: "Releases",
-        click() {
-          openLink("https://github.com/tmdh/laravel-kit/releases");
         }
       },
       {
@@ -101,9 +95,27 @@ const template = (win) => [
         }
       },
       {
+        label: "Releases",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit/releases");
+        }
+      },
+      {
         label: "License",
         click() {
           openLink("https://github.com/tmdh/laravel-kit/blob/master/license.txt");
+        }
+      },
+      {
+        label: "Laravel Kit on GitHub",
+        click() {
+          openLink("https://github.com/tmdh/laravel-kit");
+        }
+      },
+      {
+        label: "Laravel Kit Website",
+        click() {
+          openLink("https://tmdh.github.io/laravel-kit");
         }
       },
       {
