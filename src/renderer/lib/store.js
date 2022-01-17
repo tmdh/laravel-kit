@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { exec, spawn } from "child_process";
-import basename from "basename";
-// import bus from "@/lib/bus.js";
+import { spawn } from "child_process";
 
 Vue.use(Vuex);
 
@@ -47,7 +45,7 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    openProject(context, payload) {
+    async openProject(context, payload) {
       if (payload.dir === null) {
         return;
       }
@@ -56,26 +54,16 @@ export const store = new Vuex.Store({
           context.dispatch("closeProject");
         }
         context.state.opening = true;
-        exec(`"${context.state.php}" artisan --format=json`, { cwd: payload.dir }, (error, stdout) => {
-          if (error) {
-            let message = stdout.length > 0 ? stdout : `${error}`;
-            if (stdout.includes("Could not open input file: artisan")) {
-              message = `${payload.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
-            }
-            window.Electron.dialogError(message);
-            context.state.opening = false;
-          } else {
-            if (stdout.includes("Laravel")) {
-              context.state.dir = payload.dir;
-              context.state.project = JSON.parse(stdout);
-              context.state.project.namespaces = null;
-              context.state.name = basename(payload.dir);
-              document.title = `${context.state.name} - Kit`;
-              context.dispatch("addRecent", payload.dir);
-            }
-            context.state.opening = false;
-          }
-        });
+        const { success, output, basename } = await window.Electron.openProject(payload.dir);
+        if (success) {
+          context.state.dir = payload.dir;
+          context.state.project = JSON.parse(output);
+          context.state.project.namespaces = null;
+          context.state.name = basename;
+          document.title = `${context.state.name} - Kit`;
+          context.dispatch("addRecent", payload.dir);
+        }
+        context.state.opening = false;
       } else {
         window.Electron.dialogPhpNotFound();
       }

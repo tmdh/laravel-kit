@@ -5,7 +5,7 @@ import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
 import execa from "execa";
-import { join } from "path";
+import { join, basename } from "path";
 
 const defaults = {
   recents: [],
@@ -95,6 +95,33 @@ export default async function () {
       console.log(`Error executing artisan command in ${dir}: ${fullCommand}`);
       console.error(e);
       return e.all || "Error";
+    }
+  });
+
+  ipcMain.handle("openProject", async (e, dir) => {
+    try {
+      const { all } = await execa(store.get("php"), ["artisan", "--format=json"], { cwd: dir, all: true, buffer: true });
+      if (all.includes("Laravel")) {
+        return { success: true, output: all, basename: basename(dir) };
+      } else {
+        console.log(`Error opening project in ${dir}`);
+        console.error(all);
+        if (all.includes("Could not open input file: artisan")) {
+          dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
+        } else {
+          dialog.showErrorBox("Error opening project", all);
+        }
+        return { success: false };
+      }
+    } catch (e) {
+      console.log(`Error opening project in ${dir}`);
+      console.error(e);
+      if (e.all.includes("Could not open input file: artisan")) {
+        dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
+      } else {
+        dialog.showErrorBox("Error opening project", e.all);
+      }
+      return { success: false };
     }
   });
 

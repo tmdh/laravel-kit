@@ -18,7 +18,8 @@ window.Electron = {
   getPhpVersion,
   getRecents,
   tinker,
-  artisan
+  artisan,
+  openProject
 };
 
 window.dark = true;
@@ -106,5 +107,10 @@ async function tinker(dir, code) {
 
 async function artisan(fullCommand, dir) {
   const output = await ipcRenderer.invoke("artisan", { fullCommand, dir });
+  return output;
+}
+
+async function openProject(dir) {
+  const output = await ipcRenderer.invoke("openProject", dir);
   return output;
 }
