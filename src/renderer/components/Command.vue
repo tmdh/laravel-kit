@@ -40,7 +40,6 @@ import OptionInput from "@/components/OptionInput.vue";
 import RouteTable from "@/components/RouteTable.vue";
 import { mapState } from "vuex";
 import Anser from "anser";
-import { exec } from "child_process";
 
 export default {
   name: "Command",
@@ -63,32 +62,28 @@ export default {
       return this.$store.state.project.commands.find((command) => command.name == this.name);
     },
     fullCommand() {
-      let argumentsCommand = "",
-        optionsCommand = "";
+      return this.artisanArray.reduce((prev, cur) => {
+        return `${prev} ${cur}`;
+      });
+    },
+    artisanArray() {
+      let artisanArray = [];
+      artisanArray.push(this.name);
       if (this.argumentsInit.length > 0) {
-        argumentsCommand = this.argumentsInit.reduce((tempCommand, argument) => {
-          if (argument.value == "") {
-            return `${tempCommand}`;
+        this.argumentsInit.forEach((argument) => {
+          if (argument.value != "") {
+            artisanArray.push(argument.value);
           }
-          return `${tempCommand} ${argument.value}`;
-        }, "");
+        });
       }
       if (this.optionsInit.length > 0) {
-        optionsCommand = this.optionsInit.reduce((tempCommand, option) => {
-          if (option.value == "" || option.value == false) {
-            return `${tempCommand}`;
+        this.optionsInit.forEach((option) => {
+          if (!(option.value == "" || option.value == false)) {
+            artisanArray.push(`${option.name}${option.accept_value ? "=" + option.value : ""}`);
           }
-          return `${tempCommand} ${option.name}${option.accept_value ? " " + option.value : ""}`;
         }, "");
       }
-      let globalCommand = "";
-      if (this.$store.state.env != "") {
-        globalCommand += ` --env ${this.$store.state.env}`;
-      }
-      if (this.$store.state.verbosity != 1) {
-        globalCommand += ` -${"v".repeat(this.$store.state.verbosity)}`;
-      }
-      return this.command.name + argumentsCommand + optionsCommand + globalCommand;
+      return artisanArray;
     },
     routes() {
       if (this.name == "route:list") {
@@ -114,22 +109,14 @@ export default {
         .filter((option) => !remove.includes(option.name))
         .map((option) => Object.assign({}, option, { value: option.accept_value ? "" : option.default }));
     },
-    getOutputAsync() {
+    async getOutputAsync() {
       if (this.$store.state.php !== "") {
         this.output = "Running...";
         this.$store.state.running = true;
-        exec(`"${this.$store.state.php}" artisan ${this.fullCommand} --no-interaction --ansi`, { cwd: this.$store.state.dir }, (error, stdout) => {
-          if (error) {
-            if (stdout.includes("Could not open input file: artisan")) {
-              let message = `${this.$store.state.dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`;
-              window.Electron.dialogError(message);
-            }
-          }
-          this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });
-          this.$refs["terminal-end"].scrollIntoView();
-          this.$store.state.running = false;
-        });
+        const stdout = await window.Electron.artisan(this.artisanArray, this.$store.state.dir);
+        this.output = Anser.ansiToHtml(Anser.escapeForHtml(stdout.trim()), { use_classes: true });
         this.$refs["terminal-end"].scrollIntoView();
+        this.$store.state.running = false;
       } else {
         window.Electron.dialogPhpNotFound();
       }

@@ -87,6 +87,17 @@ export default async function () {
     }
   });
 
+  ipcMain.handle("artisan", async (e, { fullCommand, dir }) => {
+    try {
+      const { all } = await execa(store.get("php"), ["artisan", ...fullCommand, "--no-interaction", "--ansi"], { cwd: dir, all: true, buffer: true });
+      return all;
+    } catch (e) {
+      console.log(`Error executing artisan command in ${dir}: ${fullCommand}`);
+      console.error(e);
+      return e.all || "Error";
+    }
+  });
+
   if (store.get("php") === "") {
     try {
       const resolvedPath = await which("php");
