@@ -34,7 +34,7 @@ function createWindow() {
     title: "Kit"
   };
   if ((process.platform === "linux" && !isDev) || isDev) {
-    browserWindowOptions.icon = resolve(process.cwd(), "build/icon.png");
+    browserWindowOptions.icon = resolve(__dirname, "icon.png");
   }
   const win = new BrowserWindow(browserWindowOptions);
 
