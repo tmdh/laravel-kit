@@ -86,9 +86,6 @@
       "dist/**/*",
       "!node_modules${/*}"
     ],
-    "extraResources": [
-      "build/icon.png"
-    ],
     "directories": {
       "output": "release"
     },
