@@ -66,19 +66,22 @@ PHP must be installed in your system.
 
 ### Windows
 
-[Download the setup file](https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/Laravel-Kit-Setup-2.0.4.exe) and install it. Updates will be installed automatically.
+[Download the setup file (.exe)](https://github.com/tmdh/laravel-kit/releases/latest) and install it. Updates will be installed automatically.
 
 ### macOS
 
 The recommended way to install on macOS is by using [brew](https://brew.sh/).
+
 ```
 brew install laravel-kit
 ```
-Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/laravel-kit/releases) page.
+
+Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/laravel-kit/releases/latest) page.
 
 ### Ubuntu and other derivatives
 
 Run these commands from the terminal:
+
 ```
 wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/laravel-kit_2.0.4_amd64.deb
 sudo apt install ./laravel-kit_2.0.4_amd64.deb
@@ -86,8 +89,7 @@ sudo apt install ./laravel-kit_2.0.4_amd64.deb
 
 ### Other Linux distributions
 
-Only AppImage format is available for other Linux distributions. Download it from the [Releases](https://github.com/tmdh/laravel-kit/releases) page. Proper methods will be added very soon.
-                                          
+Only AppImage format is available for other Linux distributions. Download it from the [Releases](https://github.com/tmdh/laravel-kit/releases/latest) page. Proper methods will be added very soon.
 
 ## Screenshots
 
