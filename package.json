@@ -86,6 +86,7 @@
       "dist/**/*",
       "!node_modules${/*}"
     ],
+    "asar": false,
     "directories": {
       "output": "release"
     },
