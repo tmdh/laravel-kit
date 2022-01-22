@@ -1,7 +1,7 @@
 {
   "name": "laravel-kit",
   "description": "A desktop app for Laravel framework",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "author": "Tareque Md Hanif <tarequemd.hanif@yahoo.com> (http://tmdh.github.io/)",
   "license": "GPLV2",
   "private": true,
