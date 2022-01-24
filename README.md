@@ -83,8 +83,8 @@ Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/lara
 Run these commands from the terminal:
 
 ```
-wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.4/laravel-kit_2.0.4_amd64.deb
-sudo apt install ./laravel-kit_2.0.4_amd64.deb
+wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.6/laravel-kit_2.0.6_amd64.deb
+sudo apt install ./laravel-kit_2.0.6_amd64.deb
 ```
 
 ### Other Linux distributions
