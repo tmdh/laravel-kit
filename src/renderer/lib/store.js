@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { spawn } from "child_process";
 
 Vue.use(Vuex);
 
@@ -93,18 +92,12 @@ export const store = new Vuex.Store({
         }
       }
     },
-    startServe({ state, commit }) {
-      state.serve = spawn(state.php, ["artisan", "serve"], { cwd: state.dir });
-      state.serve.stdout.setEncoding("utf-8");
-      state.serve.stdout.on("data", (data) => {
-        if (data.includes("started")) {
-          commit("updateServeLink", data.match(/(https?:\/\/[a-zA-Z0-9.]+(:[0-9]+)?)/g)[0]);
-        }
-      });
+    async startServe({ state }) {
+      state.serve = await window.Electron.startServe(state.dir);
     },
     async stopServe({ state }) {
       if (state.serve != null) {
-        await window.Electron.kill(state.serve.pid);
+        await window.Electron.kill(state.serve);
         state.serve = null;
         state.serveLink = null;
       }

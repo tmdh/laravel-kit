@@ -19,7 +19,8 @@ window.Electron = {
   getRecents,
   tinker,
   artisan,
-  openProject
+  openProject,
+  startServe
 };
 
 window.dark = true;
@@ -29,7 +30,7 @@ window.dark = true;
 
 ipcRenderer.on("app-close", () => {
   if (window.app.$store.state.serve != null) {
-    ipcRenderer.send("stopServeSync", window.app.$store.state.serve.pid);
+    ipcRenderer.send("stopServeSync", window.app.$store.state.serve);
   }
 });
 
@@ -50,6 +51,9 @@ ipcRenderer.on("openProject", (e, dir) => {
 });
 ipcRenderer.on("executeTinker", () => {
   window.app.$store.dispatch("executeTinker");
+});
+ipcRenderer.on("updateServeLink", (e, link) => {
+  window.app.$store.commit("updateServeLink", link);
 });
 
 function dialogError(message) {
@@ -116,4 +120,9 @@ async function artisan(fullCommand, dir) {
 async function openProject(dir) {
   const output = await ipcRenderer.invoke("openProject", dir);
   return output;
+}
+
+async function startServe(dir) {
+  const serve = await ipcRenderer.invoke("startServe", dir);
+  return serve;
 }

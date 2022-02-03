@@ -1,5 +1,5 @@
-import { exec } from "child_process";
-import { ipcMain, dialog, shell } from "electron";
+import { exec, spawn } from "child_process";
+import { ipcMain, dialog, shell, BrowserWindow } from "electron";
 import killSync from "./tree-kill-sync.js";
 import kill from "tree-kill";
 import Store from "electron-store";
@@ -123,6 +123,16 @@ export default async function () {
       }
       return { success: false };
     }
+  });
+
+  ipcMain.handle("startServe", (e, dir) => {
+    const serve = spawn(store.get("php"), ["artisan", "serve"], { cwd: dir });
+    serve.stdout.on("data", (data) => {
+      if (data.includes("started")) {
+        BrowserWindow.getAllWindows()[0].webContents.send("updateServeLink", data.toString().match(/(https?:\/\/[a-zA-Z0-9.]+(:[0-9]+)?)/g)[0]);
+      }
+    });
+    return serve.pid;
   });
 
   if (store.get("php") === "") {
