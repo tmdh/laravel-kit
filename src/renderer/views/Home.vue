@@ -11,7 +11,7 @@
     <h3 class="mt-6 text-lg">Recent</h3>
     <ul class="text-sm" v-if="recents.length">
       <li class="mt-1" v-for="recent in recents" :key="recent">
-        <span class="cursor-pointer text-blue dark:text-blue-100" @click="openProject({ dir: recent })" v-text="basename(recent)"></span>
+        <span class="cursor-pointer text-blue dark:text-blue-100" @click="openProject({ dir: recent })" v-text="recent"></span>
         <span class="ml-3">{{ recent }}</span>
       </li>
     </ul>
@@ -35,7 +35,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import basename from "basename";
+//import basename from "basename";
 import KitButton from "@/components/KitButton.vue";
 export default {
   name: "Home",
@@ -60,10 +60,10 @@ export default {
     ...mapActions(["openDialog", "openProject"]),
     openLink(link) {
       window.Electron.openExternal(link.href);
-    },
+    } /*
     basename(dir) {
       return basename(dir.toString());
-    },
+    },*/,
     changeTab(tab) {
       this.$root.$emit("changeTab", tab);
     }

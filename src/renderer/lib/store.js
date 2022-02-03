@@ -2,6 +2,10 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
+var dark = false;
+async () => {
+  dark = await window.store.get("dark");
+};
 
 export const store = new Vuex.Store({
   state: {
@@ -17,7 +21,7 @@ export const store = new Vuex.Store({
     opening: false,
     running: false,
     tinkering: false,
-    dark: window.dark,
+    dark: dark,
     code: `// Write your tinker code here\nuse Illuminate\\Foundation\\Inspiring;\nInspiring::quote();`,
     autoTinker: false,
     output: "// The output is shown here",

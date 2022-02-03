@@ -17,7 +17,6 @@ module.exports = {
     filename: "[name].js",
     publicPath: "./"
   },
-  target: "electron-renderer",
   devtool: "eval-source-map",
   module: {
     rules: [

@@ -1,12 +1,6 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer, contextBridge } from "electron";
 
-// Electron Store
-window.store = {
-  get: getStore,
-  set: setStore
-};
-
-window.Electron = {
+contextBridge.exposeInMainWorld("Electron", {
   dialogPhpNotFound,
   dialogError,
   dialogFolder,
@@ -21,12 +15,12 @@ window.Electron = {
   artisan,
   openProject,
   startServe
-};
+});
 
-window.dark = true;
-(async () => {
-  window.dark = await getStore("dark");
-})();
+contextBridge.exposeInMainWorld("store", {
+  get: getStore,
+  set: setStore
+});
 
 ipcRenderer.on("app-close", () => {
   if (window.app.$store.state.serve != null) {
