@@ -1,6 +1,6 @@
-import { ipcRenderer, contextBridge } from "electron";
+import { ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld("Electron", {
+window.Electron = {
   dialogPhpNotFound,
   dialogError,
   dialogFolder,
@@ -15,12 +15,12 @@ contextBridge.exposeInMainWorld("Electron", {
   artisan,
   openProject,
   startServe
-});
+};
 
-contextBridge.exposeInMainWorld("store", {
+window.store = {
   get: getStore,
   set: setStore
-});
+};
 
 ipcRenderer.on("app-close", () => {
   if (window.app.$store.state.serve != null) {

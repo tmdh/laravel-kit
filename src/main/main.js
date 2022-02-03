@@ -26,6 +26,7 @@ function createWindow() {
     height: winState.height,
     backgroundColor: new Store().get("dark") ? "#282A36" : "#FAFAFA",
     webPreferences: {
+      contextIsolation: false,
       preload: resolve(join(__dirname, "preload.js"))
     },
     show: false,
