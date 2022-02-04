@@ -102,17 +102,17 @@ Only AppImage format is available for other Linux distributions. Download it fro
 
 ## Development
 
-Laravel Kit is made with [Electron](https://electronjs.org), [Vue.js 2](https://vuejs.org), [Tailwind CSS](https://tailwindcss.com) and [Webpack](https://webpack.js.org).
+Laravel Kit is made with [Electron](https://electronjs.org), [Vue.js 2](https://vuejs.org), [Tailwind CSS](https://tailwindcss.com) and [Vite](https://vitejs.dev).
 
 ```bash
 # For development,
-# Start development server with Webpack
+# Start development server with Vite
 yarn run dev:one
 # Start Electron
 yarn run dev:two
 
 # For production,
-# Build files with Webpack
+# Build files with Vite
 yarn run prod
 # Make executable
 yarn run pack
