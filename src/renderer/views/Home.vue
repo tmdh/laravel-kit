@@ -26,15 +26,15 @@
   <div v-else class="bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center dark:bg-d-blue-500 dark:text-white">
     <div class="text-center">
       <h1 class="text-3xl font-semibold">Build something amazing!</h1>
-      <kit-button class="mt-10" @click.native="changeTab('Artisan')">Go to Artisan</kit-button>
+      <kit-button class="mt-10" @clicked="changeTab('Artisan')">Go to Artisan</kit-button>
       <p class="italic text-lg mt-8">or</p>
-      <kit-button class="mt-10" @click.native="changeTab('Tinker')">Start Tinkering</kit-button>
+      <kit-button class="mt-10" @clicked="changeTab('Tinker')">Start Tinkering</kit-button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import basename from "@/lib/basename.js";
 import KitButton from "@/components/KitButton.vue";
 export default {
@@ -58,14 +58,12 @@ export default {
   },
   methods: {
     ...mapActions(["openDialog", "openProject"]),
+    ...mapMutations(["changeTab"]),
     openLink(link) {
       window.Electron.openExternal(link.href);
     },
     basename(dir) {
       return basename(dir.toString());
-    },
-    changeTab(tab) {
-      this.$root.$emit("changeTab", tab);
     }
   },
   computed: {

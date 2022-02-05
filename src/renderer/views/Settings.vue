@@ -8,7 +8,7 @@
       </div>
       <input type="text" class="form-input input-text my-2" spellcheck="false" id="php" v-model="php" />
     </div>
-    <kit-button class="mb-2 h-7 inline-block" @click.native="selectExecutable">Select</kit-button>
+    <kit-button class="mb-2 h-7 inline-block" @clicked="selectExecutable">Select</kit-button>
     <div class="text-xs">Detected PHP version: {{ this.phpv }}</div>
     <div class="flex flex-col md:flex-row py-1">
       <div class="w-96 my-2">
@@ -42,7 +42,7 @@
       </select>
     </div>
     <div class="flex items-center">
-      <kit-button class="mt-2" @click.native="saveSettings">Save settings</kit-button>
+      <kit-button class="mt-2" @clicked="saveSettings">Save settings</kit-button>
       <transition name="fade">
         <span class="flex flex-row items-center ml-4 text-blue dark:text-blue-100" v-if="saved">
           <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

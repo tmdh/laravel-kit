@@ -25,6 +25,7 @@
   
 */
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import { h } from "vue";
 export default {
   name: "TinkerEditor",
   props: {
@@ -78,7 +79,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.editor && this.editor.dispose();
   },
 
@@ -128,7 +129,7 @@ export default {
     }
   },
 
-  render(h) {
+  render() {
     return h("div");
   }
 };

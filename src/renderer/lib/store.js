@@ -1,14 +1,13 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex";
 
-Vue.use(Vuex);
 var dark = false;
 async () => {
   dark = await window.store.get("dark");
 };
 
-export const store = new Vuex.Store({
+export const store = createStore({
   state: {
+    tab: "Home",
     project: null,
     name: null,
     dir: null,
@@ -28,6 +27,9 @@ export const store = new Vuex.Store({
     php: ""
   },
   mutations: {
+    changeTab(state, tab) {
+      state.tab = tab;
+    },
     updateServeLink(state, link) {
       state.serveLink = link;
     },
@@ -80,6 +82,7 @@ export const store = new Vuex.Store({
     closeProject({ state, dispatch }) {
       if (state.project !== null) {
         dispatch("stopServe");
+        state.tab = "Home";
         state.project = null;
         state.name = null;
         state.dir = null;

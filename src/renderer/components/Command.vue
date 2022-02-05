@@ -2,7 +2,7 @@
   <div class="flex-1">
     <div class="flex justify-between">
       <h1 class="font-mono text-xl">{{ command.name }}</h1>
-      <kit-button @click.native="getOutputAsync">Run</kit-button>
+      <kit-button @clicked="getOutputAsync">Run</kit-button>
     </div>
     <p class="mt-5 mb-3 text-base">{{ command.description }}</p>
     <div class="h-px bg-gray-300"></div>

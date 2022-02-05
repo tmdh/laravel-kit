@@ -1,22 +1,19 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import { store } from "@/lib/store.js";
 import App from "@/App.vue";
-// import "@/lib/menu.js";
 import "@/styles.css";
-// import bus from "@/lib/bus.js";
 
-Vue.config.errorHandler = function (err) {
-  console.error(err);
-};
-Vue.config.productionTip = false;
-
-window.app = new Vue({
-  store,
-  render: function (h) {
-    return h(App);
-  },
+const app = createApp({
+  ...App,
   mounted() {
     this.$store.dispatch("getRecents");
     this.$store.dispatch("updateSettingsState");
   }
-}).$mount("#app");
+});
+
+app.use(store);
+app.mount("#app");
+
+window.app = app;
+console.log("app: ", app);
+console.log("window.app: ", window.app);

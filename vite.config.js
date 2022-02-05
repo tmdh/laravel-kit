@@ -1,17 +1,28 @@
 import { defineConfig } from "vite";
-import { createVuePlugin } from "vite-plugin-vue2";
+import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 
 export default defineConfig({
   root: "src/renderer/",
   base: "./",
-  plugins: [createVuePlugin()],
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          compatConfig: {
+            MODE: 2
+          }
+        }
+      }
+    })
+  ],
   server: {
     port: 4999
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src/renderer/")
+      "@": resolve(__dirname, "src/renderer/"),
+      vue: "@vue/compat"
     }
   },
   build: {

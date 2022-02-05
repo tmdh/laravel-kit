@@ -23,32 +23,32 @@ window.store = {
 };
 
 ipcRenderer.on("app-close", () => {
-  if (window.app.$store.state.serve != null) {
-    ipcRenderer.send("stopServeSync", window.app.$store.state.serve);
+  const serve = window.app._context.provides.store.state.serve;
+  if (serve != null) {
+    ipcRenderer.send("stopServeSync", serve);
   }
 });
 
 ipcRenderer.on("openDialog", () => {
-  window.app.$store.dispatch("openDialog");
+  window.app._context.provides.store.dispatch("openDialog");
 });
 ipcRenderer.on("reloadProject", () => {
-  window.app.$store.dispatch("openProject", { dir: window.app.$store.state.dir, reload: true });
+  window.app._context.provides.store.dispatch("openProject", { dir: window.app._context.provides.store.state.dir, reload: true });
 });
 ipcRenderer.on("closeProject", () => {
-  window.app.$root.$emit("changeTab", "Home");
-  window.app.$store.dispatch("closeProject");
+  window.app._context.provides.store.dispatch("closeProject");
 });
 ipcRenderer.on("clearRecents", () => {
-  window.app.$store.commit("clearRecents");
+  window.app._context.provides.store.commit("clearRecents");
 });
 ipcRenderer.on("openProject", (e, dir) => {
-  window.app.$store.dispatch("openProject", { dir, reload: true });
+  window.app._context.provides.store.dispatch("openProject", { dir, reload: true });
 });
 ipcRenderer.on("executeTinker", () => {
-  window.app.$store.dispatch("executeTinker");
+  window.app._context.provides.store.dispatch("executeTinker");
 });
 ipcRenderer.on("updateServeLink", (e, link) => {
-  window.app.$store.commit("updateServeLink", link);
+  window.app._context.provides.store.commit("updateServeLink", link);
 });
 
 function dialogError(message) {

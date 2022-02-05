@@ -3,7 +3,7 @@
     <div class="flex-1 overflow-hidden flex">
       <nav class="flex flex-col w-15 justify-between">
         <div>
-          <button @click="tab = 'Home'" class="link" :class="{ 'link-active': tab == 'Home' }" title="Home">
+          <button @click="changeTab('Home')" class="link" :class="{ 'link-active': tab == 'Home' }" title="Home">
             <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 stroke-linecap="round"
@@ -12,12 +12,12 @@
               />
             </svg>
           </button>
-          <button @click="tab = 'Artisan'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Artisan' }" title="Artisan">
+          <button @click="changeTab('Artisan')" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Artisan' }" title="Artisan">
             <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </button>
-          <button @click="tab = 'Tinker'" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Tinker' }" title="Tinker">
+          <button @click="changeTab('Tinker')" class="link" v-if="project != null" :class="{ 'link-active': tab == 'Tinker' }" title="Tinker">
             <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -71,22 +71,13 @@ import Artisan from "@/views/Artisan.vue";
 import Tinker from "@/views/Tinker.vue";
 import Settings from "@/views/Settings.vue";
 import LoadingIcon from "@/components/icons/LoadingIcon.vue";
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "App",
   components: { Home, Artisan, Tinker, Settings, LoadingIcon },
-  data() {
-    return {
-      tab: "Home"
-    };
-  },
-  computed: mapState(["project", "opening", "running", "tinkering", "dark"]),
-  mounted() {
-    this.$root.$on("changeTab", (tab) => {
-      this.tab = tab;
-    });
-  }
+  computed: mapState(["tab", "project", "opening", "running", "tinkering", "dark"]),
+  methods: mapMutations(["changeTab"])
 };
 </script>
 

@@ -32,14 +32,14 @@
         </div>
         <div>
           <a class="underline hover:text-blue mr-2 cursor-pointer" v-if="serve != null && serveLink != null" @click="openServe" v-text="serveLink" title="Open link in the browser"></a>
-          <kit-button @click.native="serveService" :title="serve == null ? 'Serve the application on the PHP development server' : 'Stop serving'" class="inline-flex items-center">
+          <kit-button @clicked="serveService" :title="serve == null ? 'Serve the application on the PHP development server' : 'Stop serving'" class="inline-flex items-center">
             <component :is="serve == null ? 'ServeIcon' : 'StopIcon'" class="mr-0 md:mr-2 mt-0.5"></component>
             <span class="hidden md:block" v-text="serve == null ? 'Serve' : 'Stop'"></span>
           </kit-button>
-          <kit-button @click.native="openFolder" title="Open folder in Explorer/Finder" class="inline-flex items-center">
+          <kit-button @clicked="openFolder" title="Open folder in Explorer/Finder" class="inline-flex items-center">
             <folder-icon class="mr-0 md:mr-2 mt-0.5"></folder-icon> <span class="hidden md:block">Open folder</span>
           </kit-button>
-          <kit-button @click.native="openInEditor" title="Execute 'Open in editor' command specified in Settings" class="inline-flex items-center">
+          <kit-button @clicked="openInEditor" title="Execute 'Open in editor' command specified in Settings" class="inline-flex items-center">
             <editor-icon class="mr-0 md:mr-2 mt-0.5"></editor-icon> <span class="hidden md:block">Open in editor</span>
           </kit-button>
         </div>

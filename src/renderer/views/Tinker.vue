@@ -7,7 +7,7 @@
           <input type="checkbox" class="form-checkbox input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
           <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">Auto Tinker</label>
         </div>
-        <kit-button @click.native="executeTinker" class="ml-auto">Tinker</kit-button>
+        <kit-button @clicked="executeTinker" class="ml-auto">Tinker</kit-button>
       </div>
     </div>
     <tinker-editor class="flex-1" v-model="output" language="php-x" theme="one-light" :options="outputOptions"></tinker-editor>
