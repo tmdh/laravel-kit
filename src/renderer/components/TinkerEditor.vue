@@ -38,12 +38,11 @@ export default {
       default: "vs"
     },
     language: String,
-    options: Object
+    options: Object,
+    modelValue: String
   },
 
-  model: {
-    event: "change"
-  },
+  emits: ["update:modelValue"],
 
   watch: {
     options: {
@@ -85,8 +84,6 @@ export default {
 
   methods: {
     initMonaco(monaco) {
-      this.$emit("editorWillMount", this.monaco);
-
       const options = Object.assign(
         {},
         {
@@ -113,7 +110,6 @@ export default {
       window.addEventListener("resize", () => {
         this.resize();
       });
-      this.$emit("editorDidMount", this.editor);
     },
 
     getEditor() {
@@ -131,6 +127,10 @@ export default {
 
   render() {
     return h("div");
+  },
+
+  compatConfig: {
+    RENDER_FUNCTION: false
   }
 };
 </script>
