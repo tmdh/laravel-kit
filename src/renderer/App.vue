@@ -23,7 +23,7 @@
             </svg>
           </button>
         </div>
-        <button @click="tab = 'Settings'" class="link" :class="{ 'link-active': tab == 'Settings' }" title="Settings">
+        <button @click="changeTab('Settings')" class="link" :class="{ 'link-active': tab == 'Settings' }" title="Settings">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"

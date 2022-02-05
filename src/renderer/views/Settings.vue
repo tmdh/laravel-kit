@@ -26,7 +26,7 @@
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="verbosity">Artisan output verbosity</label>
       </div>
-      <select type="text" class="form-select input-text px-1 py-0 my-2" spellcheck="false" id="verbosity" v-model="verbosity">
+      <select class="form-select input-text px-1 py-0 my-2" spellcheck="false" id="verbosity" v-model="verbosity">
         <option :value="1">Normal</option>
         <option :value="2">Verbose</option>
         <option :value="3">Debug</option>
@@ -36,7 +36,7 @@
       <div class="w-96 my-2">
         <label class="text-sm text-gray-900 dark:text-white" for="dark">Color theme</label>
       </div>
-      <select type="text" class="form-select input-text px-1 py-0 my-2" id="dark" v-model="dark">
+      <select class="form-select input-text px-1 py-0 my-2" id="dark" v-model="dark">
         <option :value="false">Light</option>
         <option :value="true">Dark</option>
       </select>

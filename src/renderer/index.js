@@ -15,5 +15,3 @@ app.use(store);
 app.mount("#app");
 
 window.app = app;
-console.log("app: ", app);
-console.log("window.app: ", window.app);
