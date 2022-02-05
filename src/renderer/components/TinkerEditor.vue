@@ -29,7 +29,7 @@ import { h } from "vue";
 export default {
   name: "TinkerEditor",
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true
     },
@@ -38,8 +38,7 @@ export default {
       default: "vs"
     },
     language: String,
-    options: Object,
-    modelValue: String
+    options: Object
   },
 
   emits: ["update:modelValue"],
@@ -55,7 +54,7 @@ export default {
       }
     },
 
-    value(newValue) {
+    modelValue(newValue) {
       if (this.editor) {
         const editor = this.getEditor();
         if (newValue !== editor.getValue()) {
@@ -87,7 +86,7 @@ export default {
       const options = Object.assign(
         {},
         {
-          value: this.value,
+          value: this.modelValue,
           theme: this.$store.state.dark ? "dracula" : "atom-one-light",
           language: this.language,
           fontSize: "18px",
@@ -103,8 +102,8 @@ export default {
       const editor = this.getEditor();
       editor.onDidChangeModelContent((event) => {
         const value = editor.getValue();
-        if (this.value !== value) {
-          this.$emit("change", value, event);
+        if (this.modelValue !== value) {
+          this.$emit("update:modelValue", value, event);
         }
       });
       window.addEventListener("resize", () => {
