@@ -17,7 +17,7 @@
     <div>
       <h2 class="text-gray-800 font-bold text-base mt-4 dark:text-gray-200">Terminal</h2>
       <div class="flex flex-row items-center mt-2" v-if="routes.isJSON">
-        <input type="checkbox" class="input-checkbox" id="routeTable" :checked="routeTable" v-model="routeTable" />
+        <input type="checkbox" class="form-checkbox input-checkbox" id="routeTable" :checked="routeTable" v-model="routeTable" />
         <label class="ml-2 text-sm text-gray-600 dark:text-white" for="routeTable">Show JSON as table</label>
       </div>
       <div ref="terminal" class="font-mono text-sm mt-3 flex flex-col">

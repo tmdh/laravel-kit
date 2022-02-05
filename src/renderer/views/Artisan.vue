@@ -6,18 +6,7 @@
         <input
           type="text"
           v-model="searchKeyword"
-          class="
-            w-full
-            h-7
-            border-input border-gray-300 border
-            placeholder-gray-800
-            px-2.5
-            text-sm
-            hover:border-gray-400
-            focus:outline-none focus:border-gray-500
-            dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100
-            rounded-md
-          "
+          class="form-input w-full h-7 border-input border-gray-300 border placeholder-gray-800 px-2.5 text-sm hover:border-gray-400 focus:outline-none focus:border-gray-500 dark:bg-d-blue-600 dark:border-d-gray-300 dark:placeholder-d-blue-100 rounded-md"
           placeholder="Search"
         />
       </div>

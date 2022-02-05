@@ -4,7 +4,7 @@
       <tinker-editor class="flex-1" v-model="code" language="php-x" theme="one-light"></tinker-editor>
       <div class="py-2 px-3 flex justify-center md:justify-start">
         <div class="flex flex-row items-center">
-          <input type="checkbox" class="input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
+          <input type="checkbox" class="form-checkbox input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
           <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">Auto Tinker</label>
         </div>
         <kit-button @click.native="executeTinker" class="ml-auto">Tinker</kit-button>
