@@ -5,24 +5,13 @@ import { resolve } from "path";
 export default defineConfig({
   root: "src/renderer/",
   base: "./",
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          compatConfig: {
-            MODE: 2
-          }
-        }
-      }
-    })
-  ],
+  plugins: [vue()],
   server: {
     port: 4999
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src/renderer/"),
-      vue: "@vue/compat"
+      "@": resolve(__dirname, "src/renderer/")
     }
   },
   build: {

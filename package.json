@@ -15,7 +15,6 @@
     "release": "electron-builder"
   },
   "dependencies": {
-    "@vue/compat": "3.2.29",
     "anser": "2.1.1",
     "electron-store": "8.0.1",
     "electron-updater": "4.6.1",

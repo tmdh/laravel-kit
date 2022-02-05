@@ -14,10 +14,7 @@
 export default {
   name: "ArgumentInput",
   props: ["field", "modelValue"],
-  emits: ["update:modelValue"],
-  compatConfig: {
-    COMPONENT_V_MODEL: false
-  }
+  emits: ["update:modelValue"]
 };
 </script>
 

@@ -23,9 +23,6 @@ export default {
     cleanName() {
       return this.field.name.substring(2);
     }
-  },
-  compatConfig: {
-    COMPONENT_V_MODEL: false
   }
 };
 </script>

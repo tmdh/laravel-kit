@@ -126,10 +126,6 @@ export default {
 
   render() {
     return h("div");
-  },
-
-  compatConfig: {
-    RENDER_FUNCTION: false
   }
 };
 </script>
