@@ -24,7 +24,7 @@
         <div class="select-text">
           <span>→</span> <span class="text-terminal-cyan dark:text-terminal-d-cyan">{{ appName }}</span> <span class="text-terminal-purple dark:text-terminal-d-purple">›</span>
           <span class="text-terminal-green dark:text-terminal-d-green">php</span>
-          <span>artisan {{ fullCommand }}</span>
+          <span> artisan {{ fullCommand }}</span>
         </div>
         <pre class="max-h-64 overflow-y-auto pb-4 select-text whitespace-pre-wrap break-all" v-html="output"></pre>
       </div>
