@@ -18,7 +18,7 @@ const defaults = {
 const store = new Store({ defaults });
 
 export default async function () {
-  ipcMain.on("stopServeSync", (e, pid) => {
+  ipcMain.on("killSync", (e, pid) => {
     killSync(pid, "SIGKILL");
   });
 

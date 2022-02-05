@@ -14,20 +14,14 @@ window.Electron = {
   tinker,
   artisan,
   openProject,
-  startServe
+  startServe,
+  killSync
 };
 
 window.store = {
   get: getStore,
   set: setStore
 };
-
-ipcRenderer.on("app-close", () => {
-  const serve = window.app._context.provides.store.state.serve;
-  if (serve != null) {
-    ipcRenderer.send("stopServeSync", serve);
-  }
-});
 
 ipcRenderer.on("openDialog", () => {
   window.app._context.provides.store.dispatch("openDialog");
@@ -120,4 +114,8 @@ async function openProject(dir) {
 async function startServe(dir) {
   const serve = await ipcRenderer.invoke("startServe", dir);
   return serve;
+}
+
+function killSync(serve) {
+  ipcRenderer.send("killSync", serve);
 }

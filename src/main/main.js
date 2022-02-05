@@ -50,9 +50,6 @@ function createWindow() {
       })
     );
   }
-  win.on("close", () => {
-    win.webContents.send("app-close");
-  });
   win.once("ready-to-show", () => {
     win.show();
     win.focus();

@@ -15,3 +15,9 @@ app.use(store);
 app.mount("#app");
 
 window.app = app;
+window.onbeforeunload = () => {
+  const serve = window.app._context.provides.store.state.serve;
+  if (serve != null) {
+    window.Electron.killSync(serve);
+  }
+};
