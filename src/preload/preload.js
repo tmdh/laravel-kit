@@ -35,6 +35,7 @@ ipcRenderer.on("reloadProject", () => {
   window.app.$store.dispatch("openProject", { dir: window.app.$store.state.dir, reload: true });
 });
 ipcRenderer.on("closeProject", () => {
+  window.app.$root.$emit("changeTab", "Home");
   window.app.$store.dispatch("closeProject");
 });
 ipcRenderer.on("clearRecents", () => {

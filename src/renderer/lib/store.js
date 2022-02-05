@@ -79,10 +79,10 @@ export const store = new Vuex.Store({
     },
     closeProject({ state, dispatch }) {
       if (state.project !== null) {
+        dispatch("stopServe");
         state.project = null;
         state.name = null;
         state.dir = null;
-        dispatch("stopServe");
       }
     },
     async executeTinker({ state }) {

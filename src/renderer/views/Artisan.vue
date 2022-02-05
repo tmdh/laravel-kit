@@ -11,7 +11,7 @@
         />
       </div>
       <div class="overflow-scroll overflow-x-hidden flex-1 flex flex-col pb-4">
-        <div class="flex flex-col text-xs font-mono font-light">
+        <div v-if="project" class="flex flex-col text-xs font-mono font-light">
           <span
             v-for="command in searchResults"
             :key="command.name"
@@ -70,15 +70,23 @@ export default {
     };
   },
   computed: {
-    ...mapState(["name", "serve", "serveLink"]),
+    ...mapState(["name", "serve", "serveLink", "project"]),
     version() {
-      return this.$store.state.project.application.version;
+      if (this.project) {
+        return this.project.application.version;
+      } else {
+        return "";
+      }
     },
     searchResults() {
-      const remove = ["serve", "tinker", "db", "schedule:work"];
-      return this.$store.state.project.commands
-        .filter((command) => command.name.includes(this.searchKeyword) && !remove.includes(command.name) && !command.name.includes("queue"))
-        .sort((a, b) => (a.name > b.name ? 1 : -1));
+      if (this.project) {
+        const remove = ["serve", "tinker", "db", "schedule:work"];
+        return this.project.commands
+          .filter((command) => command.name.includes(this.searchKeyword) && !remove.includes(command.name) && !command.name.includes("queue"))
+          .sort((a, b) => (a.name > b.name ? 1 : -1));
+      } else {
+        return [];
+      }
     }
   },
   methods: {

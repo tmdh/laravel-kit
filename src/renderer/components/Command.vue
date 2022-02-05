@@ -59,7 +59,11 @@ export default {
       return this.name;
     },
     command() {
-      return this.$store.state.project.commands.find((command) => command.name == this.name);
+      if (this.$store.state.project) {
+        return this.$store.state.project.commands.find((command) => command.name == this.name);
+      } else {
+        return {};
+      }
     },
     fullCommand() {
       return this.artisanArray.reduce((prev, cur) => {
