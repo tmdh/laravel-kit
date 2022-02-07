@@ -1,6 +1,6 @@
 import { exec, spawn } from "child_process";
 import { ipcMain, dialog, shell, BrowserWindow } from "electron";
-import killSync from "./tree-kill-sync.js";
+import killSync from "./tree-kill-sync.ts";
 import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
