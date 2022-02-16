@@ -35,9 +35,9 @@ const env = {
   DISABLE_AUTO_UPDATE: "true"
 };
 
-const parseEnv = (env) => {
+const parseEnv = (env: string) => {
   env = env.split("_SHELL_ENV_DELIMITER_")[1];
-  const ret = {};
+  const ret: Record<string, string> = {};
 
   for (const line of stripAnsi(env)
     .split("\n")
