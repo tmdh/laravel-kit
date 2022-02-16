@@ -1,6 +1,6 @@
 import { exec, spawn } from "child_process";
 import { ipcMain, dialog, shell, BrowserWindow } from "electron";
-import killSync from "./tree-kill-sync.ts";
+import killSync from "./tree-kill-sync.js";
 import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
@@ -33,8 +33,7 @@ export default async function () {
     const result = await dialog.showOpenDialog({
       title: "Open project...",
       buttonLabel: "Open",
-      properties: ["openDirectory"],
-      multiSelections: false
+      properties: ["openDirectory"]
     });
     return result;
   });
@@ -91,31 +90,31 @@ export default async function () {
     try {
       const { all } = await execa(store.get("php"), ["artisan", ...fullCommand, "--no-interaction", "--ansi"], { cwd: dir, all: true, buffer: true });
       return all;
-    } catch (e) {
+    } catch (e: any) {
       console.log(`Error executing artisan command in ${dir}: ${fullCommand}`);
       console.error(e);
-      return e.all || "Error";
+      return e.all; // e has all property when Options.all == true
     }
   });
 
   ipcMain.handle("openProject", async (e, dir) => {
     try {
       const { all } = await execa(store.get("php"), ["artisan", "--format=json"], { cwd: dir, all: true, buffer: true });
-      if (all.includes("Laravel")) {
+      if (all?.includes("Laravel")) {
         return { success: true, output: all, basename: basename(dir) };
       } else {
         console.log(`Error opening project in ${dir}`);
         console.error(all);
-        if (all.includes("Could not open input file: artisan")) {
+        if (all?.includes("Could not open input file: artisan")) {
           dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
         } else {
-          dialog.showErrorBox("Error opening project", all);
+          dialog.showErrorBox("Error opening project", all ?? "unknown");
         }
         return { success: false };
       }
-    } catch (e) {
-      console.log(`Error opening project in ${dir}`);
-      console.error(e);
+    } catch (e: any) {
+      console.warn(`Error opening project in ${dir}`);
+      console.log(e);
       if (e.all.includes("Could not open input file: artisan")) {
         dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
       } else {
