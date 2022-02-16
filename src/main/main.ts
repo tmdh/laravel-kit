@@ -1,11 +1,11 @@
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow, BrowserWindowConstructorOptions, dialog } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import fixPath from "./fix-path.js";
 import windowStateKeeper from "electron-window-state";
 import { autoUpdater } from "electron-updater";
 import Store from "electron-store";
 import { format } from "url";
 import { join, resolve } from "path";
+import fixPath from "./fix-path.js";
 import initIpcMain from "./ipc.js";
 import initMenu from "./menu.js";
 
@@ -19,7 +19,7 @@ function createWindow() {
     defaultWidth: 1280,
     defaultHeight: 720
   });
-  let browserWindowOptions = {
+  let browserWindowOptions: BrowserWindowConstructorOptions = {
     x: winState.x,
     y: winState.y,
     width: winState.width,
@@ -60,9 +60,7 @@ function createWindow() {
   if (isWindows) {
     autoUpdater.autoDownload = false;
     autoUpdater.on("error", (_, error) => {
-      if (!error.toString().includes("ERR_NAME_NOT_RESOLVED")) {
-        dialog.showErrorBox("Error", error == null ? "unknown" : error.toString());
-      }
+      console.error(error);
     });
 
     autoUpdater.on("update-available", async () => {
@@ -99,15 +97,7 @@ function createWindow() {
       console.log("An error occurred: ", e);
     }
   } else if (isWindows) {
-    try {
-      await autoUpdater.checkForUpdates();
-    } catch (e) {
-      if (e.toString().includes("ERR_NAME_NOT_RESOLVED")) {
-        console.log("Auto update failed, reason: network offline.");
-      } else {
-        console.log(e);
-      }
-    }
+    autoUpdater.checkForUpdates();
   }
 })();
 

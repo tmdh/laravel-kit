@@ -10,9 +10,10 @@ const options = {
   }
 };
 buildSync({
-  entryPoints: ["src/main/main.js"],
+  entryPoints: ["src/main/main.ts"],
   outfile: "dist/main.js",
-  ...options
+  ...options,
+  minify: process.argv[2] === "--dev" ? false : true
 });
 console.log("built src/main/main.js -> dist/main.js");
 buildSync({
