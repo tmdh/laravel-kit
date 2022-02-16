@@ -1,13 +1,14 @@
 import { exec, spawn } from "child_process";
 import { ipcMain, dialog, shell, BrowserWindow } from "electron";
-import killSync from "./tree-kill-sync.js";
 import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
 import execa from "execa";
 import { join, basename } from "path";
+import killSync from "./tree-kill-sync.js";
+import { KitStore } from "./store.js";
 
-const defaults = {
+const defaults: KitStore = {
   recents: [],
   verbosity: 1,
   env: "",
@@ -15,7 +16,7 @@ const defaults = {
   dark: true,
   php: ""
 };
-const store = new Store({ defaults });
+const store = new Store<KitStore>({ defaults });
 
 export default async function () {
   ipcMain.on("killSync", (e, pid) => {
