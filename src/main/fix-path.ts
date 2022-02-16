@@ -58,6 +58,10 @@ function shellEnv() {
   }
 }
 
+/**
+ * Fixes environment variable to execute PHP from brew or others
+ * @returns void
+ */
 export default function () {
   if (process.platform !== "darwin") {
     return;
