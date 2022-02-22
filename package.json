@@ -89,6 +89,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "linux": {
+      "icon": "./dist/icon.icns",
       "target": [
         "AppImage",
         "deb"

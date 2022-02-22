@@ -26,3 +26,5 @@ copyFileSync("src/main/tinker.php", "dist/tinker.php");
 console.log("copied src/main/tinker.php -> dist/tinker.php");
 copyFileSync("build/icon.png", "dist/icon.png");
 console.log("copied build/icon.png -> dist/icon.png");
+copyFileSync("build/icon.icns", "dist/icon.icns");
+console.log("copied build/icon.icns -> dist/icon.icns");
