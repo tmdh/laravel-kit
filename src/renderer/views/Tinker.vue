@@ -1,8 +1,8 @@
 <template>
-  <div class="flex-1 flex flex-col md:flex-row pt-2">
+  <div class="flex flex-col flex-1 pt-2 md:flex-row">
     <div class="flex flex-col flex-1">
       <tinker-editor class="flex-1" v-model="code" language="php-x" theme="one-light"></tinker-editor>
-      <div class="py-2 px-3 flex justify-center md:justify-start">
+      <div class="flex justify-center px-3 py-2 md:justify-start">
         <div class="flex flex-row items-center">
           <input type="checkbox" class="form-checkbox input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
           <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">Auto Tinker</label>
@@ -60,7 +60,7 @@ export default {
         this.$store.state.output = value;
       },
       get() {
-        return this.$store.state.output;
+        return this.getFormattedString(this.$store.state.output);
       }
     }
   },
@@ -83,6 +83,47 @@ export default {
         this.$store.state.autoTinker = value;
       }
     },
+
+    getFormattedString( output ) {
+        const hasPrefixArrow = this.hasPrefixArrow( output );
+        const outputWithoutPrefixArrow = hasPrefixArrow ? this.removePrefixArrow( output ) : output;
+        const properlyQuotedOutput = this.removeExtraQuotes(outputWithoutPrefixArrow);
+
+        if(this.isJson(properlyQuotedOutput)) {
+          output = JSON.stringify(JSON.parse(properlyQuotedOutput), null, '\t');
+
+          if(hasPrefixArrow) {
+            output = `=> ${output}`;
+          }
+        }
+
+        return output;
+    },
+
+    hasPrefixArrow( str ) {
+      return str.substr(0,3) === '=> ';
+    },
+
+    removePrefixArrow( str ) {
+        return str.substring(3);
+    },
+
+     isJson(str) {
+      try {
+          const parsedObject = JSON.parse(str);
+          if (parsedObject && typeof parsedObject === `object`) {
+            return true;
+          }
+        } catch (err) {
+          return false;
+        }
+      return false;
+    },
+
+    removeExtraQuotes(str) {
+      return str.substr(1, str.length - 2);
+    },
+
     ...mapActions(["executeTinker"])
   }
 };
