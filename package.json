@@ -94,6 +94,9 @@
         "deb"
       ],
       "category": "Development"
+    },
+    "deb": {
+      "depends": ["libnotify4", "libxtst6", "libnss3"]
     }
   }
 }
