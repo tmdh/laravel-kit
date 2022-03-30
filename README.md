@@ -66,7 +66,7 @@ PHP must be installed in your system.
 
 ### Windows
 
-[Download the setup file (.exe)](https://github.com/tmdh/laravel-kit/releases/latest) and install it. Updates will be installed automatically.
+[Download the setup file (.exe)](https://github.com/tmdh/laravel-kit/releases/latest) and install it. Updates will be checked automatically.
 
 ### macOS
 
