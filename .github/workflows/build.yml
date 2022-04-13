@@ -41,5 +41,9 @@ jobs:
         name: Upload artifacts
         if: ${{ startsWith(github.event.head_commit.message, '[artifacts]') }}
         with:
-          name: ${{ matrix.os }}
-          path: release/*.{exe,dmg,AppImage,zip,deb}
+          path: |
+            release/*.exe
+            release/*.dmg
+            release/*.AppImage
+            release/*.zip
+            release/*.deb
