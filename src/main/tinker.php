@@ -163,7 +163,7 @@ class Tinker
             'rawOutput' => true,
         ]);
 
-        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'null' : '/dev/null');
+        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? $_SERVER['TEMP'] . '\\.lk_artisan_temp' : '/dev/null');
 
         $config->getPresenter()->addCasters([
             Collection::class => 'Laravel\Tinker\TinkerCaster::castCollection',
