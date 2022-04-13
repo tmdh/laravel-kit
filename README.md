@@ -76,7 +76,7 @@ The recommended way to install on macOS is by using [brew](https://brew.sh/).
 brew install laravel-kit
 ```
 
-Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/laravel-kit/releases/latest) page.
+Or, download zip or dmg formats from the [Releases](https://github.com/tmdh/laravel-kit/releases/latest) page. Note that the dmg release is not code signed. [Installation instructions for dmg](https://github.com/tmdh/laravel-kit/issues/40#issuecomment-1085726076)
 
 ### Ubuntu and other derivatives
 
