@@ -37,13 +37,3 @@ jobs:
           GH_TOKEN: ${{ secrets.gh_token }}
         run: yarn run release
 
-      - uses: actions/upload-artifact@v3
-        name: Upload artifacts
-        if: ${{ startsWith(github.event.head_commit.message, '[artifacts]') }}
-        with:
-          path: |
-            release/*.exe
-            release/*.dmg
-            release/*.AppImage
-            release/*.zip
-            release/*.deb
