@@ -82,7 +82,11 @@
     },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "darkModeSupport": true
+      "darkModeSupport": true,
+      "publish": {
+        "provider": "github",
+        "publishAutoUpdate": false
+      }
     },
     "nsis": {
       "oneClick": false,
@@ -93,10 +97,18 @@
         "AppImage",
         "deb"
       ],
-      "category": "Development"
+      "category": "Development",
+      "publish": {
+        "provider": "github",
+        "publishAutoUpdate": false
+      }
     },
     "deb": {
-      "depends": ["libnotify4", "libxtst6", "libnss3"]
+      "depends": [
+        "libnotify4",
+        "libxtst6",
+        "libnss3"
+      ]
     }
   }
 }
