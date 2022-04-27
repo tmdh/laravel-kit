@@ -88,6 +88,9 @@
         "publishAutoUpdate": false
       }
     },
+    "dmg": {
+      "writeUpdateInfo": false
+    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
