@@ -18,7 +18,7 @@
 import TinkerEditor from "@/components/TinkerEditor.vue";
 import KitButton from "@/components/KitButton.vue";
 import { mapState, mapActions } from "vuex";
-import initTinker from "@/lib/tinker.js";
+import initTinker from "@/lib/tinker.ts";
 initTinker();
 
 export default {
@@ -84,39 +84,39 @@ export default {
       }
     },
 
-    getFormattedString( output ) {
-        const hasPrefixArrow = this.hasPrefixArrow( output );
-        const outputWithoutPrefixArrow = hasPrefixArrow ? this.removePrefixArrow( output ) : output;
-        const properlyQuotedOutput = this.removeExtraQuotes(outputWithoutPrefixArrow);
+    getFormattedString(output) {
+      const hasPrefixArrow = this.hasPrefixArrow(output);
+      const outputWithoutPrefixArrow = hasPrefixArrow ? this.removePrefixArrow(output) : output;
+      const properlyQuotedOutput = this.removeExtraQuotes(outputWithoutPrefixArrow);
 
-        if(this.isJson(properlyQuotedOutput)) {
-          output = JSON.stringify(JSON.parse(properlyQuotedOutput), null, '\t');
+      if (this.isJson(properlyQuotedOutput)) {
+        output = JSON.stringify(JSON.parse(properlyQuotedOutput), null, "\t");
 
-          if(hasPrefixArrow) {
-            output = `=> ${output}`;
-          }
+        if (hasPrefixArrow) {
+          output = `=> ${output}`;
         }
+      }
 
-        return output;
+      return output;
     },
 
-    hasPrefixArrow( str ) {
-      return str.substr(0,3) === '=> ';
+    hasPrefixArrow(str) {
+      return str.substr(0, 3) === "=> ";
     },
 
-    removePrefixArrow( str ) {
-        return str.substring(3);
+    removePrefixArrow(str) {
+      return str.substring(3);
     },
 
-     isJson(str) {
+    isJson(str) {
       try {
-          const parsedObject = JSON.parse(str);
-          if (parsedObject && typeof parsedObject === `object`) {
-            return true;
-          }
-        } catch (err) {
-          return false;
+        const parsedObject = JSON.parse(str);
+        if (parsedObject && typeof parsedObject === `object`) {
+          return true;
         }
+      } catch (err) {
+        return false;
+      }
       return false;
     },
 

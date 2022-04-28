@@ -43,9 +43,6 @@ export default function () {
         [/[[\]]/, "delimiter.array.php"],
         [/[()]/, "delimiter.parenthesis.php"],
 
-        // whitespace
-        [/[ \t\r\n]+/],
-
         // comments
         [/(#|\/\/)$/, "comment.php"],
         [/(#|\/\/)/, "comment.php", "@phpLineComment"],
