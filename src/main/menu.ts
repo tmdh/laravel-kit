@@ -158,8 +158,8 @@ async function getRecents(win: BrowserWindow) {
       }
     }
   ];
-  // FIXME: TypeSript Error
-  newTemplate[isMac ? 1 : 0].submenu[1] = Object.assign({ label: "Open Recents", submenu: [...recents, ...extraMenus] });
+  let recentsMenu = Object.assign({ label: "Open Recents", submenu: [...recents, ...extraMenus] });
+  (newTemplate[isMac ? 1 : 0].submenu as MenuItemConstructorOptions[])[1] = recentsMenu;
   Menu.setApplicationMenu(Menu.buildFromTemplate(newTemplate));
 }
 
