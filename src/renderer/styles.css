@@ -12,7 +12,8 @@
     font-family: system-ui;
     font-style: normal;
     font-weight: 300;
-    src: local(".SFNS-Light"), local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light");
+    src: local(".SFNS-Light"), local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Segoe UI Variable Text Light"), local("Segoe UI Light"),
+      local("Ubuntu Light");
   }
 
   @font-face {
@@ -26,7 +27,8 @@
     font-family: system-ui;
     font-style: normal;
     font-weight: 400;
-    src: local(".SFNS-Regular"), local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"), local(".LucidaGrandeUI"), local("Segoe UI"), local("Ubuntu");
+    src: local(".SFNS-Regular"), local(".SFNSText-Regular"), local(".HelveticaNeueDeskInterface-Regular"), local(".LucidaGrandeUI"), local("Segoe UI Variable Text Regular"), local("Segoe UI"),
+      local("Ubuntu");
   }
 
   @font-face {
@@ -40,7 +42,8 @@
     font-family: system-ui;
     font-style: normal;
     font-weight: 500;
-    src: local(".SFNS-Medium"), local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"), local(".LucidaGrandeUI"), local("Segoe UI Semibold"), local("Ubuntu Medium");
+    src: local(".SFNS-Medium"), local(".SFNSText-Medium"), local(".HelveticaNeueDeskInterface-MediumP4"), local(".LucidaGrandeUI"), local("Segoe UI Variable Text Semibold"), local("Segoe UI Semibold"),
+      local("Ubuntu Medium");
   }
 
   @font-face {
@@ -55,7 +58,8 @@
     font-family: system-ui;
     font-style: normal;
     font-weight: 700;
-    src: local(".SFNS-Bold"), local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"), local(".LucidaGrandeUI"), local("Segoe UI Bold"), local("Ubuntu Bold");
+    src: local(".SFNS-Bold"), local(".SFNSText-Bold"), local(".HelveticaNeueDeskInterface-Bold"), local(".LucidaGrandeUI"), local("Segoe UI Variable Text Bold"), local("Segoe UI Bold"),
+      local("Ubuntu Bold");
   }
 
   @font-face {

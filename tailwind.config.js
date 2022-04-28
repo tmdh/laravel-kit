@@ -1,8 +1,6 @@
 module.exports = {
-  purge: {
-    content: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"]
-  },
-  darkMode: "class", // or 'media' or 'class'
+  content: ["./src/renderer/*.vue", "./src/renderer/components/*.vue", "./src/renderer/views/*.vue"],
+  darkMode: "class",
   theme: {
     colors: {
       gray: {
@@ -69,9 +67,6 @@ module.exports = {
       md: { min: "934px" },
       sm: { min: "540px" }
     }
-  },
-  variants: {
-    extend: {}
   },
   plugins: [
     require("@tailwindcss/forms")({
