@@ -35,7 +35,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import basename from "@/lib/basename.js";
+import basename from "@/lib/basename.ts";
 import KitButton from "@/components/KitButton.vue";
 export default {
   name: "Home",

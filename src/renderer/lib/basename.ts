@@ -26,7 +26,7 @@
  * @param {string} path
  * @returns {string}
  */
-export default function (path) {
+export default function (path: string) {
   let start = 0;
   let end = -1;
   let matchedSlash = true;
@@ -34,7 +34,7 @@ export default function (path) {
   // Check for a drive letter prefix so as not to mistake the following
   // path separator as an extra separator at the end of the path that can be
   // disregarded
-  if (path.length >= 2 && isWindowsDeviceRoot(path.charCodeAt(0)) && path.charAt(1) === ":") {
+  if (path.length >= 2 && isWindowsDeviceRoot(path.charAt(0)) && path.charAt(1) === ":") {
     start = 2;
   }
 
@@ -58,10 +58,10 @@ export default function (path) {
   return path.slice(start, end);
 }
 
-function isPathSeparator(char) {
+function isPathSeparator(char: string) {
   return char === "/" || char === "\\";
 }
 
-function isWindowsDeviceRoot(char) {
+function isWindowsDeviceRoot(char: string) {
   return (char >= "A" && char <= "Z") || (char >= "a" && char <= "z");
 }
