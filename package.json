@@ -11,6 +11,7 @@
     "dev:two": "node build.js --dev && electron .",
     "prod": "vite build && node build.js --prod",
     "start": "electron .",
+    "test": "node test.js",
     "pack": "electron-builder --dir",
     "release": "electron-builder"
   },

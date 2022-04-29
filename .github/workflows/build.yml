@@ -26,6 +26,15 @@ jobs:
           node-version: 14
           cache: "yarn"
 
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2
+        with:
+          php-version: "8.1"
+          tools: composer
+
+      - name: Test
+        run: yarn test
+
       - name: Install dependencies
         run: yarn
 
@@ -36,4 +45,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
         run: yarn run release
-
