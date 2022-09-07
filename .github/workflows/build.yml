@@ -27,16 +27,6 @@ jobs:
           node-version: 14
           cache: "yarn"
 
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-          tools: composer
-          extensions: fileinfo
-
-      - name: Test
-        run: yarn test
-
       - name: Install dependencies
         run: yarn
 
