@@ -85,7 +85,11 @@
       "publish": {
         "provider": "github",
         "publishAutoUpdate": false
-      }
+      },
+      "target": [
+        "x86",
+        "arm64"
+      ]
     },
     "dmg": {
       "writeUpdateInfo": false
