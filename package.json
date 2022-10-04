@@ -33,7 +33,7 @@
     "@types/which": "^2.0.1",
     "@vitejs/plugin-vue": "2.1.0",
     "@vue/compiler-sfc": "3.2.29",
-    "electron": "17.0.0",
+    "electron": "21.0.1",
     "electron-builder": "22.14.5",
     "electron-devtools-installer": "^3.2.0",
     "esbuild": "0.14.18",
