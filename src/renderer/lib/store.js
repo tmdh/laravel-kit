@@ -114,7 +114,7 @@ export const store = createStore({
         state.serveLink = null;
       }
     },
-    async getRecents(state) {
+    async buildMenu(state) {
       const recents = await window.store.get("recents");
       state.commit("updateRecentsFromData", recents);
     },
@@ -123,7 +123,7 @@ export const store = createStore({
       newRecents = newRecents.filter((item) => item != dir);
       newRecents.unshift(dir);
       window.store.set("recents", newRecents);
-      state.dispatch("getRecents");
+      state.dispatch("buildMenu");
     },
     async updateSettingsState(state) {
       const verbosity = await window.store.get("verbosity");
