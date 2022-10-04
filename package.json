@@ -97,6 +97,9 @@
     "dmg": {
       "writeUpdateInfo": false
     },
+    "zip": {
+      "writeUpdateInfo": false
+    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
