@@ -3,7 +3,7 @@ import Store from "electron-store";
 import { KitStore } from "./store.js";
 const store = new Store<KitStore>();
 
-function template(win: BrowserWindow): MenuItemConstructorOptions[] {
+function template(win: BrowserWindow, isProject: boolean): MenuItemConstructorOptions[] {
   const isMac = process.platform === "darwin";
   return [
     ...((isMac
@@ -36,13 +36,15 @@ function template(win: BrowserWindow): MenuItemConstructorOptions[] {
           label: "Reload Project",
           click() {
             win.webContents.send("reloadProject");
-          }
+          },
+          enabled: isProject
         },
         {
           label: "Close Project",
           click() {
             win.webContents.send("closeProject");
-          }
+          },
+          enabled: isProject
         },
         { type: "separator" },
         isMac ? { role: "close" } : { role: "quit" }
@@ -56,7 +58,8 @@ function template(win: BrowserWindow): MenuItemConstructorOptions[] {
           accelerator: "CmdOrCtrl+T",
           click() {
             win.webContents.send("executeTinker");
-          }
+          },
+          enabled: isProject
         }
       ]
     },
@@ -130,16 +133,16 @@ function template(win: BrowserWindow): MenuItemConstructorOptions[] {
   ];
 }
 
-ipcMain.on("getRecents", async () => {
-  await getRecents(BrowserWindow.getAllWindows()[0]);
+ipcMain.on("buildMenu", async (e, isProject) => {
+  await buildMenu(BrowserWindow.getAllWindows()[0], isProject);
 });
 
 function openLink(link: string) {
   shell.openExternal(link);
 }
 
-async function getRecents(win: BrowserWindow) {
-  let newTemplate = template(win);
+async function buildMenu(win: BrowserWindow, isProject: boolean) {
+  let newTemplate = template(win, isProject);
   const isMac = process.platform === "darwin";
   const recents = store.get("recents").map((dir) =>
     Object.assign({
@@ -164,7 +167,7 @@ async function getRecents(win: BrowserWindow) {
 }
 
 export default async function (win: BrowserWindow): Promise<void> {
-  const menu = Menu.buildFromTemplate(template(win));
+  const menu = Menu.buildFromTemplate(template(win, false));
   Menu.setApplicationMenu(menu);
-  await getRecents(win);
+  await buildMenu(win, false);
 }

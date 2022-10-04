@@ -6,7 +6,7 @@ import "@/styles.css";
 const app = createApp({
   ...App,
   mounted() {
-    this.$store.dispatch("getRecents");
+    this.$store.dispatch("buildMenu");
     this.$store.dispatch("updateSettingsState");
   }
 });

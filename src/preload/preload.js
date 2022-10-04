@@ -10,7 +10,7 @@ window.Electron = {
   openExternal,
   choosePhpExecutable,
   getPhpVersion,
-  getRecents,
+  buildMenu,
   tinker,
   artisan,
   openProject,
@@ -92,8 +92,8 @@ function setStore(key, value) {
   ipcRenderer.invoke("setStore", { key, value });
 }
 
-function getRecents() {
-  ipcRenderer.send("getRecents");
+function buildMenu(isProject) {
+  ipcRenderer.send("buildMenu", isProject);
 }
 
 async function tinker(dir, code) {

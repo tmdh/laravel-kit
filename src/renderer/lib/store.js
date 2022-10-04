@@ -36,7 +36,7 @@ export const store = createStore({
     clearRecents(state) {
       window.store.set("recents", []);
       state.recents = [];
-      window.Electron.getRecents();
+      window.Electron.buildMenu(state.project !== null);
     },
     updateSettingsStateFromData(state, data) {
       state.verbosity = data.verbosity;
@@ -67,6 +67,7 @@ export const store = createStore({
           context.state.name = basename;
           document.title = `${context.state.name} - Kit`;
           context.dispatch("addRecent", payload.dir);
+          window.Electron.buildMenu(true);
         }
         context.state.opening = false;
       } else {
@@ -87,9 +88,13 @@ export const store = createStore({
         state.name = null;
         state.dir = null;
       }
+      window.Electron.buildMenu(state.project !== null);
     },
     async executeTinker({ state }) {
       if (state.project !== null) {
+        if (state.tab !== "Tinker") {
+          state.tab = "Tinker";
+        }
         if (state.php !== "") {
           state.tinkering = true;
           state.output = await window.Electron.tinker(state.dir, state.code);
@@ -119,7 +124,6 @@ export const store = createStore({
       newRecents.unshift(dir);
       window.store.set("recents", newRecents);
       state.dispatch("getRecents");
-      window.Electron.getRecents();
     },
     async updateSettingsState(state) {
       const verbosity = await window.store.get("verbosity");
