@@ -1,5 +1,4 @@
-import { app, BrowserWindow, BrowserWindowConstructorOptions, dialog } from "electron";
-import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { app, BrowserWindow, BrowserWindowConstructorOptions, dialog, session } from "electron";
 import windowStateKeeper from "electron-window-state";
 import { autoUpdater } from "electron-updater";
 import Store from "electron-store";
@@ -91,10 +90,15 @@ function createWindow() {
   createWindow();
   if (isDev) {
     try {
-      const name = await installExtension(VUEJS_DEVTOOLS);
-      console.log(`Added Extension:  ${name}`);
+      session.defaultSession.loadExtension(resolve(__dirname, "..", "devtools/packages/shell-chrome"));
+      console.log("Added vue-devtools extension.");
     } catch (e) {
       console.log("An error occurred: ", e);
+      console.log("Run these commands: ");
+      console.log("git clone https://github.com/vuejs/devtools.git");
+      console.log("cd devtools");
+      console.log("yarn");
+      console.log("yarn build");
     }
   } else if (isWindows) {
     autoUpdater.checkForUpdates();

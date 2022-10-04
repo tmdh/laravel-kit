@@ -6,6 +6,7 @@ test.php
 stats.json
 release
 desktop.ini
+devtools
 
 # local env files
 .env.local
