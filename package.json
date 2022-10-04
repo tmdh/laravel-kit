@@ -86,10 +86,13 @@
         "provider": "github",
         "publishAutoUpdate": false
       },
-      "target": [
-        "x86",
-        "arm64"
-      ]
+      "target": {
+        "target": "default",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
     },
     "dmg": {
       "writeUpdateInfo": false
