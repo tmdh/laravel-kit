@@ -10,15 +10,7 @@
 <div align="center">
   <!-- Version -->
   <a href="https://github.com/tmdh/laravel-kit/releases/latest">
-    <img src="https://badgen.net/github/release/tmdh/laravel-kit" alt="Latest release">
-  </a>
-  <!-- Build Status -->
-  <a href="https://github.com/tmdh/laravel-kit/actions/workflows/build.yml">
-    <img src="https://github.com/tmdh/laravel-kit/actions/workflows/build.yml/badge.svg" alt="build">
-  </a>
-  <!-- Downloads total -->
-  <a href="https://github.com/tmdh/laravel-kit/releases">
-    <img src="https://img.shields.io/github/downloads/tmdh/laravel-kit/total">
+    <img src="https://badgen.net/github/release/tmdh/laravel-kit" alt="Get the latest release">
   </a>
 </div>
 <div align="center">
@@ -58,7 +50,6 @@
 - Serve your Laravel application locally with a click of a button (so convenient :star_struck: ).
 - Beautiful user interface inspired by VSCode and dark theme.
 - Artisan commands are retrieved from your Laravel project.
-- Many more features yet to come.
 
 ## Installation
 
@@ -124,4 +115,4 @@ Go to [Laravel Kit wiki](https://github.com/tmdh/laravel-kit/wiki).
 
 ---
 
-Copyright © 2018-2021 by [Tareque Md Hanif](https://github.com/tmdh)
+Copyright © 2018-2022 by [Tareque Md Hanif](https://github.com/tmdh)
