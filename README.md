@@ -80,7 +80,7 @@ sudo apt install ./laravel-kit_2.0.7_amd64.deb
 
 ### Arch Linux
 
-It is available in the Arch User Repository (AUR) as [laravel-kit](https://aur.archlinux.org/packages/laravel-kit)
+It is available in the Arch User Repository (AUR) as [laravel-kit](https://aur.archlinux.org/packages/laravel-kit).
 
 ### Other Linux distributions
 
