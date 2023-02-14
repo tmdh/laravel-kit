@@ -78,6 +78,10 @@ wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.7/laravel-kit_2.
 sudo apt install ./laravel-kit_2.0.7_amd64.deb
 ```
 
+### Arch Linux
+
+It is available in the Arch User Repository (AUR) as [laravel-kit](https://aur.archlinux.org/packages/laravel-kit)
+
 ### Other Linux distributions
 
 Only AppImage format is available for other Linux distributions. Download it from the [Releases](https://github.com/tmdh/laravel-kit/releases/latest) page. Proper methods will be added very soon.
