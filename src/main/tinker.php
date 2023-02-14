@@ -4,6 +4,7 @@
 
     Copyright (c) 2012-2018 Justin Hileman
     Copyright (c) Spatie bvba <info@spatie.be>
+    Copyright (c) Tareque Md Hanif <tarequemd.hanif@yahoo.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +37,7 @@ use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\ExecutionClosure;
 use Psy\Shell;
+use Psy\Output\Theme;
 use Psy\Exception\BreakException;
 use Psy\Exception\ErrorException;
 use Psy\Exception\ThrowUpException;
@@ -99,7 +101,7 @@ class KitExecutionLoopClosure extends ExecutionClosure
                 // Save execution scope variables for next time
                 $__psysh__->setScopeVariables(\get_defined_vars());
 
-                $__psysh__->writeReturnValue($_);
+                $__psysh__->writeReturnValue($_, true);
             } catch (BreakException $_e) {
                 $__psysh__->writeException($_e);
 
@@ -144,7 +146,7 @@ class Tinker
     {
         $phpCode = $this->removeComments($phpCode);
         
-        $this->shell->addInput($phpCode);
+        $this->shell->addInput($phpCode, true);
 
         $closure = new KitExecutionLoopClosure($this->shell);
 
@@ -161,6 +163,8 @@ class Tinker
             'updateCheck' => 'never',
             'usePcntl' => false,
             'rawOutput' => true,
+            'theme' => 'classic',
+            'interactiveMode' => 'disabled',
         ]);
 
         $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? $_SERVER['TEMP'] . '\\.lk_artisan_temp' : '/dev/null');
