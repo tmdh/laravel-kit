@@ -26,7 +26,7 @@
           <span class="text-terminal-green dark:text-terminal-d-green">&nbsp;php</span>
           <span> artisan {{ fullCommand }}</span>
         </div>
-        <pre class="max-h-64 overflow-y-auto pb-4 select-text whitespace-pre-wrap break-all" v-html="output"></pre>
+        <pre class="pb-4 select-text whitespace-pre-wrap break-all" v-html="output"></pre>
       </div>
       <div ref="terminal-end"></div>
       <route-table v-if="routes.isJSON && routeTable" :routes="routes" :key="output"></route-table>
