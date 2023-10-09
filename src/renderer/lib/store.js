@@ -36,7 +36,7 @@ export const store = createStore({
     clearRecents(state) {
       window.store.set("recents", []);
       state.recents = [];
-      window.Electron.buildMenu(state.project !== null);
+      window.kit.buildMenu(state.project !== null);
     },
     updateSettingsStateFromData(state, data) {
       state.verbosity = data.verbosity;
@@ -59,7 +59,7 @@ export const store = createStore({
           context.dispatch("closeProject");
         }
         context.state.opening = true;
-        const { success, output, basename } = await window.Electron.openProject(payload.dir);
+        const { success, output, basename } = await window.kit.openProject({ type: "LocalFolder", dir: payload.dir });
         if (success) {
           context.state.dir = payload.dir;
           context.state.project = JSON.parse(output);
@@ -67,15 +67,15 @@ export const store = createStore({
           context.state.name = basename;
           document.title = `${context.state.name} - Kit`;
           context.dispatch("addRecent", payload.dir);
-          window.Electron.buildMenu(true);
+          window.kit.buildMenu(true);
         }
         context.state.opening = false;
       } else {
-        window.Electron.dialogPhpNotFound();
+        window.kit.dialogPhpNotFound();
       }
     },
     async openDialog(context) {
-      const result = await window.Electron.dialogFolder();
+      const result = await window.kit.dialogFolder();
       if (!result.canceled) {
         context.dispatch("openProject", { dir: result.filePaths[0] });
       }
@@ -88,7 +88,7 @@ export const store = createStore({
         state.name = null;
         state.dir = null;
       }
-      window.Electron.buildMenu(state.project !== null);
+      window.kit.buildMenu(state.project !== null);
     },
     async executeTinker({ state }) {
       if (state.project !== null) {
@@ -97,19 +97,19 @@ export const store = createStore({
         }
         if (state.php !== "") {
           state.tinkering = true;
-          state.output = await window.Electron.tinker(state.dir, state.code);
+          state.output = await window.kit.tinker(state.dir, state.code);
           state.tinkering = false;
         } else {
-          window.Electron.dialogPhpNotFound();
+          window.kit.dialogPhpNotFound();
         }
       }
     },
     async startServe({ state }) {
-      state.serve = await window.Electron.startServe(state.dir);
+      state.serve = await window.kit.startServe(state.dir);
     },
     async stopServe({ state }) {
       if (state.serve != null) {
-        await window.Electron.kill(state.serve);
+        await window.kit.kill(state.serve);
         state.serve = null;
         state.serveLink = null;
       }

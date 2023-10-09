@@ -1,22 +1,12 @@
 import { exec, spawn } from "child_process";
 import { ipcMain, dialog, shell, BrowserWindow } from "electron";
 import kill from "tree-kill";
-import Store from "electron-store";
 import which from "which";
 import execa from "execa";
 import { join, basename } from "path";
 import killSync from "./tree-kill-sync.js";
-import { KitStore } from "./store.js";
-
-const defaults: KitStore = {
-  recents: [],
-  verbosity: 1,
-  env: "",
-  editor: "echo 'No command specified'",
-  dark: true,
-  php: ""
-};
-const store = new Store<KitStore>({ defaults });
+import { store } from "./store.js";
+import { connectionFactory } from "./connection.js";
 
 export default async function () {
   ipcMain.on("killSync", (e, pid) => {
@@ -98,31 +88,9 @@ export default async function () {
     }
   });
 
-  ipcMain.handle("openProject", async (e, dir) => {
-    try {
-      const { all } = await execa(store.get("php"), ["artisan", "--format=json"], { cwd: dir, all: true, buffer: true });
-      if (all?.includes("Laravel")) {
-        return { success: true, output: all, basename: basename(dir) };
-      } else {
-        console.log(`Error opening project in ${dir}`);
-        console.error(all);
-        if (all?.includes("Could not open input file: artisan")) {
-          dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
-        } else {
-          dialog.showErrorBox("Error opening project", all ?? "unknown");
-        }
-        return { success: false };
-      }
-    } catch (e: any) {
-      console.warn(`Error opening project in ${dir}`);
-      console.log(e);
-      if (e.all.includes("Could not open input file: artisan")) {
-        dialog.showErrorBox("Error opening project", `${dir} - This folder is not a Laravel project. Please create a Laravel project and then open it.`);
-      } else {
-        dialog.showErrorBox("Error opening project", e.all);
-      }
-      return { success: false };
-    }
+  ipcMain.handle("openProject", async (e, factoryOptions) => {
+    let connection = connectionFactory(factoryOptions);
+    return await connection.openProject();
   });
 
   ipcMain.handle("startServe", (e, dir) => {

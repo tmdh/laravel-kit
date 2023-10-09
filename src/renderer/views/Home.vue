@@ -60,7 +60,7 @@ export default {
     ...mapActions(["openDialog", "openProject"]),
     ...mapMutations(["changeTab"]),
     openLink(link) {
-      window.Electron.openExternal(link.href);
+      window.kit.openExternal(link.href);
     },
     basename(dir) {
       return basename(dir.toString());

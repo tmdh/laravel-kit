@@ -74,13 +74,13 @@ export default {
   },
   methods: {
     async selectExecutable() {
-      const result = await window.Electron.choosePhpExecutable();
+      const result = await window.kit.choosePhpExecutable();
       if (!result.canceled) {
         this.php = result.filePaths[0];
       }
     },
     async getPhpVersion() {
-      const result = await window.Electron.getPhpVersion();
+      const result = await window.kit.getPhpVersion();
       this.phpv = result;
     },
     saveSettings() {

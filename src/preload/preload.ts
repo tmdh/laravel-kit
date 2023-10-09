@@ -1,6 +1,39 @@
 import { ipcRenderer } from "electron";
+import { App } from "vue";
+import { ConnectionOpenProjectResponse } from "../shared/types";
 
-window.Electron = {
+declare global {
+  interface Window {
+    kit: ElectronInterface;
+    store: StoreInterface;
+    app: App<Element>;
+  }
+
+  interface ElectronInterface {
+    dialogPhpNotFound(): void;
+    dialogError(message: string): void;
+    dialogFolder(): Promise<any>;
+    kill(pid: number): void;
+    showItemInFolder(fullPath: string): void;
+    openInEditor(dir: string): void;
+    openExternal(fullPath: string): void;
+    choosePhpExecutable(): Promise<void>;
+    getPhpVersion(): Promise<string>;
+    buildMenu(isProject: boolean): void;
+    tinker(dir: string, code: string): Promise<string>;
+    artisan(fullCommand: string, dir: string): Promise<string>;
+    openProject(dir: string): Promise<ConnectionOpenProjectResponse>;
+    startServe(dir: string): Promise<number>;
+    killSync(serve: number): void;
+  }
+
+  interface StoreInterface {
+    get(key: string): Promise<any>;
+    set(key: string, value: any): Promise<void>;
+  }
+}
+
+window.kit = {
   dialogPhpNotFound,
   dialogError,
   dialogFolder,
@@ -45,7 +78,7 @@ ipcRenderer.on("updateServeLink", (e, link) => {
   window.app._context.provides.store.commit("updateServeLink", link);
 });
 
-function dialogError(message) {
+function dialogError(message: string) {
   ipcRenderer.send("dialogError", message);
 }
 
@@ -57,19 +90,19 @@ async function dialogFolder() {
   return await ipcRenderer.invoke("dialogFolder");
 }
 
-async function kill(pid) {
+async function kill(pid: number) {
   await ipcRenderer.invoke("kill", pid);
 }
 
-function showItemInFolder(fullPath) {
+function showItemInFolder(fullPath: string) {
   ipcRenderer.send("showItemInFolder", fullPath);
 }
 
-function openInEditor(dir) {
+function openInEditor(dir: string) {
   ipcRenderer.send("openInEditor", dir);
 }
 
-function openExternal(fullPath) {
+function openExternal(fullPath: string) {
   ipcRenderer.send("openExternal", fullPath);
 }
 
@@ -83,39 +116,39 @@ async function getPhpVersion() {
   return result;
 }
 
-async function getStore(key) {
+async function getStore(key: string) {
   const value = await ipcRenderer.invoke("getStore", key);
   return value;
 }
 
-function setStore(key, value) {
-  ipcRenderer.invoke("setStore", { key, value });
+async function setStore(key: string, value: any) {
+  await ipcRenderer.invoke("setStore", { key, value });
 }
 
-function buildMenu(isProject) {
+function buildMenu(isProject: boolean) {
   ipcRenderer.send("buildMenu", isProject);
 }
 
-async function tinker(dir, code) {
+async function tinker(dir: string, code: string) {
   const output = await ipcRenderer.invoke("tinker", { dir, code });
   return output;
 }
 
-async function artisan(fullCommand, dir) {
+async function artisan(fullCommand: string, dir: string) {
   const output = await ipcRenderer.invoke("artisan", { fullCommand, dir });
   return output;
 }
 
-async function openProject(dir) {
+async function openProject(dir: string) {
   const output = await ipcRenderer.invoke("openProject", dir);
   return output;
 }
 
-async function startServe(dir) {
+async function startServe(dir: string) {
   const serve = await ipcRenderer.invoke("startServe", dir);
   return serve;
 }
 
-function killSync(serve) {
+function killSync(serve: number) {
   ipcRenderer.send("killSync", serve);
 }

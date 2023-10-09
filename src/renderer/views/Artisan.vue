@@ -91,10 +91,10 @@ export default {
   },
   methods: {
     openFolder() {
-      window.Electron.showItemInFolder(this.$store.state.dir);
+      window.kit.showItemInFolder(this.$store.state.dir);
     },
     openServe() {
-      window.Electron.openExternal(this.serveLink);
+      window.kit.openExternal(this.serveLink);
     },
     ...mapActions(["startServe", "stopServe"]),
     serveService() {
@@ -105,7 +105,7 @@ export default {
       }
     },
     openInEditor() {
-      window.Electron.openInEditor(this.$store.state.dir);
+      window.kit.openInEditor(this.$store.state.dir);
     }
   }
 };

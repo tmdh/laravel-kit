@@ -18,6 +18,6 @@ window.app = app;
 window.onbeforeunload = () => {
   const serve = window.app._context.provides.store.state.serve;
   if (serve != null) {
-    window.Electron.killSync(serve);
+    window.kit.killSync(serve);
   }
 };
