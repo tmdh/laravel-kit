@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { store } from "@/lib/store.js";
+import { store } from "@/lib/store.ts";
 import App from "@/App.vue";
 import "@/styles.css";
 

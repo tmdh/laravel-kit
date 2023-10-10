@@ -5,7 +5,33 @@ async () => {
   dark = await window.store.get("dark");
 };
 
-export const store = createStore({
+interface Project {
+  name: string;
+  commands: [string];
+}
+
+interface State {
+  tab: string;
+  project: Project | null;
+  name: string | null;
+  dir: string | null;
+  serve: number | null;
+  serveLink: string | null;
+  recents: [string] | [];
+  verbosity: number;
+  env: string;
+  editor: string;
+  opening: boolean;
+  running: boolean;
+  tinkering: boolean;
+  dark: boolean;
+  code: string;
+  autoTinker: boolean;
+  output: string;
+  php: string;
+}
+
+export const store = createStore<State>({
   state: {
     tab: "Home",
     project: null,
@@ -59,12 +85,13 @@ export const store = createStore({
           context.dispatch("closeProject");
         }
         context.state.opening = true;
-        const { success, output, basename } = await window.kit.openProject({ type: "LocalFolder", dir: payload.dir });
-        if (success) {
+        const result = await window.kit.openProject({ type: "LocalFolder", dir: payload.dir });
+        if (result.success) {
           context.state.dir = payload.dir;
-          context.state.project = JSON.parse(output);
-          context.state.project.namespaces = null;
-          context.state.name = basename;
+          const parsedJson = JSON.parse(result.output);
+          delete parsedJson.namespaces;
+          context.state.project = JSON.parse(result.output);
+          context.state.name = result.basename;
           document.title = `${context.state.name} - Kit`;
           context.dispatch("addRecent", payload.dir);
           window.kit.buildMenu(true);
@@ -95,7 +122,7 @@ export const store = createStore({
         if (state.tab !== "Tinker") {
           state.tab = "Tinker";
         }
-        if (state.php !== "") {
+        if (state.php !== "" && state.dir != null) {
           state.tinkering = true;
           state.output = await window.kit.tinker(state.dir, state.code);
           state.tinkering = false;
@@ -105,7 +132,9 @@ export const store = createStore({
       }
     },
     async startServe({ state }) {
-      state.serve = await window.kit.startServe(state.dir);
+      if (state.dir != null) {
+        state.serve = await window.kit.startServe(state.dir);
+      }
     },
     async stopServe({ state }) {
       if (state.serve != null) {
@@ -118,9 +147,9 @@ export const store = createStore({
       const recents = await window.store.get("recents");
       state.commit("updateRecentsFromData", recents);
     },
-    async addRecent(state, dir) {
+    async addRecent(state, dir: string) {
       let newRecents = await window.store.get("recents");
-      newRecents = newRecents.filter((item) => item != dir);
+      newRecents = newRecents.filter((item: string) => item != dir);
       newRecents.unshift(dir);
       window.store.set("recents", newRecents);
       state.dispatch("buildMenu");

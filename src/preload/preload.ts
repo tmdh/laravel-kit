@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { App } from "vue";
-import { ConnectionOpenProjectResponse } from "../shared/types";
+import { ConnectionFactoryOptions, ConnectionOpenProjectResponse } from "../shared/types";
 
 declare global {
   interface Window {
@@ -22,7 +22,7 @@ declare global {
     buildMenu(isProject: boolean): void;
     tinker(dir: string, code: string): Promise<string>;
     artisan(fullCommand: string, dir: string): Promise<string>;
-    openProject(dir: string): Promise<ConnectionOpenProjectResponse>;
+    openProject(dir: ConnectionFactoryOptions): Promise<ConnectionOpenProjectResponse>;
     startServe(dir: string): Promise<number>;
     killSync(serve: number): void;
   }
@@ -139,7 +139,7 @@ async function artisan(fullCommand: string, dir: string) {
   return output;
 }
 
-async function openProject(dir: string) {
+async function openProject(dir: ConnectionFactoryOptions) {
   const output = await ipcRenderer.invoke("openProject", dir);
   return output;
 }
