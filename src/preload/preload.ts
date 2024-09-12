@@ -1,37 +1,5 @@
 import { ipcRenderer } from "electron";
-import { App } from "vue";
 import { ConnectionFactoryOptions, ConnectionOpenProjectResponse } from "../shared/types";
-
-declare global {
-  interface Window {
-    kit: ElectronInterface;
-    store: StoreInterface;
-    app: App<Element>;
-  }
-
-  interface ElectronInterface {
-    dialogPhpNotFound(): void;
-    dialogError(message: string): void;
-    dialogFolder(): Promise<any>;
-    kill(pid: number): void;
-    showItemInFolder(fullPath: string): void;
-    openInEditor(dir: string): void;
-    openExternal(fullPath: string): void;
-    choosePhpExecutable(): Promise<void>;
-    getPhpVersion(): Promise<string>;
-    buildMenu(isProject: boolean): void;
-    tinker(dir: string, code: string): Promise<string>;
-    artisan(fullCommand: string, dir: string): Promise<string>;
-    openProject(dir: ConnectionFactoryOptions): Promise<ConnectionOpenProjectResponse>;
-    startServe(dir: string): Promise<number>;
-    killSync(serve: number): void;
-  }
-
-  interface StoreInterface {
-    get(key: string): Promise<any>;
-    set(key: string, value: any): Promise<void>;
-  }
-}
 
 window.kit = {
   dialogPhpNotFound,
