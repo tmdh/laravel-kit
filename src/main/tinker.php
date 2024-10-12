@@ -41,7 +41,6 @@ use Psy\Output\Theme;
 use Psy\Exception\BreakException;
 use Psy\Exception\ErrorException;
 use Psy\Exception\ThrowUpException;
-use Psy\Exception\TypeErrorException;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class KitExecutionLoopClosure extends ExecutionClosure
@@ -111,7 +110,7 @@ class KitExecutionLoopClosure extends ExecutionClosure
 
                 throw $_e;
             } catch (\TypeError $_e) {
-                $__psysh__->writeException(TypeErrorException::fromTypeError($_e));
+                $__psysh__->writeException(new \ErrorException($_e->getMessage() . " on line " . $_e->getLine() , $_e->getCode(), 1, $_e->getFile(), $_e->getLine(), $_e));
             } catch (\Error $_e) {
                 $__psysh__->writeException(ErrorException::fromError($_e));
             } catch (\Exception $_e) {
@@ -121,7 +120,7 @@ class KitExecutionLoopClosure extends ExecutionClosure
             $__psysh__->afterLoop();
         });
     }
-} 
+}
 
 class Tinker
 {
@@ -145,7 +144,7 @@ class Tinker
     public function execute(string $phpCode): string
     {
         $phpCode = $this->removeComments($phpCode);
-        
+
         $this->shell->addInput($phpCode, true);
 
         $closure = new KitExecutionLoopClosure($this->shell);
