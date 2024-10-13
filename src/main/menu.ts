@@ -55,7 +55,7 @@ function template(win: BrowserWindow, isProject: boolean): MenuItemConstructorOp
       submenu: [
         {
           label: "Tinker Now",
-          accelerator: "CmdOrCtrl+T",
+          accelerator: "CmdOrCtrl+Enter",
           click() {
             win.webContents.send("executeTinker");
           },
