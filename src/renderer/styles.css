@@ -99,3 +99,7 @@
 .dark *::selection {
   background: #5e5f68;
 }
+
+.monaco-editor .mtkz {
+  display: inline;
+}
