@@ -34,7 +34,7 @@
     "@vitejs/plugin-vue": "2.1.0",
     "@vue/compiler-sfc": "3.2.29",
     "electron": "21.0.1",
-    "electron-builder": "24.0.0",
+    "electron-builder": "25.1.8",
     "esbuild": "0.14.18",
     "eslint": "8.8.0",
     "eslint-plugin-prettier": "4.0.0",
