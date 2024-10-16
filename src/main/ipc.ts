@@ -3,7 +3,7 @@ import { ipcMain, dialog, shell, BrowserWindow } from "electron";
 import kill from "tree-kill";
 import Store from "electron-store";
 import which from "which";
-import execa from "execa";
+import { execa } from "execa";
 import { join, basename } from "path";
 import killSync from "./tree-kill-sync.js";
 import { KitStore } from "./store.js";
