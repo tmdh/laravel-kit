@@ -127,8 +127,9 @@ export default async function () {
 
   ipcMain.handle("startServe", (e, dir) => {
     const serve = spawn(store.get("php"), ["artisan", "serve"], { cwd: dir });
+    serve.stdout.setEncoding("utf-8");
     serve.stdout.on("data", (data) => {
-      if (data.includes("started")) {
+      if (data.includes("started") || data.includes("running")) {
         BrowserWindow.getAllWindows()[0].webContents.send("updateServeLink", data.toString().match(/(https?:\/\/[a-zA-Z0-9.]+(:[0-9]+)?)/g)[0]);
       }
     });
