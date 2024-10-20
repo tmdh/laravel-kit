@@ -97,7 +97,7 @@ Only AppImage format is available for other Linux distributions. Download it fro
 
 ## Development
 
-Laravel Kit is made with [Electron](https://electronjs.org), [Vue.js 2](https://vuejs.org), [Tailwind CSS](https://tailwindcss.com) and [Vite](https://vitejs.dev).
+Laravel Kit is made with [Electron](https://electronjs.org), [Vue.js 3](https://vuejs.org), [Tailwind CSS](https://tailwindcss.com) and [Vite](https://vitejs.dev).
 
 ```bash
 # For development,
