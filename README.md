@@ -74,8 +74,8 @@ Or, you can download the dmg file from the [Releases](https://github.com/tmdh/la
 Run these commands from the terminal:
 
 ```
-wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.8/laravel-kit_2.0.8_amd64.deb
-sudo apt install ./laravel-kit_2.0.8_amd64.deb
+wget https://github.com/tmdh/laravel-kit/releases/download/v2.0.9/laravel-kit_2.0.9_amd64.deb
+sudo apt install ./laravel-kit_2.0.9_amd64.deb
 ```
 
 ### Arch Linux
