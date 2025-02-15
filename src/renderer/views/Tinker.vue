@@ -1,8 +1,8 @@
 <template>
-  <div class="h-full grid grid-cols-1 md:grid-cols-2">
-    <div class="flex flex-col h-full">
+  <div class="h-full flex flex-col md:grid md:grid-cols-2 gap-2">
+    <div class="flex-1 flex flex-col min-h-0">
       <tinker-editor
-        class="flex-1"
+        class="flex-1 min-h-0"
         v-model="code"
         language="php-x"
         theme="one-light">
@@ -24,7 +24,7 @@
         </kit-button>
       </div>
     </div>
-    <div class="h-full">
+    <div class="flex-1 min-h-0">
       <tinker-editor
         class="h-full"
         v-model="output"
