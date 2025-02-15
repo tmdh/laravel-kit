@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen max-h-screen flex overflow-hidden antialiased select-none flex-col" :class="[dark ? 'dark bg-d-blue-500 text-white' : 'bg-white-100']">
-    <div class="flex-1 overflow-hidden flex">
+    <div class="flex-1 overflow-hidden flex min-h-0">
       <nav class="flex flex-col w-15 justify-between">
         <div>
           <button @click="changeTab('Home')" class="link" :class="{ 'link-active': tab == 'Home' }" title="Home">
@@ -35,7 +35,9 @@
         </button>
       </nav>
       <keep-alive exclude="Tinker">
-        <component :is="tab" class="border-l-1 dark:border-d-blue-800"></component>
+        <div class="flex-1 overflow-hidden">
+          <component :is="tab" class="border-l-1 dark:border-d-blue-800 h-full w-full"></component>
+        </div>
       </keep-alive>
     </div>
     <div class="h-6 text-xs flex flex-row bg-gray-100 text-gray-800 dark:bg-d-blue-800 dark:text-white">

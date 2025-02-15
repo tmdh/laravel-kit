@@ -1,16 +1,38 @@
 <template>
-  <div class="flex flex-col flex-1 pt-2 md:flex-row">
-    <div class="flex flex-col flex-1">
-      <tinker-editor class="flex-1" v-model="code" language="php-x" theme="one-light"></tinker-editor>
+  <div class="h-full grid grid-cols-1 md:grid-cols-2">
+    <div class="flex flex-col h-full">
+      <tinker-editor
+        class="flex-1"
+        v-model="code"
+        language="php-x"
+        theme="one-light">
+      </tinker-editor>
       <div class="flex justify-center px-3 py-2 md:justify-start">
         <div class="flex flex-row items-center">
-          <input type="checkbox" class="form-checkbox input-checkbox" id="autoTinker" :checked="autoTinker" @change="enableautoTinker($event.target.checked)" />
-          <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">Auto Tinker</label>
+          <input
+            type="checkbox"
+            class="form-checkbox input-checkbox"
+            id="autoTinker"
+            :checked="autoTinker"
+            @change="enableautoTinker($event.target.checked)" />
+          <label class="ml-2 text-sm text-gray-600 dark:text-white" for="autoTinker">
+            Auto Tinker
+          </label>
         </div>
-        <kit-button @clicked="executeTinker" class="ml-auto">Tinker</kit-button>
+        <kit-button @clicked="executeTinker" class="ml-auto">
+          Tinker
+        </kit-button>
       </div>
     </div>
-    <tinker-editor class="flex-1" v-model="output" language="php-x" theme="one-light" :options="outputOptions"></tinker-editor>
+    <div class="h-full">
+      <tinker-editor
+        class="h-full"
+        v-model="output"
+        language="php-x"
+        theme="one-light"
+        :options="outputOptions">
+      </tinker-editor>
+    </div>
   </div>
 </template>
 

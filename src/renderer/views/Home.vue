@@ -1,5 +1,5 @@
 <template>
-  <div v-if="project == null" class="bg-white-100 flex-1 p-5 text-gray-700 tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
+  <div v-if="project == null" class="h-full bg-white-100 flex-1 p-5 text-gray-700 tracking-wide overflow-y-auto dark:bg-d-blue-500 dark:text-white">
     <h1 class="text-4xl">Laravel Kit</h1>
     <h2 class="mt-3 text-2xl">Artisan evolved</h2>
     <h3 class="mt-3 text-lg">Start</h3>
@@ -23,7 +23,7 @@
       </li>
     </ul>
   </div>
-  <div v-else class="bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center dark:bg-d-blue-500 dark:text-white">
+  <div v-else class="h-full bg-white-100 flex-1 p-5 text-gray-600 flex justify-center items-center dark:bg-d-blue-500 dark:text-white">
     <div class="text-center">
       <h1 class="text-3xl font-semibold">Build something amazing!</h1>
       <kit-button class="mt-10" @clicked="changeTab('Artisan')">Go to Artisan</kit-button>
