@@ -1,4 +1,4 @@
-import execa from "execa";
+import { execa } from "execa";
 import { BrowserWindow, dialog } from "electron";
 import { basename, join } from "path";
 import { store } from "./store.js";
