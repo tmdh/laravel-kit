@@ -17,6 +17,18 @@ jobs:
           node-version: 20
           cache: yarn
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Install Laravel installer
+        run: composer global require laravel/installer
+
+      - name: Create Laravel blog project
+        run: laravel new blog --no-interaction --database sqlite
+        working-directory: ${{ github.workspace }}
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
@@ -28,6 +40,8 @@ jobs:
 
       - name: Run Playwright tests
         run: xvfb-run --auto-servernum -- yarn test
+        env:
+          LARAVEL_PROJECT_PATH: ${{ github.workspace }}/blog
 
       - name: Upload test results
         if: ${{ !cancelled() }}
