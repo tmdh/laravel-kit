@@ -3,7 +3,10 @@ import path from "path";
 
 test("should display 'Artisan evolved' text after loading", async () => {
   const electronApp = await electron.launch({
-    args: [path.join(__dirname, "..", "dist", "main.js")],
+    args: [
+      "--no-sandbox",
+      path.join(__dirname, "..", "dist", "main.js")
+    ],
     env: {
       ...process.env,
       NODE_ENV: "production"
