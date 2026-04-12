@@ -11,7 +11,7 @@
     "dev:two": "node build.js --dev && electron .",
     "prod": "vite build && node build.js --prod",
     "start": "electron .",
-    "test": "npx playwright test",
+    "test": "playwright test",
     "pack": "electron-builder --dir",
     "release": "electron-builder"
   },

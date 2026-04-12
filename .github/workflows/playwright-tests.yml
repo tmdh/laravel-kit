@@ -36,7 +36,7 @@ jobs:
         run: yarn prod
 
       - name: Install Playwright
-        run: npx playwright install --with-deps chromium
+        run: yarn playwright install --with-deps chromium
 
       - name: Run Playwright tests
         run: xvfb-run --auto-servernum -- yarn test
